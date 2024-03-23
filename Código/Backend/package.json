@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --env-file=development.env index.js",
     "start": "node --env-file=.env index.js"
   },
   "author": "Fernando J. Estrada Gallardo",
