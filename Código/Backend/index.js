@@ -1,6 +1,7 @@
 import express from "express"
 import mainRouter from "./routes/mainrouter.js"
 const app = express()
+import { UnauthorizedError, ValidationError, NotFoundError } from "./errors.js"
 import { connectDB } from "./connection.js"
 app.listen(3000, () => {
 	console.log("El servidor está inicializado en el puerto 3000")
@@ -11,17 +12,17 @@ app.listen(3000, () => {
 app.use(express.json())
 
 // routes
-app.use(mainRouter)
+app.use('/api', mainRouter)
 
 // error handling
 app.use((err, _req, res, _next) => {
-	if(err.name === "UnauthorizedError") {
+	if(err instanceof UnauthorizedError) {
 		return res.status(401).send({ message: "No estás autorizado" })
 	}
-	if(err.name === "ValidationError") {
+	if(err instanceof ValidationError) {
 		return res.status(400).send({ message: "Hay errores en los datos enviados", errors: err.errors })
 	}
-	if(err.name === "NotFoundError") {
+	if(err instanceof NotFoundError) {
 		return res.status(404).send({ message: "No encontrado" })
 	}
 	console.error(err.stack)
