@@ -1,7 +1,7 @@
 import express from "express"
-import mainRouter from "./routes/mainrouter.js"
+import mainRouter from "./routes/v1/mainrouter.js"
 const app = express()
-import { UnauthorizedError, ValidationError, NotFoundError } from "./errors.js"
+import { UnauthorizedError, ValidationError, NotFoundError } from "./lib/Errors.js"
 import { connectDB } from "./connection.js"
 app.listen(3000, () => {
 	console.log("El servidor está inicializado en el puerto 3000")
@@ -12,7 +12,7 @@ app.listen(3000, () => {
 app.use(express.json())
 
 // routes
-app.use("/api", mainRouter)
+app.use("/api/v1", mainRouter)
 
 // error handling
 // eslint-disable-next-line no-unused-vars
