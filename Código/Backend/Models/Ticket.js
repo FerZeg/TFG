@@ -5,7 +5,10 @@ const TicketSchema = new Schema({
     pedidos: [{
         nombre: String,
         precio: Number,
-        cantidad: Number,
+        cantidad: {
+            type: Number,
+            default: 1,
+        },
         estado: {
             type: String,
             default: 'PENDIENTE',
