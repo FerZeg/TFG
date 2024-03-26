@@ -12,10 +12,11 @@ app.listen(3000, () => {
 app.use(express.json())
 
 // routes
-app.use('/api', mainRouter)
+app.use("/api", mainRouter)
 
 // error handling
-app.use((err, _req, res, _next) => {
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
 	if(err instanceof UnauthorizedError) {
 		return res.status(401).send({ message: "No estás autorizado" })
 	}

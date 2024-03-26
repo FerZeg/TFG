@@ -1,6 +1,6 @@
-import { Router } from 'express'
+import { Router } from "express"
 
 const restauranteRouter = Router()
-restauranteRouter.use('/:')
+restauranteRouter.use("/:")
 
 export default restauranteRouter
