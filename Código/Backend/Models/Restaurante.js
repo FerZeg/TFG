@@ -22,23 +22,25 @@ const RestauranteSchema = new Schema({
 			enum: ["LIBRE", "OCUPADA"],
 		}
 	}],
-	contraseña: {
-		type: String,
-		required: true,
-		set: v => bcrypt.hashSync(v, 10),
-	},
+	users: [{ref: "Usuario", type: Schema.Types.ObjectId}],
 	contraseña_mesas: {
 		type: String,
 		required: true,
 		set: v => bcrypt.hashSync(v, 10),
 	},
-	cocineros: [{
-		nombre: String,
-		contraseña: {
-			type: String,
-			set: v => bcrypt.hashSync(v, 10),
-		},
-	}]
+	cocineros: [{ref: "Cocinero", type: Schema.Types.ObjectId}],
+	createdDate: {
+		type: Date,
+		default: Date.now,
+	},
+	lastModifiedDate: {
+		type: Date,
+		default: Date.now,
+	},
+})
+RestauranteSchema.pre("updateOne", function(next) {
+	this.lastModifiedDate = Date.now()
+	next()
 })
 
 export default model("Restaurante", RestauranteSchema)

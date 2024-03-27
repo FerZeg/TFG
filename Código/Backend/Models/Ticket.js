@@ -22,22 +22,32 @@ const TicketSchema = new Schema({
 	},
 	restaurante: Schema.Types.ObjectId,
 	mesa: {
-		identificador: {
-			type: String,
-			required: true,
-		},
+		type: String,
+		required: true,
 	},
-	fecha: {
+	createdDate: {
+		type: Date,
+		default: Date.now,
+	},
+	lastModifiedDate: {
 		type: Date,
 		default: Date.now,
 	},
 })
 
-function updateTotal(next) {
+TicketSchema.method("updateTotal", function() {
 	this.total = this.pedidos.reduce((acc, pedido) => acc + pedido.precio * pedido.cantidad, 0)
+})
+  
+TicketSchema.pre("save", function(next) {
+	this.updateTotal()
 	next()
-}
-TicketSchema.pre("save", updateTotal)
-TicketSchema.pre("update", updateTotal)
+})
+  
+TicketSchema.pre("updateOne", function(next) {
+	this.lastModifiedDate = Date.now()
+	this.updateTotal()
+	next()
+})
 
 export default model("Ticket", TicketSchema)
