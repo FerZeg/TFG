@@ -2,11 +2,6 @@ import express from "express"
 import mainRouter from "./routes/v1/mainrouter.js"
 const app = express()
 import { UnauthorizedError, ValidationError, NotFoundError } from "./lib/Errors.js"
-import { connectDB } from "./connection.js"
-app.listen(3000, () => {
-	console.log("El servidor está inicializado en el puerto 3000")
-	connectDB()
-})
 
 // middleware
 app.use(express.json())
@@ -26,6 +21,8 @@ app.use((err, req, res, next) => {
 	if(err instanceof NotFoundError) {
 		return res.status(404).send({ message: "No encontrado" })
 	}
-	console.error(err.stack)
-	res.status(500).send({ message: "Error en el servidor" })
+	res.status(522).send({ message: "Error en el servidor" })
+	console.log("ERROR" + err)
 })
+
+export default app
