@@ -20,7 +20,7 @@ const TicketSchema = new Schema({
 		default: "NOPAID",
 		enum: ["NOPAID", "PAID", "CANCELLED"],
 	},
-	restaurante: Schema.Types.ObjectId,
+	restauranteId: Schema.Types.ObjectId,
 	mesa: {
 		type: String,
 		required: true,

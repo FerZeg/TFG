@@ -20,15 +20,22 @@ const RestauranteSchema = new Schema({
 			type: String,
 			default: "LIBRE",
 			enum: ["LIBRE", "OCUPADA"],
-		}
+		},
 	}],
-	users: [{ref: "Usuario", type: Schema.Types.ObjectId}],
+	users: [{
+		ref: {type: Schema.Types.ObjectId, ref: "Usuario" },
+		type: {
+			type: String,
+			default: "cocinero",
+			enum: ["cocinero", "admin", "superadmin"],
+		},
+		_id: false,
+	}],
 	contraseña_mesas: {
 		type: String,
 		required: true,
 		set: v => bcrypt.hashSync(v, 10),
 	},
-	cocineros: [{ref: "Cocinero", type: Schema.Types.ObjectId}],
 	createdDate: {
 		type: Date,
 		default: Date.now,

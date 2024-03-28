@@ -16,11 +16,6 @@ const UserSchema = new Schema({
 		required: true,
 		unique: true,
 	},
-	type: {
-		type: String,
-		default: "cocinero",
-		enum: ["cocinero", "admin", "superadmin"],
-	},
 	createdDate: {
 		type: Date,
 		default: Date.now,
@@ -28,6 +23,11 @@ const UserSchema = new Schema({
 	lastModifiedDate: {
 		type: Date,
 		default: Date.now,
+	},
+	type: {
+		type: String,
+		enum: ["normal", "superadmin"],
+		default: "normal",
 	},
 })
 
