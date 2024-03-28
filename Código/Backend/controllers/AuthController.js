@@ -8,17 +8,19 @@ const authController = (type) => {
 		if(!token) {
 			throw new UnauthorizedError("Token is required")
 		}
+
 		let payload
+
 		try {
 			payload = verify(token)
 		} catch (error) {
 			throw new UnauthorizedError("Invalid token")
 		}
-		if(assignPermissionNumber (payload.type) < assignPermissionNumber(type)) {
-			throw new UnauthorizedError("No tienes permiso para acceder a este recurso")
+		if(payload.type === "superadmin" || (assignPermissionNumber(payload.type) >= assignPermissionNumber(type) && payload.restauranteId == req.params.restauranteId)) {
+			req.user = payload
+			return next()
 		}
-		req.user = payload
-		next()
+		throw new UnauthorizedError("No tienes permiso para este recurso")
 	}
 }
 

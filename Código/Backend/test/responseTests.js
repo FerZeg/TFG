@@ -25,12 +25,12 @@ before(async() => {
 			
 
 })
-const validAdminToken = sign({ id: 1, type: "admin" })
+const validAdminToken = sign({ id: 1, type: "superadmin" })
 
 describe("Routing tests", () => {
 	it("should return restaurant data", async () => {
 		await request(app)
-			.get("/api/v1/restaurante/" + nuevoRestaurante._id)
+			.get("/api/v1/restaurantes/" + nuevoRestaurante._id)
 			.set("Authorization", `Bearer ${validAdminToken}`)
 			.expect(200)
 			.expect("Content-Type", /json/)

@@ -6,11 +6,18 @@ describe("JWT Tests", () => {
 	it("should decode the token correctly", () => {
 		const payload = {
 			id: 1,
-			type: "admin"
+			type: "superadmin"
 		}
 		const token = sign(payload)
 		const decoded = verify(token)
 		assert.equal(decoded.id, payload.id)
+	})
+	it("should throw an error if no restaurant ID is provided", () => {
+		const payload = {
+			id: 1,
+			type: "admin"
+		}
+		assert.throws(() => sign(payload), Error)
 	})
 })
 

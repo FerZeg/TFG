@@ -1,11 +1,17 @@
 import jwt from "jsonwebtoken"
 
 function sign(payload) {
+	if(!payload.type) {
+		throw new Error("Type is required to generate token")
+	}
 	if(!payload.id) {
 		throw new Error("Username is required to generate token")
 	}
-	if(!payload.type) {
-		throw new Error("Type is required to generate token")
+	if(payload.type === "superadmin") {
+		return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" })
+	}
+	if(!payload.restauranteId) {
+		throw new Error("Restaurant ID is required to generate token")
 	}
 	return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" })
 }

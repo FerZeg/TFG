@@ -12,7 +12,7 @@ before(async() => {
 	await connectDB()
 })
 
-app.get("/protected", authController("admin"), (req, res) => {
+app.get("/:restauranteId/protected", authController("cocinero"), (req, res) => {
 	res.status(200).send({ message: "Passed" })
 })
 app.get("/error", () => {
@@ -28,14 +28,27 @@ app.use((err, req, res, next) => {
 })
 
 describe("AuthController Tests", () => {
-	it("should pass with a valid token", async () => {
+	it("should pass with a valid superadmin token", async () => {
 		const payload = {
 			id: 1,
-			type: "admin"
+			type: "superadmin"
 		}
 		const token = sign(payload)
 		const response = await request(app)
-			.get("/protected")
+			.get("/1/protected")
+			.set("Authorization", `Bearer ${token}`)
+			.expect(200)
+		assert.equal(response.body.message, "Passed")
+	})
+	it("should pass with a valid token and restaurantId", async () => {
+		const payload = {
+			id: 1,
+			type: "admin",
+			restauranteId: 1
+		}
+		const token = sign(payload)
+		const response = await request(app)
+			.get("/1/protected")
 			.set("Authorization", `Bearer ${token}`)
 			.expect(200)
 		assert.equal(response.body.message, "Passed")
@@ -43,8 +56,20 @@ describe("AuthController Tests", () => {
 
 	it("should fail with an invalid token", async () => {
 		await request(app)
-			.get("/protected")
+			.get("/1/protected")
 			.set("Authorization", "Bearer invalidtoken")
+			.expect(401)
+	})
+	it("should fail if restaurantId is not the same", async () => {
+		const payload = {
+			id: 1,
+			type: "admin",
+			restauranteId: 2
+		}
+		const token = sign(payload)
+		await request(app)
+			.get("/6/protected")
+			.set("Authorization", `Bearer ${token}`)
 			.expect(401)
 	})
 })
@@ -56,7 +81,7 @@ describe("Error handling tests", () => {
 			.get("/notfound")
 			.expect(404)
 	})
-	it("should return a 522 status code", async () => {
+	it("should return a 500 status code", async () => {
 		await request(app)
 			.get("/error")
 			.expect(500)
