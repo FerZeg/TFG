@@ -21,8 +21,8 @@ app.use((err, req, res, next) => {
 	if(err instanceof NotFoundError) {
 		return res.status(404).send({ message: "No encontrado" })
 	}
-	res.status(522).send({ message: "Error en el servidor" })
-	console.log("ERROR" + err)
+	res.status(500).send({ message: "Error en el servidor" })
+	console.log("ERROR" + err.stack)
 })
 
 export default app
