@@ -9,6 +9,6 @@ const loginController = async (req, res) => {
 	}
 	const { role, restaurant } = await AuthService.getRoleAndRestaurant(user)
 	const token = sign({ id: user.id, type: user.type, role, restauranteId: restaurant._id})
-	return res.json({ token })
+	res.json({ token })
 }
 export { loginController }
