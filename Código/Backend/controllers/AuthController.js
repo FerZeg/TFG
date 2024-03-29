@@ -1,27 +1,14 @@
-import { UnauthorizedError } from "../lib/Errors.js"
-import { extractBearerToken, verify } from "../lib/JWT.js"
-import { assignPermissionNumber } from "../lib/Permissions.js"
+import { sign } from "../lib/JWT.js"
+import AuthService from "../services/AuthService.js"
 
-const authController = (type) => {
-	return (req, res, next) => {
-		const token = extractBearerToken(req.headers.authorization)
-		if(!token) {
-			throw new UnauthorizedError("Token is required")
-		}
-
-		let payload
-
-		try {
-			payload = verify(token)
-		} catch (error) {
-			throw new UnauthorizedError("Invalid token")
-		}
-		if(payload.type === "superadmin" || (assignPermissionNumber(payload.type) >= assignPermissionNumber(type) && payload.restauranteId == req.params.restauranteId)) {
-			req.user = payload
-			return next()
-		}
-		throw new UnauthorizedError("No tienes permiso para este recurso")
+const loginController = async (req, res) => {
+	const { email, password } = req.body
+	const user = await AuthService.login({ email, password })
+	if(user.type === "superadmin") {
+		return res.json({ token: sign({ id: user.id, type: user.type }) })
 	}
+	const { role, restaurant } = await AuthService.getRoleAndRestaurant(user)
+	const token = sign({ id: user.id, type: user.type, role, restauranteId: restaurant._id})
+	return res.json({ token })
 }
-
-export default authController
+export { loginController }

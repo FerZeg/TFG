@@ -1,5 +1,5 @@
 import request from "supertest"
-import authController from "../controllers/AuthController.js"
+import permissionController from "../controllers/PermissionController.js"
 import app from "../index.js"
 import { describe, it, after, before } from "node:test"
 import { sign } from "../lib/JWT.js"
@@ -12,7 +12,7 @@ before(async() => {
 	await connectDB()
 })
 
-app.get("/:restauranteId/protected", authController("cocinero"), (req, res) => {
+app.get("/:restauranteId/protected", permissionController("cocinero"), (req, res) => {
 	res.status(200).send({ message: "Passed" })
 })
 app.get("/error", () => {
@@ -43,8 +43,9 @@ describe("AuthController Tests", () => {
 	it("should pass with a valid token and restaurantId", async () => {
 		const payload = {
 			id: 1,
-			type: "admin",
-			restauranteId: 1
+			type: "normal",
+			restauranteId: 1,
+			role: "cocinero"
 		}
 		const token = sign(payload)
 		const response = await request(app)
@@ -63,8 +64,9 @@ describe("AuthController Tests", () => {
 	it("should fail if restaurantId is not the same", async () => {
 		const payload = {
 			id: 1,
-			type: "admin",
-			restauranteId: 2
+			type: "normal",
+			restauranteId: 2,
+			role: "cocinero"
 		}
 		const token = sign(payload)
 		await request(app)

@@ -36,5 +36,11 @@ UserSchema.pre("updateOne", function(next) {
 	next()
 })
 
+UserSchema.methods.comparePassword = function(password) {
+	return bcrypt.compareSync(password, this.contraseña)
+}
+
+UserSchema.index({ email: 1 })
+
 export default model("Usuario", UserSchema)
 

@@ -27,7 +27,7 @@ const RestauranteSchema = new Schema({
 		type: {
 			type: String,
 			default: "cocinero",
-			enum: ["cocinero", "admin", "superadmin"],
+			enum: ["cocinero", "admin"],
 		},
 		_id: false,
 	}],
@@ -49,5 +49,9 @@ RestauranteSchema.pre("updateOne", function(next) {
 	this.lastModifiedDate = Date.now()
 	next()
 })
+RestauranteSchema.methods.compareMesaPassword = function(password) {
+	return bcrypt.compareSync(password, this.contraseña_mesas)
+}
+RestauranteSchema.index({ "users.ref": 1 })
 
 export default model("Restaurante", RestauranteSchema)
