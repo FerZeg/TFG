@@ -2,6 +2,13 @@ import express from "express"
 import mainRouter from "./routes/v1/mainrouter.js"
 const app = express()
 import { UnauthorizedError, ValidationError, NotFoundError } from "./lib/Errors.js"
+import cors from "cors"
+
+app.use(cors({
+	origin: process.env.MODE === "development" 
+		? ["http://localhost:5500"] 
+		: ["https://admin.cocinaenmarcha.com", "https://cocinaenmarcha.com", "https://cocina.cocinaenmarcha.com"]
+}))
 
 // middleware
 app.use(express.json())
