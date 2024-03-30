@@ -22,6 +22,13 @@ class AuthService {
 		const role = restaurant.users.find(u => u.ref.equals(user._id)).type
 		return { role, restaurant }
 	}
+	static async getUserData(id) {
+		const user = await Usuario.findById(id, { contraseña: 0, __v: 0 })
+		if (!user) {
+			throw new NotFoundError("No se ha encontrado el usuario")
+		}
+		return user
+	}
     
 }
 export default AuthService

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { BadRequestError, UnauthorizedError } from "./Errors"
+import { BadRequestError, UnauthorizedError } from "./Errors.js"
 
 function sign(payload) {
 	if(!payload.type) {

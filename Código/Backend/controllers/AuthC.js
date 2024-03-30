@@ -11,4 +11,9 @@ const loginController = async (req, res) => {
 	const token = sign({ id: user.id, type: user.type, role, restauranteId: restaurant._id})
 	res.json({ token })
 }
-export { loginController }
+const dataController = async (req, res) => {
+	const user = req.user
+	const data = await AuthService.getUserData(user.id)
+	res.json({data, role: user.role, restauranteId: user.restauranteId})
+}
+export { loginController, dataController }
