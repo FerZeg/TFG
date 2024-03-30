@@ -20,5 +20,11 @@ class UnauthorizedError extends Error {
 		this.name = "UnauthorizedError"
 	}
 }
+class BadRequestError extends Error {
+	constructor(message) {
+		super(message)
+		this.name = "BadRequestError"
+	}
+}
 
-export { NotFoundError, ValidationError, UnauthorizedError }
+export { NotFoundError, ValidationError, UnauthorizedError, BadRequestError }
