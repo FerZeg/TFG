@@ -13,13 +13,11 @@ describe("AuthController Tests", () => {
 			email: "cocinero@cocinero.com",
 			password: "cocinero"
 		}
-		const res = await request(app)
+		await request(app)
 			.post("/api/v1/auth/login")
 			.send(payload)
 			.expect(200)
 			.expect("Content-Type", /json/)
-
-		console.log(res.body)
 
 	})
 	it("should fail with an invalid password", async () => {
@@ -27,12 +25,11 @@ describe("AuthController Tests", () => {
 			email: "cocinero@cocinero.com",
 			password: "cocinero123"
 		}
-		const res = await request(app)
+		await request(app)
 			.post("/api/v1/auth/login")
 			.send(payload)
 			.expect(401)
 			.expect("Content-Type", /json/)
-		console.log(res.body)
 	}
 	)
 })
