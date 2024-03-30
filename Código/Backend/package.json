@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Backend del servicio comidaenmarcha",
   "main": "index.js",
   "type": "module",
@@ -18,7 +18,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "middleware-async": "^1.4.0",
-    "mongoose": "^8.2.3"
+    "mongoose": "^8.2.4"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
