@@ -1,5 +1,5 @@
 import request from "supertest"
-import permissionController from "../controllers/PermissionController.js"
+import { permissionController } from "../controllers/PermissionC.js"
 import app from "../index.js"
 import { describe, it, after, before } from "node:test"
 import { sign } from "../lib/JWT.js"
