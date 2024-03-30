@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+import { BadRequestError, UnauthorizedError } from "./Errors"
 
 function sign(payload) {
 	if(!payload.type) {
@@ -20,15 +21,19 @@ function sign(payload) {
 }
 
 function verify(token) {
-	return jwt.verify(token, process.env.JWT_SECRET)
+	try {
+		return jwt.verify(token, process.env.JWT_SECRET)
+	} catch (error) {
+		throw new UnauthorizedError("The token is invalid or has expired")
+	}
 }
 function extractBearerToken(header) {
 	if(!header) {
-		return null
+		throw new BadRequestError("Invalid authorization token")
 	}
 	const [type, token] = header.split(" ")
 	if(type !== "Bearer") {
-		return null
+		throw new BadRequestError("Invalid authorization token")
 	}
 	return token
 }

@@ -2,20 +2,10 @@ import { UnauthorizedError } from "../lib/Errors.js"
 import { extractBearerToken, verify } from "../lib/JWT.js"
 import { assignPermissionNumber } from "../lib/Permissions.js"
 
-const authController = (role) => {
+const permissionController = (role) => {
 	return (req, res, next) => {
 		const token = extractBearerToken(req.headers.authorization)
-		if(!token) {
-			throw new UnauthorizedError("Token is required")
-		}
-
-		let payload
-
-		try {
-			payload = verify(token)
-		} catch (error) {
-			throw new UnauthorizedError("Invalid token")
-		}
+		const payload = verify(token)
 		if(payload.type === "superadmin" || (assignPermissionNumber(payload.role) >= assignPermissionNumber(role) && payload.restauranteId == req.params.restauranteId)) {
 			req.user = payload
 			return next()
@@ -24,4 +14,10 @@ const authController = (role) => {
 	}
 }
 
-export default authController
+const extractToken = (req, res, next) => {
+	const token = extractBearerToken(req.headers.authorization)
+	req.user = verify(token)
+	next()
+}
+
+export { permissionController, extractToken }
