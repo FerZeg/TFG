@@ -1,7 +1,7 @@
 import { describe, it, after, before } from "node:test"
 import request from "supertest"
-import app from "../index.js"
-import { connectDB, disconnectDB } from "../connection.js"
+import app from "../../index.js"
+import { connectDB, disconnectDB } from "../../connection.js"
 
 before(async() => {
 	await connectDB()

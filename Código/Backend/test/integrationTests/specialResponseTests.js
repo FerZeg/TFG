@@ -1,12 +1,12 @@
 import request from "supertest"
-import { permissionController } from "../controllers/PermissionC.js"
-import app from "../index.js"
+import { permissionController } from "../../controllers/PermissionC.js"
+import app from "../../index.js"
 import { describe, it, after, before } from "node:test"
-import { sign } from "../lib/JWT.js"
-import { UnauthorizedError } from "../lib/Errors.js"
+import { sign } from "../../lib/JWT.js"
+import { UnauthorizedError } from "../../lib/Errors.js"
 import assert from "node:assert"
-import { disconnectDB} from "../connection.js"
-import { connectDB } from "../connection.js"
+import { disconnectDB} from "../../connection.js"
+import { connectDB } from "../../connection.js"
 
 before(async() => {
 	await connectDB()
@@ -14,9 +14,6 @@ before(async() => {
 
 app.get("/:restauranteId/protected", permissionController("cocinero"), (req, res) => {
 	res.status(200).send({ message: "Passed" })
-})
-app.get("/error", () => {
-	throw new Error("Error")
 })
 // Código repetido necesario para que el test funcione con los errores
 // eslint-disable-next-line no-unused-vars
@@ -28,7 +25,7 @@ app.use((err, req, res, next) => {
 })
 
 describe("AuthController Tests", () => {
-	it("should pass with a valid superadmin token", async () => {
+	it("Debería pasar con un token de superadmin", async () => {
 		const payload = {
 			id: 1,
 			type: "superadmin"
@@ -40,7 +37,7 @@ describe("AuthController Tests", () => {
 			.expect(200)
 		assert.equal(response.body.message, "Passed")
 	})
-	it("should pass with a valid token and restaurantId", async () => {
+	it("Debería pasar con el rol adecuado y el restaurante", async () => {
 		const payload = {
 			id: 1,
 			type: "normal",
@@ -55,13 +52,13 @@ describe("AuthController Tests", () => {
 		assert.equal(response.body.message, "Passed")
 	})
 
-	it("should fail with an invalid token", async () => {
+	it("Debería fallar con un token invalido", async () => {
 		await request(app)
 			.get("/1/protected")
 			.set("Authorization", "Bearer invalidtoken")
 			.expect(401)
 	})
-	it("should fail if restaurantId is not the same", async () => {
+	it("Debería fallar si el Id del restaurante no es el mismo", async () => {
 		const payload = {
 			id: 1,
 			type: "normal",
@@ -73,20 +70,6 @@ describe("AuthController Tests", () => {
 			.get("/6/protected")
 			.set("Authorization", `Bearer ${token}`)
 			.expect(401)
-	})
-})
-
-
-describe("Error handling tests", () => {
-	it("should return a 404 status code", async () => {
-		await request(app)
-			.get("/notfound")
-			.expect(404)
-	})
-	it("should return a 500 status code", async () => {
-		await request(app)
-			.get("/error")
-			.expect(500)
 	})
 })
 

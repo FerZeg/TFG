@@ -1,10 +1,10 @@
 import { before, after, it, describe } from "node:test"
-import { connectDB, disconnectDB } from "../connection.js"
-import { sign } from "../lib/JWT.js"
+import { connectDB, disconnectDB } from "../../connection.js"
+import { sign } from "../../lib/JWT.js"
 import assert from "node:assert"
 import request from "supertest"
-import app from "../index.js"
-import Restaurante from "../models/Restaurante.js"
+import app from "../../index.js"
+import Restaurante from "../../models/Restaurante.js"
 
 
 let nuevoRestaurante
