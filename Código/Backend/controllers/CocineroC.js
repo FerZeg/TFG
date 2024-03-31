@@ -6,4 +6,11 @@ const getCocineros = async (req, res) => {
 	res.send(cocineros)
 }
 
-export { getCocineros }
+const postCocinero = async (req, res) => {
+	const { restauranteId } = req.params
+	const cocinero = req.body
+	const newCocinero = await CocineroService.createCocinero(restauranteId, cocinero)
+	res.send(newCocinero)
+}
+
+export { getCocineros, postCocinero }
