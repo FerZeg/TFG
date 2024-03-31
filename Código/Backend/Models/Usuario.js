@@ -1,4 +1,6 @@
-import { Schema, model } from "mongoose"
+import mongoose from "mongoose"
+const { Schema, model, models } = mongoose
+
 import bcrypt from "bcrypt"
 
 const UserSchema = new Schema({
@@ -42,5 +44,5 @@ UserSchema.methods.comparePassword = function(password) {
 
 UserSchema.index({ email: 1 })
 
-export default model("Usuario", UserSchema)
+export default models.Usuario || model("Usuario", UserSchema)
 

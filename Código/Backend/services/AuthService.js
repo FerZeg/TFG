@@ -1,5 +1,5 @@
-import Usuario from "../models/Usuario.js"
-import Restaurante from "../models/Restaurante.js"
+import Usuario from "../Models/Usuario.js"
+import Restaurante from "../Models/Restaurante.js"
 import { UnauthorizedError, NotFoundError } from "../lib/Errors.js"
 
 class AuthService {

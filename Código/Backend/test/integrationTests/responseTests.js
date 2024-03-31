@@ -4,7 +4,7 @@ import { sign } from "../../lib/JWT.js"
 import assert from "node:assert"
 import request from "supertest"
 import app from "../../index.js"
-import Restaurante from "../../models/Restaurante.js"
+import Restaurante from "../../Models/Restaurante.js"
 
 
 let nuevoRestaurante

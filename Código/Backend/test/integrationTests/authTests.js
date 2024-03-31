@@ -1,11 +1,10 @@
-import { describe, it, after, before } from "node:test"
+import { describe, it, before, after } from "node:test"
 import request from "supertest"
 import app from "../../index.js"
 import { connectDB, disconnectDB } from "../../connection.js"
 
-before(async() => {
-	await connectDB()
-})
+before(async() => await connectDB())
+after(async() => await disconnectDB())
 
 describe("AuthController Tests", () => {
 	it("should pass with a valid password and email", async () => {
@@ -32,8 +31,4 @@ describe("AuthController Tests", () => {
 			.expect("Content-Type", /json/)
 	}
 	)
-})
-
-after(async() => {
-	await disconnectDB()
 })

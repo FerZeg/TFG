@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose"
+import mongoose from "mongoose"
+const { Schema, model, models } = mongoose
 
 const TicketSchema = new Schema({
 	total: Number,
@@ -50,4 +51,4 @@ TicketSchema.pre("updateOne", function(next) {
 	next()
 })
 
-export default model("Ticket", TicketSchema)
+export default models.Ticket || model("Ticket", TicketSchema)

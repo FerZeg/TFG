@@ -8,9 +8,8 @@ import assert from "node:assert"
 import { disconnectDB} from "../../connection.js"
 import { connectDB } from "../../connection.js"
 
-before(async() => {
-	await connectDB()
-})
+before(async() => await connectDB())
+after(async() => await disconnectDB())
 
 app.get("/:restauranteId/protected", permissionController("cocinero"), (req, res) => {
 	res.status(200).send({ message: "Passed" })
@@ -71,10 +70,4 @@ describe("AuthController Tests", () => {
 			.set("Authorization", `Bearer ${token}`)
 			.expect(401)
 	})
-})
-
-
-after(async() => {
-	await disconnectDB()
-
 })

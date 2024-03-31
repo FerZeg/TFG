@@ -1,6 +1,6 @@
-import Restaurante from "../models/Restaurante.js"
+import Restaurante from "../Models/Restaurante.js"
 import { NotFoundError } from "../lib/Errors.js"
-import User from "../models/User.js"
+import Usuario from "../Models/Usuario.js"
 
 class CocineroService {
 	static async getCocineros(restauranteId) {
@@ -20,10 +20,11 @@ class CocineroService {
 			throw new NotFoundError("No se ha encontrado el restaurante")
 		}
 		try {
-			const user = await User.create(cocinero)
-			restaurant.users.push({ref: user._id, type: "cocinero"})
+			cocinero = cocinero instanceof Usuario ? cocinero : new Usuario(cocinero)
+			await cocinero.save()
+			restaurant.users.push({ref: cocinero._id, type: "cocinero"})
 			await restaurant.save()
-			return user
+			return cocinero
 		} catch (error) {
 			throw new Error("Error al crear el usuario")
 		}

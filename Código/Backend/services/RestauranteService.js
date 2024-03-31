@@ -1,4 +1,4 @@
-import Restaurante from "../models/Restaurante.js"
+import Restaurante from "../Models/Restaurante.js"
 import { NotFoundError } from "../lib/Errors.js"
 
 export default class RestauranteService {

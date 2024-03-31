@@ -1,4 +1,6 @@
-import { Schema, model } from "mongoose"
+import mongoose from "mongoose"
+const { Schema, model, models } = mongoose
+
 import bcrypt  from "bcrypt"
 
 const RestauranteSchema = new Schema({
@@ -54,4 +56,4 @@ RestauranteSchema.methods.compareMesaPassword = function(password) {
 }
 RestauranteSchema.index({ "users.ref": 1 })
 
-export default model("Restaurante", RestauranteSchema)
+export default models.Restaurante || model("Restaurante", RestauranteSchema)

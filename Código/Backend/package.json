@@ -8,7 +8,7 @@
     "dev": "node --watch --env-file=development.env server.js",
     "loadSample": "node --env-file=development.env loadSampleData.js",
     "start": "node --env-file=.env server.js",
-    "test": "node --test --test-reporter tap --env-file=development.env"
+    "test": "node --test  --env-file=development.env"
   },
   "author": "Fernando J. Estrada Gallardo",
   "license": "ISC",
