@@ -29,6 +29,18 @@ class CocineroService {
 			throw new Error("Error al crear el usuario")
 		}
 	}
+	static async deleteCocinero(restauranteId, cocineroId) {
+		if (!restauranteId || !cocineroId) {
+			throw new Error("restauranteId y cocineroId son requeridos")
+		}
+		const restaurante = await Restaurante.findById(restauranteId, { users: 1 })
+		if (!restaurante) {
+			throw new NotFoundError("No se ha encontrado el restaurante")
+		}
+		restaurante.users = restaurante.users.filter(user => user.ref.toString() != cocineroId)
+		await restaurante.save()
+		await Usuario.deleteOne({ _id: cocineroId })
+	}
 }
 
 export default CocineroService

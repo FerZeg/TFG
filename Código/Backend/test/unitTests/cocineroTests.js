@@ -37,4 +37,9 @@ describe("CocineroDB Tests", () => {
 		assert.strictEqual(updatedCocineros.length, 2)
 
 	})
+	it("Debería eliminar un cocinero", async () => {
+		await CocineroService.deleteCocinero(restaurante._id, user._id)
+		const updatedCocineros = await CocineroService.getCocineros(restaurante._id)
+		assert.strictEqual(updatedCocineros.length, 1)
+	})
 })

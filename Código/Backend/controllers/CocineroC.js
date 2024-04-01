@@ -13,4 +13,10 @@ const postCocinero = async (req, res) => {
 	res.send(newCocinero)
 }
 
-export { getCocineros, postCocinero }
+const deleteCocinero = async (req, res) => {
+	const { restauranteId, cocineroId } = req.params
+	await CocineroService.deleteCocinero(restauranteId, cocineroId)
+	res.json({ message: "Cocinero eliminado"})
+}
+
+export { getCocineros, postCocinero, deleteCocinero }
