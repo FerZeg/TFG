@@ -2,6 +2,9 @@ import Restaurante from "../Models/Restaurante.js"
 import { NotFoundError } from "../lib/Errors.js"
 
 export default class RestauranteService {
+	static async getAll(fields) {
+		return Restaurante.find({}, { __v: 0, ...fields })
+	}
 	static async findById(id, fields) {
 		const restaurante = await Restaurante.findById(id, { __v: 0, ...fields })
 		if(!restaurante) throw new NotFoundError("No se ha encontrado el restaurante")
