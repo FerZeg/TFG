@@ -11,7 +11,8 @@ export default class RestauranteService {
 		return Restaurante.findOne(query, { __v: 0, ...fields})
 	}
 	static async createOne(data) {
-		return Restaurante.create(data)
+		data = data instanceof Restaurante ? data : new Restaurante(data)
+		return data.save()
 	}
 	static async updateOne(id, data) {
 		return Restaurante.updateOne({ _id: id }, data)
