@@ -9,5 +9,4 @@ cocineroRouter.get("/", permissionController("cocinero"), asyncMiddleware(getCoc
 cocineroRouter.post("/", permissionController("admin"), asyncMiddleware(postCocinero))
 cocineroRouter.delete("/:cocineroId", permissionController("admin"), asyncMiddleware(deleteCocinero))
 
-
 export default cocineroRouter
