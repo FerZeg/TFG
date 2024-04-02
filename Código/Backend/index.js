@@ -5,8 +5,8 @@ import { UnauthorizedError, ValidationError, NotFoundError, BadRequestError } fr
 import cors from "cors"
 
 app.use(cors({
-	origin: process.env.MODE === "development" 
-		? ["http://localhost:5500"] 
+	origin: process.env.MODE == "development" 
+		? ["http://localhost:5173"] 
 		: ["https://admin.cocinaenmarcha.com", "https://cocinaenmarcha.com", "https://cocina.cocinaenmarcha.com"]
 }))
 
