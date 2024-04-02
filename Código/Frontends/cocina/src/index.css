@@ -3,9 +3,22 @@
   line-height: 1.5;
   font-weight: 400;
   color: rgba(10, 9, 9, 0.87);
-  background-color: #e1e1e1;
+  background-color: #fcfcfc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.center-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
