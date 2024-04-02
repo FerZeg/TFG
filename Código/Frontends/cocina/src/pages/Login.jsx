@@ -19,9 +19,10 @@ export default function Login() {
     }
 
     return (
-        <div className="center-page">
+        <div className="center-page margin-top-20">
+            <h1 className='title'>ComidaEnMarcha</h1>
             <div className='loginFormContainer'>
-                <h1 className="loginTitle">Iniciar Sesión</h1>
+                <h2 className="loginTitle">Iniciar Sesión</h2>
                 <form className='loginForm' onSubmit={handleSubmit}>
                     <input type="text" placeholder="Usuario" value={user} onChange={(ev) => setUser(ev.target.value)}/>
                     <input type="password" placeholder="Contraseña" value={password} onChange={(ev) => setPassword(ev.target.value)}/>
