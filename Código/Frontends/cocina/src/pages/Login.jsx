@@ -1,13 +1,17 @@
+import { useContext } from 'react';
 import { fetchLogin } from '../lib/fetchers';
 import './Login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginContext } from '../lib/context';
+import { useEffect } from 'react';
 
 export default function Login() {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const {login} = useContext(loginContext);
     const handleSubmit = async (ev) => {
         ev.preventDefault();
         if(await fetchLogin(user, password)) {
@@ -17,6 +21,9 @@ export default function Login() {
             setPassword('');
         }  
     }
+    useEffect(() => {
+        if(login.value) navigate('/')
+    }, [login.value, navigate])
 
     return (
         <div className="center-page margin-top-20">
