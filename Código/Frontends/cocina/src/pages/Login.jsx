@@ -36,7 +36,7 @@ export default function Login() {
                     <div>
                         <button type="submit">Enviar</button>
                     </div>
-                    <p>{error}</p>
+                    <p style={{color: 'red'}}>{error}</p>
                 </form>
             </div>
         </div>

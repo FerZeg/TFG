@@ -1,10 +1,10 @@
+import PropTypes from 'prop-types';
 import Header from "../components/mainUI/Header";
 
 export default function Layout({children}) {
 
     return (
       <>
-        <h1>dsfjkjiasfj</h1>
         <Header />
         <main>
           {children}
@@ -12,3 +12,7 @@ export default function Layout({children}) {
       </>
     );
 }
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
+};
