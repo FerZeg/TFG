@@ -41,7 +41,7 @@ export const fetchLogin = async (email, password) => {
 
 export const fetchRestaurant = async () => {
     try {
-        const response = await fetch(`${URL}/restaurant`, {
+        const response = await fetch(`${URL}/restaurantes`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
