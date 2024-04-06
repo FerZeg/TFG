@@ -1,7 +1,13 @@
+import DatosRestaurante from "../../components/DatosRestaurante/DatosRestaurante";
+import Personal from "../../components/Personal/Personal";
+import Mesas from "../../components/Mesas/Mesas";
+
 export default function Admin() {
     return (
-        <div>
-            <h1>Admin</h1>
-        </div>
+        <section id="admin">
+            <DatosRestaurante />
+            <Personal />
+            <Mesas />
+        </section>
     )
 }

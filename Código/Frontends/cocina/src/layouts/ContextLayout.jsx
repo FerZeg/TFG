@@ -11,27 +11,23 @@ export default function ContextLayout() {
         value: false,
         data: null
       })
-    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
     useEffect(() => {
+        if(login.value) return
         const token = localStorage.getItem('token')
         if(!token) {
-            setLoading(false)
             return navigate('/login')
         }
         (async() => {
             const data = await fetchUserData()
-            if(data) {
-                setLogin({value: true, data: data.data})
-            }
-            else navigate('/login')
-            setLoading(false)
+            if(data) setLogin({value: true, data})
+            else navigate('/logout')
         })()
-        }, [navigate])
+        }, [navigate, login.value])
     return (
         <loginContext.Provider value={{login, setLogin}}>
             <Toaster/>
-            {!loading && <Outlet />}
+            <Outlet />
         </loginContext.Provider>
     );
 }

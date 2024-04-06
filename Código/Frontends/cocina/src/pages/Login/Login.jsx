@@ -1,23 +1,25 @@
-import { fetchLogin } from '../../lib/fetchers';
-import './Login.css';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { loginContext } from '../../lib/context'
-import { fetchUserData } from '../../lib/fetchers';
+import { fetchLogin, fetchUserData } from '../../lib/fetchers';
+import './Login.css';
 
 export default function Login() {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { setLogin } = useContext(loginContext);
+    const { login, setLogin } = useContext(loginContext);
+
     const handleSubmit = async (ev) => {
         ev.preventDefault();
+        setLoading(true);
         const login = await fetchLogin(user, password);
         if(!login) {
             setError('Usuario o contraseña incorrectos');
             setPassword('');
+            setLoading(false);
         } else {
             localStorage.setItem('token', login);
             navigate('/')
@@ -26,11 +28,18 @@ export default function Login() {
                 setError('Error al obtener los datos del usuario');
                 setPassword('');
                 setUser('');
+                setLoading(false);
                 return
             }
-            setLogin({value: true, data: data.data})
+            setLogin({value: true, data: data})
+            setLoading(false);
         }
     }
+
+    useEffect(() => {
+        if(login.value) navigate('/')
+    }, [login.value, navigate])
+
     return (
         <div className="center-page margin-top-20">
             <h1 className='title'>ComidaEnMarcha</h1>
@@ -40,7 +49,7 @@ export default function Login() {
                     <input type="text" placeholder="Usuario" value={user} onChange={(ev) => setUser(ev.target.value)}/>
                     <input type="password" placeholder="Contraseña" value={password} onChange={(ev) => setPassword(ev.target.value)}/>
                     <div>
-                        <button type="submit">Enviar</button>
+                        <button type="submit" disabled={loading}>Enviar</button>
                     </div>
                     <p style={{color: 'red'}}>{error}</p>
                 </form>

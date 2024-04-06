@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Header() {
     const { login } = useContext(loginContext);
@@ -10,6 +11,9 @@ export default function Header() {
     const isActive = (path) => {
         return pathname === path ? "active" : "";
     };
+    useEffect(() => {
+        console.log(login);
+    }, [login]);
     return (
         <div className="main-header">
             <nav>
@@ -17,7 +21,7 @@ export default function Header() {
                     <li><Link to="/" className={isActive("/")}>Cocina</Link></li>
                     <li><Link to="/edit" className={isActive("/edit")}>Editor</Link></li>
                     {
-                        login.data && (login.data.role === "admin" || login.data.type === "superadmin") &&
+                        login.data && login.data.data && (login.data.role === "admin" || login.data.data.type === "superadmin") &&
                         <>
                             <li><Link to="/admin" className={isActive("/admin")}>Admin</Link></li>
                             <li><Link to="/tickets" className={isActive("/tickets")}>Tickets</Link></li>

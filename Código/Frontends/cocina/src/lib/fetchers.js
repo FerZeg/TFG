@@ -38,3 +38,23 @@ export const fetchLogin = async (email, password) => {
         return null
     }
 }
+
+export const fetchRestaurant = async () => {
+    try {
+        const response = await fetch(`${URL}/restaurant`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        if(response.ok) {
+            const data = await response.json()
+            return data
+        }
+        return null
+    }
+    catch(e) {
+        return null
+    }
+}
