@@ -15,11 +15,11 @@ class AuthService {
 		return user
 	}
 	static async getRoleAndRestaurant(user) {
-		const restaurant = await Restaurante.findOne({ "users.ref": user._id })
+		const restaurant = await Restaurante.findOne({ "users.user": user._id })
 		if (!restaurant) {
 			throw new NotFoundError("No se ha encontrado el restaurante")
 		}
-		const role = restaurant.users.find(u => u.ref.equals(user._id)).type
+		const role = restaurant.users.find(u => u.user.equals(user._id)).role
 		return { role, restaurant }
 	}
 	static async getUserData(id) {

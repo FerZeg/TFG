@@ -4,13 +4,13 @@ import Usuario from "../Models/Usuario.js"
 
 class UserService {
 	static async getUsers(restauranteId) {
-		const restaurant = await Restaurante.findById(restauranteId, { users: 1 })
+		const restaurant = await Restaurante.findById(restauranteId, { users: 1 }).populate("users.user")
 		if (!restaurant) {
 			throw new NotFoundError("No se ha encontrado el restaurante")
 		}
 		return restaurant.users
 	}
-	static async createUser(restauranteId, user, type = "cocinero") {
+	static async createUser(restauranteId, user, role = "cocinero") {
 		if (!restauranteId || !user) {
 			throw new Error("restauranteId y user son requeridos")
 		}
@@ -21,7 +21,7 @@ class UserService {
 		try {
 			user = user instanceof Usuario ? user : new Usuario(user)
 			await user.save()
-			restaurant.users.push({ref: user._id, type})
+			restaurant.users.push({user: user._id, role})
 			await restaurant.save()
 			return user
 		} catch (error) {
@@ -36,7 +36,7 @@ class UserService {
 		if (!restaurante) {
 			throw new NotFoundError("No se ha encontrado el restaurante")
 		}
-		restaurante.users = restaurante.users.filter(user => user.ref.toString() != userId)
+		restaurante.users = restaurante.users.filter(user => user.user.toString() != userId)
 		await restaurante.save()
 		await Usuario.deleteOne({ _id: userId })
 	}

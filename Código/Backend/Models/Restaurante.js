@@ -25,8 +25,8 @@ const RestauranteSchema = new Schema({
 		},
 	}],
 	users: [{
-		ref: {type: Schema.Types.ObjectId, ref: "Usuario" },
-		type: {
+		user: {type: Schema.Types.ObjectId, ref: "Usuario" },
+		role: {
 			type: String,
 			default: "cocinero",
 			enum: ["cocinero", "admin"],
@@ -54,6 +54,6 @@ RestauranteSchema.pre("updateOne", function(next) {
 RestauranteSchema.methods.compareMesaPassword = function(password) {
 	return bcrypt.compareSync(password, this.contraseña_mesas)
 }
-RestauranteSchema.index({ "users.ref": 1 })
+RestauranteSchema.index({ "users.user": 1 })
 
 export default models.Restaurante || model("Restaurante", RestauranteSchema)

@@ -41,12 +41,12 @@ const restaurante = new Restaurante({
 	],
 	users: [
 		{
-			ref: user._id,
-			type: "admin",
+			user: user._id,
+			role: "admin",
 		},
 		{
-			ref: cocinero._id,
-			type: "cocinero",
+			user: cocinero._id,
+			role: "cocinero",
 		},
 	],
 	contraseña_mesas: "1234",

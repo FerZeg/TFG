@@ -11,7 +11,7 @@ let user = generateRandomUser()
 before(async() => {
 	await connectDB()
 	await user.save()
-	restaurante.users.push({ref: user._id, type: "cocinero"})
+	restaurante.users.push({user: user._id, role: "cocinero"})
 	await restaurante.save()
 })
 after(async() => {
@@ -28,7 +28,7 @@ describe("CocineroDB Tests", () => {
 	it("Debería devolver todos los cocineros", async () => {
 		const users = await UserService.getUsers(restaurante._id)
 		assert.strictEqual(users.length, 1)
-		assert.strictEqual(users[0].ref.toString(), user._id.toString())
+		assert.strictEqual(users[0].user._id.toString(), user._id.toString())
 	})
 	it("Debería crear un nuevo cocinero", async () => {
 		const newUser = generateRandomUser()
