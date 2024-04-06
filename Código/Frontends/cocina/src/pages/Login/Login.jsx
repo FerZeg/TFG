@@ -1,30 +1,36 @@
-import { useContext } from 'react';
-import { fetchLogin } from '../lib/fetchers';
+import { fetchLogin } from '../../lib/fetchers';
 import './Login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginContext } from '../lib/context';
-import { useEffect } from 'react';
+import { useContext } from 'react';
+import { loginContext } from '../../lib/context'
+import { fetchUserData } from '../../lib/fetchers';
 
 export default function Login() {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const {login} = useContext(loginContext);
+    const { setLogin } = useContext(loginContext);
     const handleSubmit = async (ev) => {
         ev.preventDefault();
-        if(await fetchLogin(user, password)) {
-            navigate('/');
-        } else {
+        const login = await fetchLogin(user, password);
+        if(!login) {
             setError('Usuario o contraseña incorrectos');
             setPassword('');
-        }  
+        } else {
+            localStorage.setItem('token', login);
+            navigate('/')
+            const data = await fetchUserData();
+            if(!data) {
+                setError('Error al obtener los datos del usuario');
+                setPassword('');
+                setUser('');
+                return
+            }
+            setLogin({value: true, data: data.data})
+        }
     }
-    useEffect(() => {
-        if(login.value) navigate('/')
-    }, [login.value, navigate])
-
     return (
         <div className="center-page margin-top-20">
             <h1 className='title'>ComidaEnMarcha</h1>

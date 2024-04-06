@@ -31,10 +31,10 @@ export const fetchLogin = async (email, password) => {
         if(response.ok) {
             const data = await response.json()
             localStorage.setItem("token", data.token)
-            return true
+            return data.token
         }
-        return false
+        return null
     } catch(e) {
-        return false
+        return null
     }
 }

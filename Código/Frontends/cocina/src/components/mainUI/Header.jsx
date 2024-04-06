@@ -3,22 +3,25 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Header() {
     const { login } = useContext(loginContext);
     const { pathname } = useLocation();
     const isActive = (path) => {
-        console.log(pathname, path)
         return pathname === path ? "active" : "";
     };
+    useEffect(() => {
+        console.log(login)
+    })
     return (
         <div className="main-header">
             <nav>
                 <ul>
                     <li><Link to="/" className={isActive("/")}>Cocina</Link></li>
-                    <li><Link to="/edit" className={isActive("/editor")}>Editor</Link></li>
+                    <li><Link to="/edit" className={isActive("/edit")}>Editor</Link></li>
                     {
-                        login.data && (login.data.data.role === "admin" || login.data.data.type === "superadmin") &&
+                        login.data && (login.data.role === "admin" || login.data.type === "superadmin") &&
                         <>
                             <li><Link to="/admin" className={isActive("/admin")}>Admin</Link></li>
                             <li><Link to="/tickets" className={isActive("/tickets")}>Tickets</Link></li>
