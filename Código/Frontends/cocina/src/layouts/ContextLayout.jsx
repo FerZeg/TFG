@@ -14,7 +14,6 @@ export default function ContextLayout() {
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
     useEffect(() => {
-        console.log('ContextLayout')
         const token = localStorage.getItem('token')
         if(!token) {
             setLoading(false)
@@ -32,9 +31,7 @@ export default function ContextLayout() {
     return (
         <loginContext.Provider value={{login, setLogin}}>
             <Toaster/>
-            {
-            !loading && <Outlet />
-            }
+            {!loading && <Outlet />}
         </loginContext.Provider>
     );
 }
