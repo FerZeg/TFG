@@ -1,12 +1,12 @@
 import { Router } from "express"
-import { getCocineros, postCocinero, deleteCocinero } from "../../../controllers/CocineroC.js"
+import { getUser, postUser, deleteUser } from "../../../controllers/UserC.js"
 import { permissionController } from "../../../controllers/PermissionC.js"
 import asyncMiddleware from "middleware-async"
 
 const cocineroRouter = Router({ mergeParams: true })
 
-cocineroRouter.get("/", permissionController("cocinero"), asyncMiddleware(getCocineros))
-cocineroRouter.post("/", permissionController("admin"), asyncMiddleware(postCocinero))
-cocineroRouter.delete("/:cocineroId", permissionController("admin"), asyncMiddleware(deleteCocinero))
+cocineroRouter.get("/", permissionController("cocinero"), asyncMiddleware(getUser))
+cocineroRouter.post("/", permissionController("admin"), asyncMiddleware(postUser))
+cocineroRouter.delete("/:userId", permissionController("admin"), asyncMiddleware(deleteUser))
 
 export default cocineroRouter

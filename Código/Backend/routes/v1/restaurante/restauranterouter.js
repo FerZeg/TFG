@@ -11,6 +11,6 @@ restauranteRouter.get("/", permissionController("superadmin"), asyncMiddleware(g
 restauranteRouter.post("/", permissionController("superadmin"), asyncMiddleware(createRestaurante))
 restauranteRouter.delete("/:restauranteId", permissionController("superadmin"), asyncMiddleware(deleteRestaurante))
 
-restauranteRouter.use("/:restauranteId/cocineros", cocineroRouter)
+restauranteRouter.use("/:restauranteId/users", cocineroRouter)
 
 export default restauranteRouter
