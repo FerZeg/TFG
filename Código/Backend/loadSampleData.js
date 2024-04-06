@@ -7,15 +7,21 @@ const user = new Usuario({
 	nombre: "admin",
 	contraseña: "admin",
 	email: "admin@admin.com",
-	type: "superadmin",
 })
 const cocinero = new Usuario({
 	nombre: "cocinero",
 	contraseña: "cocinero",
 	email: "cocinero@cocinero.com",
 })
+const superadmin = new Usuario({
+	nombre: "superadmin",
+	contraseña: "superadmin",
+	email: "superadmin@superadmin.com",
+	type: "superadmin",
+})
 await user.save()
 await cocinero.save()
+await superadmin.save()
 const restaurante = new Restaurante({
 	nombre: "restaurante",
 	direccion: "calle",
