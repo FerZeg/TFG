@@ -25,3 +25,37 @@ table tr:hover {
     flex-direction: column;
     align-items: center;
 }
+
+button.save {
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+button.save.changed {
+    background-color: #4CAF50;
+}
+button.save[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+button.delete {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}

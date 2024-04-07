@@ -1,44 +1,43 @@
 import PropTypes from 'prop-types'
-import { deleteUser } from '../../lib/actions';
-import { useContext } from 'react';
-import { loginContext } from '../../lib/context';
-import { toast } from 'sonner';
+import PersonalField from './PersonalField';
 
 function PersonalTable({ personal, fields, setPersonal }) {
-    const { login } = useContext(loginContext)
-    const handleDeleteButton = async (id) => {
-        const result = await deleteUser(login.data.restauranteId, id)
-        if(result) {
-            const newPersonal = personal.filter((person) => person.user._id !== id)
-            toast.success('Usuario eliminado')
-            return setPersonal(newPersonal)
-        }
-        toast.error('No se pudo eliminar el usuario')
+    const handleAddButton = () => {
+        const newPersonal = [...personal]
+        newPersonal.push({
+            user: {
+                nombre: '',
+                email: ''
+            },
+            role: '',
+            alreadyExist: false
+        })
+        setPersonal(newPersonal)
     }
     return (
-        <table>
-            <thead>
-                <tr>
-                    {Object.values(fields).map((field, index) => (
-                        <th key={index}>{field.label}</th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {personal.map((person, index) => (
-                    <tr key={index}>
-                        <td>{person.user.nombre}</td>
-                        <td>{person.role}</td>
-                        <td>{'********'}</td>
-                        <td>{person.user.email}</td>
-                        <td>
-                            <button>Añadir</button>
-                            <button onClick={() => handleDeleteButton(person.user._id)}>Eliminar</button>
-                        </td>
+        <>
+            <table>
+                <thead>
+                    <tr>
+                        {Object.values(fields).map((field, index) => (
+                            <th key={index}>{field.label}</th>
+                        ))}
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {personal.map((person) => (
+                        <PersonalField 
+                        person={person} 
+                        key={person.user._id} 
+                        personal={personal}
+                        alreadyExist={person.alreadyExist}
+                        setPersonal={setPersonal}
+                         />
+                    ))}
+                </tbody>
+            </table>
+            <button onClick={handleAddButton}>Añadir</button>
+        </>
     );
 }
 
