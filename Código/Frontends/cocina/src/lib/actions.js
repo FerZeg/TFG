@@ -14,3 +14,18 @@ export async function deleteUser(restaurantId, id) {
         return null
     }
 }
+export async function createUser(user, restaurantId) {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/users`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(user)
+        })
+        return response
+    } catch(e) {
+        return null
+    }
+}
