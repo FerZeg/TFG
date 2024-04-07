@@ -10,7 +10,7 @@ const getUsers = async (req, res) => {
 const postUser = async (req, res) => {
 	const { restauranteId } = req.params
 	const cocinero = req.body
-	const newCocinero = await UserService.createUser(restauranteId, cocinero)
+	const newCocinero = await UserService.createUser(restauranteId, cocinero, cocinero.role)
 	res.send(newCocinero)
 }
 

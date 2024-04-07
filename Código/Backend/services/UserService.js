@@ -25,6 +25,7 @@ class UserService {
 			await restaurant.save()
 			return user
 		} catch (error) {
+			console.log(error)
 			throw new Error("Error al crear el usuario")
 		}
 	}
