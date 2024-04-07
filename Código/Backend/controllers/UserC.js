@@ -14,6 +14,13 @@ const postUser = async (req, res) => {
 	res.send(newCocinero)
 }
 
+const putUser = async (req, res) => {
+	const { restauranteId, userId } = req.params
+	const user = req.body
+	const updatedUser = await UserService.updateUser(restauranteId, userId, user)
+	res.send(updatedUser)
+}
+
 const deleteUser = async (req, res) => {
 	const { restauranteId, userId } = req.params
 	if(userId === req.user.id) {
@@ -23,4 +30,4 @@ const deleteUser = async (req, res) => {
 	res.json({ message: "Usuario eliminado"})
 }
 
-export { getUsers, postUser, deleteUser }
+export { getUsers, postUser, deleteUser, putUser }

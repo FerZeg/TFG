@@ -5,6 +5,7 @@ import { deleteUser } from '../../lib/actions';
 import { useContext } from 'react';
 import { loginContext } from '../../lib/context';
 import { createUser } from '../../lib/actions';
+import { updateUser } from '../../lib/actions';
 
 export default function PersonalField({alreadyExist = true, person, personal, setPersonal}) {
     const { login } = useContext(loginContext)
@@ -16,7 +17,18 @@ export default function PersonalField({alreadyExist = true, person, personal, se
     const [password, setPassword] = useState('********')
     
     const handleSaveButton = async () => {
-        if(exists) return
+        if(exists) {
+            const response = await updateUser(
+                {nombre, role, email, contraseña: password === '********' ? undefined : password},
+                 login.data.restauranteId, person.user._id)
+            if(response) {
+                setChanged(false)
+                toast.success('Usuario actualizado')
+            } else {
+                toast.error('Error al actualizar el usuario')
+            }
+            return
+        }
         const response = await createUser({nombre, role, email, contraseña: password}, login.data.restauranteId)
         if(response.ok) {
             setExist(true)
@@ -68,7 +80,7 @@ export default function PersonalField({alreadyExist = true, person, personal, se
                     className={'save' + (changed ? ' changed' : '')}
                     disabled={!changed ? true : false}
                     onClick={handleSaveButton}>
-                    Guardar
+                    {exists ? 'Guardar' : 'Crear'}
                 </button>
                 {exists && (
                     <button onClick={() => handleDeleteButton(person.user._id)} className='delete'>
