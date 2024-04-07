@@ -9,7 +9,7 @@ export async function deleteUser(restaurantId, id) {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
         })
-        return await response.json()
+        return response.ok
     } catch(e) {
         return null
     }
