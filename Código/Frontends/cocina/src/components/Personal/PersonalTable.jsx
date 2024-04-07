@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { deleteUser } from '../../lib/actions';
 import { useContext } from 'react';
 import { loginContext } from '../../lib/context';
+import { toast } from 'sonner';
 
 function PersonalTable({ personal, fields, setPersonal }) {
     const { login } = useContext(loginContext)
@@ -9,8 +10,10 @@ function PersonalTable({ personal, fields, setPersonal }) {
         const result = await deleteUser(login.data.restauranteId, id)
         if(result) {
             const newPersonal = personal.filter((person) => person.user._id !== id)
-            setPersonal(newPersonal)
+            toast.success('Usuario eliminado')
+            return setPersonal(newPersonal)
         }
+        toast.error('No se pudo eliminar el usuario')
     }
     return (
         <table>

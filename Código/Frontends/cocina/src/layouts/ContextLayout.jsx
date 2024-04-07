@@ -26,7 +26,7 @@ export default function ContextLayout() {
         }, [navigate, login.value])
     return (
         <loginContext.Provider value={{login, setLogin}}>
-            <Toaster/>
+            <Toaster richColors/>
             <Outlet />
         </loginContext.Provider>
     );
