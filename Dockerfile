@@ -9,4 +9,4 @@ RUN npm install
 
 EXPOSE 80
 
-CMD [ "npm", "run", "init" ]
+CMD [ "npm", "run", "start" ]

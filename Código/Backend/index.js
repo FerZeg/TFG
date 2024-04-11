@@ -13,6 +13,10 @@ app.use(cors({
 // middleware
 app.use(express.json())
 
+app.get("/", (req, res) => {
+	res.send("API Cocina en Marcha")
+})
+
 // routes
 app.use("/api/v1", mainRouter)
 
