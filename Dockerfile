@@ -3,9 +3,9 @@ FROM node:18-alpine AS builder
 RUN mkdir -p /app
 WORKDIR /app
 
-RUN npm install
-
 COPY /Código/Backend .
+
+RUN npm install
 
 EXPOSE 80
 
