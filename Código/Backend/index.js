@@ -7,7 +7,7 @@ import cors from "cors"
 app.use(cors({
 	origin: process.env.MODE == "development" 
 		? ["http://localhost:5173"] 
-		: ["https://admin.cocinaenmarcha.com", "https://cocinaenmarcha.com", "https://cocina.cocinaenmarcha.com"]
+		: ["https://admin.comidaenmarcha.com", "https://comidaenmarcha.com", "https://cocina.comidaenmarcha.com"]
 }))
 
 // middleware
