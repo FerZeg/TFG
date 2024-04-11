@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node --watch --env-file=development.env server.js",
     "loadSample": "node --env-file=development.env loadSampleData.js",
-    "start": "node --env-file=.env server.js",
+    "start": "node server.js",
     "test": "node --test  --env-file=development.env",
     "init": "npm install && npm run start"
   },
