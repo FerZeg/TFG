@@ -1,8 +1,24 @@
 # Trabajo final para DAW
-Scripts npm run ....
-- dev -> Desarrollar en local
-- start -> Iniciar la aplicación
-- test -> Pasar los tests
-- loadSample -> Cargar datos de ejemplo
 
-## Para usar la aplicación en local debes instalar MongoDB en local primero
+<details>
+<summary>Tabla de contenidos</summary>
+
+- [Scripts](#Scripts)
+- [Requisitos previos](#Requisitos-previos)
+- [Capturas de pantalla](#Capturas)
+
+</details>
+
+## Scripts
+```
+npm run dev -> Desarrollar en local
+npm run start -> Iniciar la aplicación
+npm run test -> Pasar los tests
+npm run loadSample -> Cargar datos de ejemplo
+```
+
+## Requisitos previos
+- MongoDB
+- NodeJS (21 o superior)
+
+## Capturas
