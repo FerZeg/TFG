@@ -31,9 +31,13 @@ export default function PersonalField({alreadyExist = true, person, personal, se
         }
         const response = await createUser({nombre, role, email, contraseña: password}, login.data.restauranteId)
         if(response.ok) {
+            const data = await response.json()
+            const {_id} = data
             setExist(true)
             setChanged(false)
             toast.success('Usuario creado')
+            setPersonal([...personal.slice(0, -1), {user: {nombre, email, password, _id}, role, alreadyExist: true}])
+            console.log()
         }
         else {
             toast.error('Error al crear el usuario')

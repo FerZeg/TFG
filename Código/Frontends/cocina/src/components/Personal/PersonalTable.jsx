@@ -9,7 +9,7 @@ function PersonalTable({ personal, fields, setPersonal }) {
                 nombre: '',
                 email: ''
             },
-            role: '',
+            role: 'cocinero',
             alreadyExist: false
         })
         setPersonal(newPersonal)
