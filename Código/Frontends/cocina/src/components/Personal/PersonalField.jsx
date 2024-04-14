@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { loginContext } from '../../lib/context';
 import { createUser } from '../../lib/actions';
 import { updateUser } from '../../lib/actions';
+import { Link } from 'react-router-dom';
 
 export default function PersonalField({alreadyExist = true, person, personal, setPersonal}) {
     const { login } = useContext(loginContext)
@@ -17,6 +18,10 @@ export default function PersonalField({alreadyExist = true, person, personal, se
     const [password, setPassword] = useState('********')
     
     const handleSaveButton = async () => {
+        if(!changed) {
+            toast.error('No se han realizado cambios')
+            return
+        }
         if(exists) {
             const response = await updateUser(
                 {nombre, role, email, contraseña: password === '********' ? undefined : password},
@@ -80,16 +85,15 @@ export default function PersonalField({alreadyExist = true, person, personal, se
             <td><input type="password" name="password" value={password} onChange={handleInputChange} /></td>
             <td><input type="email" name="email" value={email} onChange={handleInputChange} /></td>
             <td>
-                <button 
+                <a 
                     className={'save' + (changed ? ' changed' : '')}
-                    disabled={!changed ? true : false}
                     onClick={handleSaveButton}>
                     {exists ? 'Guardar' : 'Crear'}
-                </button>
+                </a>
                 {exists && (
-                    <button onClick={() => handleDeleteButton(person.user._id)} className='delete'>
+                    <a onClick={() => handleDeleteButton(person.user._id)} className='delete'>
                         Eliminar
-                    </button>
+                    </a>
                 )}
             </td>
         </tr>

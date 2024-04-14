@@ -44,3 +44,19 @@ export async function updateUser(user, restaurantId, id) {
         return null
     }
 }
+
+export async function updateRestaurant(restaurant, restaurantId) {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(restaurant)
+        })
+        return response.ok
+    } catch(e) {
+        return null
+    }
+}

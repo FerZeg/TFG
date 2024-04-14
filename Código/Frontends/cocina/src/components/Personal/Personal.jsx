@@ -37,7 +37,7 @@ export default function Personal() {
         })
     }, [login])
     return (
-        <section className="personal-section">
+        <section id="personal-section">
             <h1>Personal</h1>
             <PersonalTable  personal={personal} fields={fields} setPersonal={setPersonal}/>
         </section>

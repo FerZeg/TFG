@@ -1,3 +1,4 @@
+import './Admin.css'
 import DatosRestaurante from "../../components/DatosRestaurante/DatosRestaurante";
 import Personal from "../../components/Personal/Personal";
 import Mesas from "../../components/Mesas/Mesas";

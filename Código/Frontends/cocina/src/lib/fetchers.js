@@ -39,9 +39,9 @@ export const fetchLogin = async (email, password) => {
     }
 }
 
-export const fetchRestaurant = async () => {
+export const fetchRestaurant = async (restaurantId) => {
     try {
-        const response = await fetch(`${URL}/restaurantes`, {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

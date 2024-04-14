@@ -1,61 +1,51 @@
-table {
-    width: 500px;
+#personal-section table {
+    width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-
 }
-table th {
+#personal-section table th {
     background-color: #f2f2f2;
     color: #333;
     font-weight: bold;
 }
-table th, table td {
-    padding: 10px;
+#personal-section table th, table td {
     border: 1px solid #ccc;
 }
-table tr {
+#personal-section table tr {
     transition: background-color 0.2s ease;
 }
-table tr:hover {
+#personal-section table tr:hover {
     background-color: #96daff4a;
 }
-.personal-section {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-button.save {
-    color: white;
+#personal-section input {
+    padding: 5px;
     border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    margin: 5px 0;
     border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    width: 100%;
+    max-width: 120px;
+    height: 100%;
+
 }
 
-button.save.changed {
-    background-color: #4CAF50;
+
+a.delete {
+    color: red;
+    cursor: pointer;
+    text-decoration: underline;
 }
-button.save[disabled] {
-    background-color: #ccc;
+a.delete:hover {
+    color: darkred;
+}
+a.save.changed {
+    color: green;
+    cursor: pointer;
+    text-decoration: underline;
+}
+a.save.changed:hover {
+    color: darkgreen;
+}
+a.save {
+    color: #333;
     cursor: not-allowed;
-}
-button.delete {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    text-decoration: underline;
 }

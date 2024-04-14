@@ -6,10 +6,10 @@ import asyncMiddleware from "middleware-async"
 
 
 const restauranteRouter = Router()
-restauranteRouter.get("/:restauranteId", permissionController("cocinero"), asyncMiddleware(getRestaurante))
-restauranteRouter.get("/", permissionController("superadmin"), asyncMiddleware(getRestaurante))
+restauranteRouter.get("/:restauranteId", permissionController("admin"), asyncMiddleware(getRestaurante))
+restauranteRouter.get("/", permissionController("admin"), asyncMiddleware(getRestaurante))
 restauranteRouter.post("/", permissionController("superadmin"), asyncMiddleware(createRestaurante))
-restauranteRouter.put("/:restauranteId", permissionController("superadmin"), asyncMiddleware(putRestaurante))
+restauranteRouter.put("/:restauranteId", permissionController("admin"), asyncMiddleware(putRestaurante))
 restauranteRouter.delete("/:restauranteId", permissionController("superadmin"), asyncMiddleware(deleteRestaurante))
 
 restauranteRouter.use("/:restauranteId/users", cocineroRouter)
