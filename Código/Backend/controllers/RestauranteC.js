@@ -20,5 +20,11 @@ const deleteRestaurante = async (req, res) => {
 	await RestauranteService.deleteOne(restauranteId)
 	res.json({message: "Restaurante eliminado"})
 }
+const putRestaurante = async (req, res) => {
+	const restauranteId = req.params.restauranteId
+	if(!restauranteId) throw new NotFoundError("No se ha encontrado el restaurante")
+	const restaurante = await RestauranteService.updateOne(restauranteId, req.body)
+	res.json({message: "Restaurante actualizado", restaurante})
+}
 
-export { getRestaurante, createRestaurante, deleteRestaurante }
+export { getRestaurante, createRestaurante, deleteRestaurante, putRestaurante }
