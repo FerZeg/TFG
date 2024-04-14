@@ -44,9 +44,9 @@ class UserService {
 				throw new NotFoundError("No se ha encontrado el restaurante");
 			}
 			user = user instanceof Usuario ? user : new Usuario(user);
-			await user.save();
+			await user.save({ session });
 			restaurant.users.push({ user: user._id, role });
-			await restaurant.save();
+			await restaurant.save({ session });
 			await session.commitTransaction();
 			session.endSession();
 			return user;
