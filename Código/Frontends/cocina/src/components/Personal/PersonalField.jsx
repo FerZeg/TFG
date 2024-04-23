@@ -1,19 +1,25 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { toast } from 'sonner';
-import { deleteUser } from '../../lib/actions';
+import { deleteUserRemote, updateUserRemote } from '../../lib/actions';
 import { useLoginContext } from '../../lib/context';
-import { createUser } from '../../lib/actions';
-import { updateUser } from '../../lib/actions';
+import { createUserRemote } from '../../lib/actions';
+import { useRestauranteContext } from '../../lib/context';
+import { useEffect } from 'react';
 
-export default function PersonalField({alreadyExist = true, person, personal, setPersonal}) {
+export default function PersonalField({user}) {
     const { login } = useLoginContext()
-    const [nombre, setNombre] = useState(person.user.nombre)
-    const [role, setRole] = useState(person.role)
-    const [email, setEmail] = useState(person.user.email)
-    const [exists, setExist] = useState(alreadyExist)
+    const { removeUser, updateUser } = useRestauranteContext()
+    const [nombre, setNombre] = useState(user.user.nombre)
+    const [role, setRole] = useState(user.role)
+    const [email, setEmail] = useState(user.user.email)
+    const [exists, setExist] = useState(user.alreadyExist)
     const [changed, setChanged] = useState(false)
     const [password, setPassword] = useState('********')
+
+    useEffect(() => {
+        console.log('user', user)
+    }, [user])
     
     const handleSaveButton = async () => {
         if(!changed) {
@@ -21,36 +27,36 @@ export default function PersonalField({alreadyExist = true, person, personal, se
             return
         }
         if(exists) {
-            const response = await updateUser(
+            const response = await updateUserRemote(
                 {nombre, role, email, contraseña: password === '********' ? undefined : password},
-                 login.data.restauranteId, person.user._id)
+                 login.data.restauranteId, user.user._id)
             if(response) {
                 setChanged(false)
                 toast.success('Usuario actualizado')
+                updateUser({user: {nombre, email, password, _id: user.user._id}, role, alreadyExist: true})
             } else {
                 toast.error('Error al actualizar el usuario')
             }
             return
         }
-        const response = await createUser({nombre, role, email, contraseña: password}, login.data.restauranteId)
+        const response = await createUserRemote({nombre, role, email, contraseña: password}, login.data.restauranteId)
         if(response.ok) {
             const data = await response.json()
             const {_id} = data
             setExist(true)
             setChanged(false)
             toast.success('Usuario creado')
-            setPersonal([...personal.slice(0, -1), {user: {nombre, email, password, _id}, role, alreadyExist: true}])
-            console.log()
+            updateUser({user: {nombre, email, password, _id}, role, alreadyExist: true})
+
         }
         else {
             toast.error('Error al crear el usuario')
         }
     }
     const handleDeleteButton = async (id) => {
-        const response = await deleteUser(id, login.data.restauranteId)
+        const response = await deleteUserRemote(id, login.data.restauranteId)
         if(response) {
-            const newPersonal = personal.filter((person) => person.user._id !== id)
-            setPersonal(newPersonal)
+            removeUser(user)
             toast.success('Usuario eliminado')
         } else {
             toast.error('Error al eliminar el usuario')
@@ -89,7 +95,7 @@ export default function PersonalField({alreadyExist = true, person, personal, se
                     {exists ? 'Guardar' : 'Crear'}
                 </a>
                 {exists && (
-                    <a onClick={() => handleDeleteButton(person.user._id)} className='delete'>
+                    <a onClick={() => handleDeleteButton(user.user._id)} className='delete'>
                         Eliminar
                     </a>
                 )}
@@ -99,9 +105,6 @@ export default function PersonalField({alreadyExist = true, person, personal, se
 }
 
 PersonalField.propTypes = {
-    person: PropTypes.object.isRequired,
-    setPersonal: PropTypes.func.isRequired,
-    personal: PropTypes.array.isRequired,
-    alreadyExist: PropTypes.bool
+    user: PropTypes.object.isRequired,
 
 }

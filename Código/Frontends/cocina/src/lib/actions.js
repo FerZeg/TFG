@@ -1,6 +1,6 @@
 const URL = import.meta.env.VITE_API_URL
 
-export async function deleteUser(id, restaurantId) {
+export async function deleteUserRemote(id, restaurantId) {
     try {
         const response = await fetch(`${URL}/restaurantes/${restaurantId}/users/${id}`, {
             method: "DELETE",
@@ -14,7 +14,7 @@ export async function deleteUser(id, restaurantId) {
         return null
     }
 }
-export async function createUser(user, restaurantId) {
+export async function createUserRemote(user, restaurantId) {
     try {
         const response = await fetch(`${URL}/restaurantes/${restaurantId}/users`, {
             method: "POST",
@@ -29,7 +29,7 @@ export async function createUser(user, restaurantId) {
         return null
     }
 }
-export async function updateUser(user, restaurantId, id) {
+export async function updateUserRemote(user, restaurantId, id) {
     try {
         const response = await fetch(`${URL}/restaurantes/${restaurantId}/users/${id}`, {
             method: "PUT",
@@ -45,7 +45,7 @@ export async function updateUser(user, restaurantId, id) {
     }
 }
 
-export async function updateRestaurant(restaurant, restaurantId) {
+export async function updateRestaurantRemote(restaurant, restaurantId) {
     try {
         const response = await fetch(`${URL}/restaurantes/${restaurantId}`, {
             method: "PUT",

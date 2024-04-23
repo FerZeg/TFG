@@ -4,7 +4,7 @@ import './MainLayout.css';
 import { useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { fetchUserData } from '../lib/fetchers';
-
+import { Toaster } from 'sonner';
 
 
 export default function Layout() {
@@ -28,6 +28,7 @@ export default function Layout() {
       <>
       {login.value &&
       <>
+        <Toaster richColors/>
         <Header />
         <main className='main-section'>
           <Outlet />

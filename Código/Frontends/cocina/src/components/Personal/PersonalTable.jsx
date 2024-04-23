@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import PersonalField from './PersonalField';
+import { useRestauranteContext } from '../../lib/context';
 
-function PersonalTable({ personal, fields, setPersonal }) {
+function PersonalTable({ fields }) {
+    const { users, addUser } = useRestauranteContext()
     const handleAddButton = () => {
-        const newPersonal = [...personal]
-        newPersonal.push({
+        const newPersonal = ({
             user: {
                 nombre: '',
                 email: ''
@@ -12,7 +13,7 @@ function PersonalTable({ personal, fields, setPersonal }) {
             role: 'cocinero',
             alreadyExist: false
         })
-        setPersonal(newPersonal)
+        addUser(newPersonal)
     }
     return (
         <>
@@ -25,13 +26,10 @@ function PersonalTable({ personal, fields, setPersonal }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {personal.map((person) => (
+                    {users.map((user) => (
                         <PersonalField 
-                        person={person} 
-                        key={person.user._id} 
-                        personal={personal}
-                        alreadyExist={person.alreadyExist}
-                        setPersonal={setPersonal}
+                        user={user} 
+                        key={user.user._id} 
                          />
                     ))}
                 </tbody>
@@ -43,7 +41,5 @@ function PersonalTable({ personal, fields, setPersonal }) {
 
 export default PersonalTable;
 PersonalTable.propTypes = {
-    personal: PropTypes.array,
     fields: PropTypes.object.isRequired,
-    setPersonal: PropTypes.func.isRequired
 }

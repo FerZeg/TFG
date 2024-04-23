@@ -6,7 +6,6 @@ import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Admin from './pages/Admin/Admin.jsx';
-import { Toaster } from 'sonner';
 
 
 const router = createBrowserRouter([
@@ -26,6 +25,5 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router}>
-      <Toaster richColors/>
     </RouterProvider>,
 )
