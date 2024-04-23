@@ -5,25 +5,27 @@ import Layout from './layouts/MainLayout';
 import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import ContextLayout from './layouts/ContextLayout.jsx';
 import Admin from './pages/Admin/Admin.jsx';
+import { Toaster } from 'sonner';
 
 
 const router = createBrowserRouter([
   { path: "logout", element: <Logout/> },
+  { path: "login", element: <Login/> },
   {
     path: "/",
-    element: <ContextLayout/>,
+    element: <Layout/>,
     children: [
-      { path: "", element: <Layout><Cocina/></Layout>},
-      { path: "edit", element: <Layout><h1>Editar</h1></Layout>},
-      { path: "admin", element: <Layout><Admin/></Layout>},
-      { path: "tickets", element: <Layout><h1>Tickets</h1></Layout>},
-      { path: "login", element: <Login/> }
+      { path: "", element: <Cocina/>},
+      { path: "edit", element: <h1>Editar</h1>},
+      { path: "admin", element: <Admin/>},
+      { path: "tickets", element: <h1>Tickets</h1>},
     ]
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router}></RouterProvider>,
+    <RouterProvider router={router}>
+      <Toaster richColors/>
+    </RouterProvider>,
 )

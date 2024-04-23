@@ -34,6 +34,10 @@
     color: #fff;
     cursor: pointer;
 }
+.loginForm button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
 .margin-top-20 {
     margin-top: -20px;
 }
