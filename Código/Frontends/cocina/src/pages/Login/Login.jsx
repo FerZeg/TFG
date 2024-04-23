@@ -1,6 +1,6 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginContext } from '../../lib/context'
+import { useLoginContext } from '../../lib/context'
 import { fetchLogin, fetchUserData } from '../../lib/fetchers';
 import './Login.css';
 
@@ -10,7 +10,7 @@ export default function Login() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { login, setLogin } = useContext(loginContext);
+    const { login, updateLogin } = useLoginContext();
 
     const handleSubmit = async (ev) => {
         ev.preventDefault();
@@ -31,7 +31,7 @@ export default function Login() {
                 setLoading(false);
                 return
             }
-            setLogin({value: true, data: data})
+            updateLogin({value: true, data: data})
             setLoading(false);
         }
     }

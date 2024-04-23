@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import App from './app.jsx'
+import Cocina from './pages/Cocina/Cocina.jsx'
 import './index.css'
 import Layout from './layouts/MainLayout';
 import Login from './pages/Login/Login';
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <ContextLayout/>,
     children: [
-      { path: "", element: <Layout><App/></Layout>},
+      { path: "", element: <Layout><Cocina/></Layout>},
       { path: "edit", element: <Layout><h1>Editar</h1></Layout>},
       { path: "admin", element: <Layout><Admin/></Layout>},
       { path: "tickets", element: <Layout><h1>Tickets</h1></Layout>},

@@ -1,7 +1,7 @@
 import './DatosRestaurante.css'
 
-import { useState, useContext } from 'react'
-import { loginContext } from '../../lib/context'
+import { useState } from 'react'
+import { useLoginContext } from '../../lib/context'
 import { useEffect } from 'react'
 import { fetchRestaurant } from '../../lib/fetchers'
 import { updateRestaurant } from '../../lib/actions'
@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 
 export default function DatosRestaurante() {
     const [restaurant, setRestaurant] = useState({nombre: "", direccion: "", telefono: "", contraseña_mesas: "********"})
-    const { login } = useContext(loginContext)
+    const { login } = useLoginContext()
     const handleChange = (e) => {
         setRestaurant({...restaurant, [e.target.name]: e.target.value})
     }

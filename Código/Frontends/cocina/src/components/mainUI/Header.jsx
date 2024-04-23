@@ -1,19 +1,14 @@
-import { loginContext } from "../../lib/context";
-import { useContext } from "react";
+import { useLoginContext } from "../../lib/context";
 import { Link } from "react-router-dom";
 import './Header.css';
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function Header() {
-    const { login } = useContext(loginContext);
+    const { login } = useLoginContext();
     const { pathname } = useLocation();
     const isActive = (path) => {
         return pathname === path ? "active" : "";
     };
-    useEffect(() => {
-        console.log(login);
-    }, [login]);
     return (
         <div className="main-header">
             <nav>

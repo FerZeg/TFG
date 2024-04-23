@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import Header from "../components/mainUI/Header";
-import { useContext } from "react";
-import { loginContext } from '../lib/context';
+import { useLoginContext } from "../lib/context";
 import './MainLayout.css';
 
 export default function Layout({children}) {
-    const {login} = useContext(loginContext);
+  const { login } = useLoginContext()
     return (
       <>
       {login.value &&

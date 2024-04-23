@@ -1,16 +1,12 @@
-import { useState } from 'react';
-import { loginContext } from '../lib/context';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserData } from '../lib/fetchers';
+import { useLoginContext } from '../lib/context';
 
 export default function ContextLayout() {
-    const [ login, setLogin ] = useState({
-        value: false,
-        data: null
-      })
+    const { login, updateLogin } = useLoginContext()
     const navigate = useNavigate()
     useEffect(() => {
         if(login.value) return
@@ -20,14 +16,14 @@ export default function ContextLayout() {
         }
         (async() => {
             const data = await fetchUserData()
-            if(data) setLogin({value: true, data})
+            if(data) updateLogin({value: true, data})
             else navigate('/logout')
         })()
-        }, [navigate, login.value])
+        }, [navigate, login.value, updateLogin])
     return (
-        <loginContext.Provider value={{login, setLogin}}>
-            <Toaster richColors/>
-            <Outlet />
-        </loginContext.Provider>
+        <>
+        <Toaster richColors/>
+        <Outlet />
+        </>
     );
 }

@@ -1,3 +1,6 @@
-import { createContext } from 'react'
+import { create } from 'zustand'
 
-export const loginContext = createContext({value: false, data: null})
+export const useLoginContext = create((set) => ({
+    login: { value: false, data: {} },
+    updateLogin: (context) => set({ login: context }),
+}))

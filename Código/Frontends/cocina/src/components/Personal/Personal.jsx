@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import PersonalTable from "./PersonalTable"
 import { fetchPersonal } from "../../lib/fetchers"
-import { useContext } from "react";
-import { loginContext } from "../../lib/context";
+import { useLoginContext } from "../../lib/context";
 import './Personal.css'
 
 const fields = {
@@ -30,7 +29,7 @@ const fields = {
 
 export default function Personal() {
     const [personal, setPersonal] = useState([])
-    const { login } = useContext(loginContext)
+    const { login } = useLoginContext()
     useEffect(() => {
         fetchPersonal(login.data.restauranteId).then((data) => {
             if(data) setPersonal(data)

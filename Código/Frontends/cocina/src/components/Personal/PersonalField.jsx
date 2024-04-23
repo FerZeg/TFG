@@ -2,14 +2,12 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { toast } from 'sonner';
 import { deleteUser } from '../../lib/actions';
-import { useContext } from 'react';
-import { loginContext } from '../../lib/context';
+import { useLoginContext } from '../../lib/context';
 import { createUser } from '../../lib/actions';
 import { updateUser } from '../../lib/actions';
-import { Link } from 'react-router-dom';
 
 export default function PersonalField({alreadyExist = true, person, personal, setPersonal}) {
-    const { login } = useContext(loginContext)
+    const { login } = useLoginContext()
     const [nombre, setNombre] = useState(person.user.nombre)
     const [role, setRole] = useState(person.role)
     const [email, setEmail] = useState(person.user.email)
