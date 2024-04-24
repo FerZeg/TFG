@@ -1,0 +1,57 @@
+/* CSS for Mesas component */
+#mesas-section {
+    width: 100%;
+}
+
+#mesas-section h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#mesas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* CSS for MesaRow component */
+.mesa-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.mesa-row .mesa-row-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mesa-row .mesa-row-info input[type="text"],
+.mesa-row .mesa-row-info input[type="number"] {
+    font-size: 1em;
+    color: #333;
+}
+
+.mesa-row .mesa-row-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.mesa-row .mesa-row-buttons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.mesa-row .mesa-row-buttons button:hover {
+    background-color: #0056b3;
+}

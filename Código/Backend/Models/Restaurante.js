@@ -23,6 +23,10 @@ const RestauranteSchema = new Schema({
 			default: "LIBRE",
 			enum: ["LIBRE", "OCUPADA"],
 		},
+		capacidad: {
+			type: Number,
+			default: 4,
+		},
 	}],
 	users: [{
 		user: {type: Schema.Types.ObjectId, ref: "Usuario" },

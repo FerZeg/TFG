@@ -85,7 +85,12 @@ export default function PersonalField({user}) {
     return (
         <tr>
             <td><input type="text" name="nombre" value={nombre} onChange={handleInputChange} /></td>
-            <td><input type="text" name="role" value={role} onChange={handleInputChange} /></td>
+            <td>
+                <select name='role' onChange={handleInputChange}>
+                    <option value="admin">Admin</option>
+                    <option value="cocinero">Cocinero</option>
+                </select>
+            </td>
             <td><input type="password" name="password" value={password} onChange={handleInputChange} /></td>
             <td><input type="email" name="email" value={email} onChange={handleInputChange} /></td>
             <td>

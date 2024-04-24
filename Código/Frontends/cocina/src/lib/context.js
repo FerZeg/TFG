@@ -14,6 +14,7 @@ export const createMesasSlice = (set) => ({
     mesas: [],
     addMesa: (mesa) => set((state) => ({ mesas: [...state.mesas, mesa] })),
     removeMesa: (mesa) => set((state) => ({ mesas: state.mesas.filter((m) => m._id !== mesa._id) })),
+    updateMesa: (mesa) => set((state) => ({ mesas: state.mesas.map((m) => m._id === mesa._id ? mesa : m) })),
 })
 
 export const createPlatosContext = (set) => ({
