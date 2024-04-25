@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useRestauranteContext } from '../../lib/context';
-import { updateMesaRemote } from '../../lib/restaurante';
+import { updateMesaRemote } from '../../lib/actions';
 import { toast } from 'sonner';
 
 export default function MesaRow({mesa}) {
