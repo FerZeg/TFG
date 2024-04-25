@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useRestauranteContext } from '../../lib/context';
+import { updateMesaRemote } from '../../lib/restaurante';
+import { toast } from 'sonner';
 
 export default function MesaRow({mesa}) {
-    const { updateMesa } = useRestauranteContext();
+    const { updateMesa, login } = useRestauranteContext();
     const [changed, setChanged] = useState(false);
     const handleInputChange = (e) => {
         if(e.target.value !== mesa.identificador || e.target.value !== mesa.capacidad) {
@@ -13,8 +15,12 @@ export default function MesaRow({mesa}) {
             setChanged(false);
         }
     }
+    const handleSave = () => {
+        const result = updateMesaRemote(mesa, login.data.restauranteId);
+        if(result) toast.success("Datos guardados correctamente")
+        else toast.error("Error al guardar los datos")
+    }
 
-    console.log(mesa);
 
     return (
         <div className='mesa-row'>
@@ -23,7 +29,7 @@ export default function MesaRow({mesa}) {
                 <input type="number" name='capacidad' value={mesa.capacidad} onChange={(e) => handleInputChange(e)} />
             </div>
             <div className='mesa-row-buttons'>
-                <button disabled={!changed}>Guardar</button>
+                <button disabled={!changed} onClick={handleSave}>Guardar</button>
                 <button>Eliminar</button>
             </div>
         </div>
