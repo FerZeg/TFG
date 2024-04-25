@@ -43,13 +43,17 @@
     gap: 10px;
 }
 
-.mesa-row .mesa-row-buttons button {
+.mesa-row  button {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
+}
+.mesas-row  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .mesa-row .mesa-row-buttons button:hover {

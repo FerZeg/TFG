@@ -63,13 +63,27 @@ export async function updateRestaurantRemote(restaurant, restaurantId) {
 
 export async function updateMesaRemote(mesa, restaurantId) {
     try {
-        const response = await fetch(`${URL}/restaurantes/${restaurantId}/mesas/${mesa.id}`, {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/mesas/${mesa._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             },
             body: JSON.stringify(mesa)
+        })
+        return response.ok
+    } catch(e) {
+        return null
+    }
+}
+export async function deleteMesaRemote(mesa, restaurantId) {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/mesas/${mesa._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
         })
         return response.ok
     } catch(e) {
