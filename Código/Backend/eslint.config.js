@@ -1,4 +1,5 @@
 import js from "@eslint/js"
+import globals from "globals"
 
 export default [
 	js.configs.recommended,
@@ -25,8 +26,10 @@ export default [
 		}
 	},
 	{
-		env: {
-			node: true
+		languageOptions: {
+			globals: {
+				...globals.node
+			}
 		}
 	}
 ]
