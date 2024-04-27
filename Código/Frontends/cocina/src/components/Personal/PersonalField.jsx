@@ -9,51 +9,44 @@ import { useShallow } from 'zustand/react/shallow';
 
 export default function PersonalField({user}) {
     const { login } = useLoginContext()
-    const { removeUser, updateUser } = useRestauranteContext(useShallow(state => ({
+    const { removeUser, updateUser} = useRestauranteContext(useShallow(state => ({
         removeUser: state.removeUser,
-        updateUser: state.updateUser
+        updateUser: state.updateUser,
+        users: state.users
     })) )
-    const [nombre, setNombre] = useState(user.user.nombre)
-    const [role, setRole] = useState(user.role)
-    const [email, setEmail] = useState(user.user.email)
-    const [exists, setExist] = useState(user.alreadyExist)
     const [changed, setChanged] = useState(false)
-    const [password, setPassword] = useState('********')
     
     const handleSaveButton = async () => {
         if(!changed) {
             toast.error('No se han realizado cambios')
             return
         }
-        if(exists) {
-            const response = await updateUserRemote(
-                {nombre, role, email, contraseña: password === '********' ? undefined : password},
-                 login.data.restauranteId, user.user._id)
-            if(response) {
+        if(user.alreadyExist) {
+            const response = await updateUserRemote(user, login.data.restauranteId)
+            if(response.ok) {
                 setChanged(false)
                 toast.success('Usuario actualizado')
-                updateUser({user: {nombre, email, password, _id: user.user._id}, role, alreadyExist: true})
+                updateUser(user, {...user, alreadyExist: true, _id: response._id})
             } else {
                 toast.error('Error al actualizar el usuario')
             }
             return
         }
-        const response = await createUserRemote({nombre, role, email, contraseña: password}, login.data.restauranteId)
+        const response = await createUserRemote(user, login.data.restauranteId)
         if(response.ok) {
             const data = await response.json()
             const {_id} = data
-            setExist(true)
             setChanged(false)
             toast.success('Usuario creado')
-            updateUser({user: {nombre, email, password, _id}, role, alreadyExist: true})
+            updateUser(user, {...user, alreadyExist: true, _id})
 
         }
         else {
             toast.error('Error al crear el usuario')
         }
     }
-    const handleDeleteButton = async (id) => {
-        const response = await deleteUserRemote(id, login.data.restauranteId)
+    const handleDeleteButton = async () => {
+        const response = await deleteUserRemote(user, login.data.restauranteId)
         if(response) {
             removeUser(user)
             toast.success('Usuario eliminado')
@@ -63,43 +56,28 @@ export default function PersonalField({user}) {
     }
     const handleInputChange = (e) => {
         setChanged(true);
-        switch (e.target.name) {
-            case 'nombre':
-                setNombre(e.target.value);
-                break;
-            case 'role':
-                setRole(e.target.value);
-                break;
-            case 'password':
-                setPassword(e.target.value);
-                break;
-            case 'email':
-                setEmail(e.target.value);
-                break;
-            default:
-                break;
-        }
+        updateUser(user, {...user, [e.target.name]: e.target.value})
     };
 
     return (
         <tr>
-            <td><input type="text" name="nombre" value={nombre} onChange={handleInputChange} /></td>
+            <td><input type="text" name="nombre" value={user.nombre} onChange={handleInputChange} /></td>
             <td>
-                <select name='role' onChange={handleInputChange}>
+                <select name='role' value={user.role} onChange={handleInputChange}>
                     <option value="admin">Admin</option>
                     <option value="cocinero">Cocinero</option>
                 </select>
             </td>
-            <td><input type="password" name="password" value={password} onChange={handleInputChange} /></td>
-            <td><input type="email" name="email" value={email} onChange={handleInputChange} /></td>
+            <td><input type="password" name="password" value={user.password} onChange={handleInputChange} /></td>
+            <td><input type="email" name="email" value={user.email} onChange={handleInputChange} /></td>
             <td>
                 <a 
                     className={'save' + (changed ? ' changed' : '')}
                     onClick={handleSaveButton}>
-                    {exists ? 'Guardar' : 'Crear'}
+                    {user.alreadyExist ? 'Guardar' : 'Crear'}
                 </a>
-                {exists && (
-                    <a onClick={() => handleDeleteButton(user.user._id)} className='delete'>
+                {user.alreadyExist && (
+                    <a onClick={handleDeleteButton} className='delete'>
                         Eliminar
                     </a>
                 )}

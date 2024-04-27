@@ -12,7 +12,9 @@ class UserService {
 		return restaurant.users
 	}
 	// TODO: Mejorar la lógica de actualización de usuario
-	static async updateUser(restauranteId, userId, user) {
+	static async updateUser(req) {
+		const { restauranteId, userId } = req.params
+		const user  = req.body
 		if (!restauranteId || !userId || !user) {
 			throw new Error("restauranteId, userId y user son requeridos")
 		}
@@ -32,29 +34,35 @@ class UserService {
 		await userToUpdateDoc.save()
 		return userToUpdate
 	}
-	static async createUser(restauranteId, user, role = "cocinero") {
+	static async createUser(req) {
+		const { restauranteId } = req.params
+		const  user = req.body
 		if (!restauranteId || !user) {
 			throw new Error("restauranteId y user son requeridos")
 		}
-		const session = await mongoose.startSession();
-		session.startTransaction();
+		const session = await mongoose.startSession()
+		session.startTransaction()
 		try {
-			const restaurant = await Restaurante.findById(restauranteId, { users: 1 }).session(session);
+			const restaurant = await Restaurante.findById(restauranteId, { users: 1 }).session(session)
 			if (!restaurant) {
-				throw new NotFoundError("No se ha encontrado el restaurante");
+				throw new NotFoundError("No se ha encontrado el restaurante")
 			}
-			user = user instanceof Usuario ? user : new Usuario(user);
-			await user.save({ session });
-			restaurant.users.push({ user: user._id, role });
-			await restaurant.save({ session });
-			await session.commitTransaction();
-			session.endSession();
-			return user;
+			user._id = undefined
+			user.contraseña = user.password
+			const newUser = new Usuario({
+				...user
+			})
+			await newUser.save({ session })
+			restaurant.users.push({ user: newUser._id, role: newUser.role })
+			await restaurant.save({ session })
+			await session.commitTransaction()
+			session.endSession()
+			return newUser
 		} catch (error) {
-			await session.abortTransaction();
-			session.endSession();
-			console.log(error);
-			throw new Error("Error al crear el usuario");
+			await session.abortTransaction()
+			session.endSession()
+			console.log(error)
+			throw new Error("Error al crear el usuario")
 		}
 	}
 	// TODO: Implementar transacción en caso de errores

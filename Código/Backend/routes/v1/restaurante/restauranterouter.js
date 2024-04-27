@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { getRestaurante, createRestaurante, deleteRestaurante, putRestaurante } from "../../../controllers/RestauranteC.js"
 import { permissionController } from "../../../controllers/PermissionC.js"
-import cocineroRouter from "./cocinerorouter.js"
+import userRouter from "./userrouter.js"
 import mesasRouter from "./mesarouter.js"
 import asyncMiddleware from "middleware-async"
 
@@ -13,7 +13,7 @@ restauranteRouter.post("/", permissionController("superadmin"), asyncMiddleware(
 restauranteRouter.put("/:restauranteId", permissionController("admin"), asyncMiddleware(putRestaurante))
 restauranteRouter.delete("/:restauranteId", permissionController("superadmin"), asyncMiddleware(deleteRestaurante))
 
-restauranteRouter.use("/:restauranteId/users", cocineroRouter)
+restauranteRouter.use("/:restauranteId/users", userRouter)
 restauranteRouter.use("/:restauranteId/mesas", mesasRouter)
 
 export default restauranteRouter

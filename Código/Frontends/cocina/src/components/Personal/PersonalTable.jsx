@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import PersonalField from './PersonalField';
 import { useRestauranteContext } from '../../lib/context';
 import { useShallow } from 'zustand/react/shallow';
+import { toast } from 'sonner';
 
 function PersonalTable({ fields }) {
     const { users, addUser } = useRestauranteContext(
@@ -11,13 +12,14 @@ function PersonalTable({ fields }) {
     })))
     const handleAddButton = () => {
         const newPersonal = ({
-            user: {
-                nombre: '',
-                email: ''
-            },
+            nombre: '',
+            email: '',
             role: 'cocinero',
             alreadyExist: false
         })
+        if (users.some(u => u.alreadyExist === false)) {
+            return toast.warning("Hay mesas sin guardar cambios");
+        }
         addUser(newPersonal)
     }
     console.log(users)
@@ -35,7 +37,7 @@ function PersonalTable({ fields }) {
                     {users.map((user) => (
                         <PersonalField 
                         user={user} 
-                        key={user.user._id} 
+                        key={user._id} 
                          />
                     ))}
                 </tbody>

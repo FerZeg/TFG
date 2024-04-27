@@ -7,15 +7,20 @@ import { useLoginContext, useRestauranteContext } from '../../lib/context';
 import { fetchRestaurant } from '../../lib/fetchers';
 
 export default function Admin() {
-    const { set } = useRestauranteContext()    
+    const { setData } = useRestauranteContext()    
     const { login } = useLoginContext()
     useEffect(() => {
         document.title = "Admin - Restaurante";
         (async() => {
             const data = await fetchRestaurant(login.data.restauranteId)
-            if(data)
-                set({
-                    users: data.users.map(user => ({...user, alreadyExist: true})),
+            if(data) {
+                setData({
+                    users: data.users.map(user => ({
+                        ...user, 
+                        ...user.user, 
+                        alreadyExist: true, 
+                        user: undefined
+                    })),
                     platos: data.platos,
                     mesas: data.mesas,
                     restauranteData: {
@@ -26,8 +31,9 @@ export default function Admin() {
                     }
                 })
             }
+            }
         )()
-    }, [set, login.data.restauranteId])
+    }, [setData, login.data.restauranteId])
     return (
         <section id="admin">
             <DatosRestaurante/>

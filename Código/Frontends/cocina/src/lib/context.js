@@ -23,16 +23,25 @@ export const createMesasSlice = (set) => ({
 
 export const createPlatosContext = (set) => ({
     platos: [],
-    addPlato: (plato) => set((state) => ({ platos: [...state.platos, plato] })),
+    addPlato: (plato) => set((state) => {
+        plato._id = crypto.randomUUID()
+        plato.alreadyExist = false
+        return ({ platos: [...state.platos, plato] })
+    }),
     removePlato: (plato) => set((state) => ({ platos: state.platos.filter((p) => p._id !== plato._id) })),
+    updatePlato: (oldPlato, newPlato) => set((state) => ({ platos: state.platos.map((p) => p._id === oldPlato._id ? newPlato : p) }))
     
 })
 
 export const createUsersSlice = (set) => ({
     users: [],
-    addUser: (user) => set((state) => ({ users: [...state.users, user] })),
-    removeUser: (user) => set((state) => ({ users: state.users.filter((u) => u.user._id !== user.user._id) })),
-    updateUser: (user) => set((state) => ({ users: state.users.map((u) => u.user._id === user.user._id ? user : u) })),
+    addUser: (user) => set((state) => {
+        user.alreadyExist = false
+        user._id = crypto.randomUUID()
+        return ({ users: [...state.users, user] })
+    }),
+    removeUser: (user) => set((state) => ({ users: state.users.filter((u) => u._id !== user._id) })),
+    updateUser: (oldUser, newUser) => set((state) => ({ users: state.users.map((u) => u._id === oldUser._id ? newUser : u) })),
     setUsers: (users) => set({ users }),
 })
 
@@ -41,7 +50,13 @@ export const useRestauranteContext = create((set) => ({
     ...createMesasSlice(set),
     ...createPlatosContext(set),
     ...createUsersSlice(set),
-    set: (data) => {
+    setData: (data) => {
+        if(data.users) {
+            data.users.forEach((u) => {
+                u.alreadyExist = true
+                u.password = "********"
+            })
+        }
         if(data.mesas)
             data.mesas.forEach((m) => m.alreadyExist = true)
         set(data)
