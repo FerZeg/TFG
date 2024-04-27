@@ -1,10 +1,14 @@
+import { useShallow } from "zustand/react/shallow"
 import { useRestauranteContext } from "../../lib/context"
 import MesaRow from "./MesaRow"
 import './Mesas.css'
 import { toast } from 'sonner'
 
 export default function Mesas() {
-    const { mesas, addMesa } = useRestauranteContext()
+    const { mesas, addMesa } = useRestauranteContext(useShallow(state => ({
+        mesas: state.mesas,
+        addMesa: state.addMesa
+    })) )
     const handleAddMesa = () => {
         if (mesas.some(m => m.alreadyExist === false)) {
             return toast.warning("Hay mesas sin guardar cambios");

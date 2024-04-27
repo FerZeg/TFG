@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types'
 import PersonalField from './PersonalField';
 import { useRestauranteContext } from '../../lib/context';
+import { useShallow } from 'zustand/react/shallow';
 
 function PersonalTable({ fields }) {
-    const { users, addUser } = useRestauranteContext()
+    const { users, addUser } = useRestauranteContext(
+        useShallow(state => ({
+            users: state.users,
+            addUser: state.addUser
+    })))
     const handleAddButton = () => {
         const newPersonal = ({
             user: {

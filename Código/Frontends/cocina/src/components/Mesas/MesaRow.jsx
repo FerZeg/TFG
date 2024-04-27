@@ -3,10 +3,14 @@ import { useState } from 'react';
 import { useLoginContext, useRestauranteContext } from '../../lib/context';
 import { updateMesaRemote, deleteMesaRemote } from '../../lib/actions';
 import { toast } from 'sonner';
+import { useShallow } from 'zustand/react/shallow';
 
 export default function MesaRow({mesa}) {
     const { login } = useLoginContext(); 
-    const { updateMesa, removeMesa } = useRestauranteContext();
+    const { updateMesa, removeMesa } = useRestauranteContext(useShallow(state => ({
+        updateMesa: state.updateMesa,
+        removeMesa: state.removeMesa
+    })));
     const [changed, setChanged] = useState(false);
     const handleInputChange = (e) => {
         console.log(mesa)

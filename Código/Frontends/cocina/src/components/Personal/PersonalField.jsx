@@ -5,21 +5,20 @@ import { deleteUserRemote, updateUserRemote } from '../../lib/actions';
 import { useLoginContext } from '../../lib/context';
 import { createUserRemote } from '../../lib/actions';
 import { useRestauranteContext } from '../../lib/context';
-import { useEffect } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
 export default function PersonalField({user}) {
     const { login } = useLoginContext()
-    const { removeUser, updateUser } = useRestauranteContext()
+    const { removeUser, updateUser } = useRestauranteContext(useShallow(state => ({
+        removeUser: state.removeUser,
+        updateUser: state.updateUser
+    })) )
     const [nombre, setNombre] = useState(user.user.nombre)
     const [role, setRole] = useState(user.role)
     const [email, setEmail] = useState(user.user.email)
     const [exists, setExist] = useState(user.alreadyExist)
     const [changed, setChanged] = useState(false)
     const [password, setPassword] = useState('********')
-
-    useEffect(() => {
-        console.log('user', user)
-    }, [user])
     
     const handleSaveButton = async () => {
         if(!changed) {

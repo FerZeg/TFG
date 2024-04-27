@@ -6,9 +6,13 @@ import { fetchRestaurant } from '../../lib/fetchers'
 import { updateRestaurantRemote } from '../../lib/actions'
 import { toast } from 'sonner'
 import { useRestauranteContext } from '../../lib/context'
+import { useShallow } from 'zustand/react/shallow'
 
 export default function DatosRestaurante() {
-    const { restauranteData, updateRestauranteData } = useRestauranteContext()
+    const { restauranteData, updateRestauranteData } = useRestauranteContext(useShallow(state => ({
+        restauranteData: state.restauranteData,
+        updateRestauranteData: state.updateRestauranteData
+    })))
     const { login } = useLoginContext()
     const handleChange = (e) => {
         updateRestauranteData({...restauranteData, [e.target.name]: e.target.value})
