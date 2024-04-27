@@ -4,6 +4,7 @@ import { permissionController } from "../../../controllers/PermissionC.js"
 import userRouter from "./userrouter.js"
 import mesasRouter from "./mesarouter.js"
 import asyncMiddleware from "middleware-async"
+import ticketRouter from "./ticket/ticketrouter.js"
 
 
 const restauranteRouter = Router()
@@ -15,5 +16,6 @@ restauranteRouter.delete("/:restauranteId", permissionController("superadmin"), 
 
 restauranteRouter.use("/:restauranteId/users", userRouter)
 restauranteRouter.use("/:restauranteId/mesas", mesasRouter)
+restauranteRouter.use("/:restauranteId/tickets", ticketRouter)
 
 export default restauranteRouter

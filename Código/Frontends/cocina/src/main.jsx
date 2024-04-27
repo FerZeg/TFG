@@ -6,6 +6,7 @@ import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Admin from './pages/Admin/Admin.jsx';
+import TicketsPage from './pages/Tickets/Tickets.jsx';
 
 
 const router = createBrowserRouter([
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
       { path: "", element: <Cocina/>},
       { path: "edit", element: <h1>Editar</h1>},
       { path: "admin", element: <Admin/>},
-      { path: "tickets", element: <h1>Tickets</h1>},
+      { path: "tickets", element: <TicketsPage/>},
     ]
   }
 ]);

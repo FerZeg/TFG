@@ -5,6 +5,13 @@ export const useLoginContext = create((set) => ({
     updateLogin: (context) => set({ login: context }),
 }))
 
+export const useTicketsContext = create((set) => ({
+    tickets: [],
+    setTickets: (tickets) => set({ tickets }),
+    removeTicket: (ticket) => set((state) => ({ tickets: state.tickets.filter((t) => t._id !== ticket._id) })),
+    updateTicket: (oldTicket, newTicket) => set((state) => ({ tickets: state.tickets.map((t) => t._id === oldTicket._id ? newTicket : t) })),
+}))
+
 export const createRestauranteDataSlice = (set) => ({
     restauranteData: {nombre: "", direccion: "", telefono: "", contraseña_mesas: "********"},
     updateRestauranteData: (data) => set({ restauranteData: data }),

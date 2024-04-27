@@ -1,0 +1,10 @@
+import TicketService from "../services/TicketService.js"
+
+export const getTicket = async (req, res) => {
+	const result = await TicketService.getTicket(req)
+	res.send(result)
+}
+export const deleteTicket = async (req, res) => {
+	const result = await TicketService.deleteTicket(req)
+	res.send(result)
+}

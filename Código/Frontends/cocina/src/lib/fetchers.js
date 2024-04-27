@@ -58,9 +58,24 @@ export const fetchRestaurant = async (restaurantId) => {
         return null
     }
 }
-export const fetchPersonal = async (restaurantId) => {
+/*export const fetchPersonal = async (restaurantId) => {
     try {
         const response = await fetch(`${URL}/restaurantes/${restaurantId}/users`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        return response.ok ? await response.json() : undefined;
+    } catch (e) {
+        return undefined;
+    }
+}*/
+
+export const fetchTickets = async (restaurantId) => {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/tickets`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
