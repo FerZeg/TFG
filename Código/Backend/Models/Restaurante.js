@@ -17,7 +17,11 @@ const RestauranteSchema = new Schema({
 		ingredientes: [String],
 	}],
 	mesas: [{
-		identificador: String,
+		identificador: {
+			type: String,
+			required: true,
+			unique: true,
+		},
 		estado: {
 			type: String,
 			default: "LIBRE",

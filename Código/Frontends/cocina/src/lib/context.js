@@ -12,9 +12,13 @@ export const createRestauranteDataSlice = (set) => ({
 
 export const createMesasSlice = (set) => ({
     mesas: [],
-    addMesa: (mesa) => set((state) => ({ mesas: [...state.mesas, mesa] })),
+    addMesa: (mesa) => set((state) => {
+        mesa.alreadyExist = false
+        mesa._id = crypto.randomUUID()
+        return ({ mesas: [...state.mesas, mesa ] })
+    }),
     removeMesa: (mesa) => set((state) => ({ mesas: state.mesas.filter((m) => m._id !== mesa._id) })),
-    updateMesa: (mesa) => set((state) => ({ mesas: state.mesas.map((m) => m._id === mesa._id ? mesa : m) })),
+    updateMesa: (oldMesa, newMesa) => set((state) => ({ mesas: state.mesas.map((m) => m._id === oldMesa._id ? newMesa : m) })),
 })
 
 export const createPlatosContext = (set) => ({
@@ -37,5 +41,9 @@ export const useRestauranteContext = create((set) => ({
     ...createMesasSlice(set),
     ...createPlatosContext(set),
     ...createUsersSlice(set),
-    set: (data) => set(data),
+    set: (data) => {
+        if(data.mesas)
+            data.mesas.forEach((m) => m.alreadyExist = true)
+        set(data)
+    },
 }))

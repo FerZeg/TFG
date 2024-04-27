@@ -71,7 +71,8 @@ export async function updateMesaRemote(mesa, restaurantId) {
             },
             body: JSON.stringify(mesa)
         })
-        return response.ok
+        const json = await response.json()
+        return {ok: response.ok, _id: json._id}
     } catch(e) {
         return null
     }

@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
 		return res.status(400).send({ message: err.message })
 	}
 	res.status(500).send({ message: "Error en el servidor" })
-	console.log("ERROR" + err.stack)
+	console.log("ERROR" + err)
 })
 
 export default app

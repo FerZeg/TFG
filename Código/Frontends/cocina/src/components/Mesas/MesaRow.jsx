@@ -9,23 +9,26 @@ export default function MesaRow({mesa}) {
     const { updateMesa, removeMesa } = useRestauranteContext();
     const [changed, setChanged] = useState(false);
     const handleInputChange = (e) => {
+        console.log(mesa)
         if(e.target.value !== mesa.identificador || e.target.value !== mesa.capacidad) {
             setChanged(true);
-            updateMesa({...mesa, [e.target.name]: e.target.value});
+            console.log(22)
+            updateMesa(mesa, {...mesa, [e.target.name]: e.target.value});
         } else {
             setChanged(false);
         }
     }
-    const handleSave = () => {
-        const result = updateMesaRemote(mesa, login.data.restauranteId);
-        if(result) {
+    const handleSave = async () => {
+        const result = await updateMesaRemote(mesa, login.data.restauranteId);
+        if(result.ok) {
             toast.success("Datos guardados correctamente")
             setChanged(false);
+            updateMesa(mesa, {...mesa, alreadyExist: true, _id: result._id});
         }
         else toast.error("Error al guardar los datos")
     }
-    const handleDelete = () => {
-        const result = deleteMesaRemote(mesa, login.data.restauranteId);
+    const handleDelete = async () => {
+        const result = await deleteMesaRemote(mesa, login.data.restauranteId);
         if(result) {
             removeMesa(mesa);
             toast.success("Mesa eliminada correctamente")

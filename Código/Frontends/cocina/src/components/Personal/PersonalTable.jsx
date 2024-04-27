@@ -15,6 +15,7 @@ function PersonalTable({ fields }) {
         })
         addUser(newPersonal)
     }
+    console.log(users)
     return (
         <>
             <table>
