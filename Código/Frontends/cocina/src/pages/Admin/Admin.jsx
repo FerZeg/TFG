@@ -35,7 +35,7 @@ export default function Admin() {
         )()
     }, [setData, login.data.restauranteId])
     return (
-        <section id="admin">
+        <section id="admin" className='page'>
             <DatosRestaurante/>
             <Personal/>
             <Mesas/>

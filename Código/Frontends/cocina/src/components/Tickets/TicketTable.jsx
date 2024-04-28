@@ -8,24 +8,23 @@ export default function TicketTable() {
             tickets: state.tickets
     })))
     return (
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Numero</th>
-                        <th>Fecha</th>
-                        <th>Cliente</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        tickets && tickets.map(ticket => (
-                            <Ticket ticket={ticket} key={ticket._id} />
-                        ))
-                    }
-                </tbody>
-            </table>
-        </div>
+        <table id="ticketTable" className="table">
+            <thead>
+                <tr>
+                    <th>Mesa</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    tickets && tickets.map(ticket => (
+                        <Ticket ticket={ticket} key={ticket._id} />
+                    ))
+                }
+            </tbody>
+        </table>
     )
 }

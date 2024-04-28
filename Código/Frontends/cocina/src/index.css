@@ -10,6 +10,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -34,4 +39,35 @@
   .title {
     font-size: 4rem;
   }
+}
+
+/*Table CSS*/
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th {
+  background-color: #f2f2f2;
+  color: #333;
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 0.4rem 0.3rem;
+  font-weight: 500;
+}
+.table th, .table td {
+  border: 1px solid #ddd;
+}
+.table td {
+  padding: 0.2rem 0.4rem;
+}
+.table td, .table th {
+  resize: both;
+  overflow: auto;
+}
+
+.table tr:hover {
+  background-color: #ffeb7b9e;
+}
+.table tr {
+  transition: background-color 0.2s ease-out;
 }

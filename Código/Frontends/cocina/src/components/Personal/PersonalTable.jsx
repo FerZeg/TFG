@@ -25,7 +25,7 @@ function PersonalTable({ fields }) {
     console.log(users)
     return (
         <>
-            <table>
+            <table className='table'>
                 <thead>
                     <tr>
                         {Object.values(fields).map((field, index) => (

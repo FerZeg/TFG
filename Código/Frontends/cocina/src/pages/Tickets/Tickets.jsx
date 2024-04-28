@@ -13,6 +13,8 @@ export default function TicketsPage() {
             .then(data => setTickets(data))
     }, [login, setTickets])
     return (
-        <TicketTable />
+        <section id='tickets' className='page'>
+            <TicketTable />
+        </section>
     )
 }

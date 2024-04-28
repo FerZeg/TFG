@@ -1,22 +1,3 @@
-#personal-section table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-#personal-section table th {
-    background-color: #f2f2f2;
-    color: #333;
-    font-weight: bold;
-}
-#personal-section table th, table td {
-    border: 1px solid #ccc;
-}
-#personal-section table tr {
-    transition: background-color 0.2s ease;
-}
-#personal-section table tr:hover {
-    background-color: #96daff4a;
-}
 #personal-section input {
     padding: 5px;
     border: none;
