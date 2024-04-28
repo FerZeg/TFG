@@ -26,9 +26,9 @@ const fields = {
 
 export default function Personal() {
     return (
-        <section id="personal-section">
-            <h1>Personal</h1>
+        <>
+            <h3 className="section-title">Personal</h3>
             <PersonalTable  fields={fields}/>
-        </section>
+        </>
     )
 }

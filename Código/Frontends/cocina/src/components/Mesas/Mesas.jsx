@@ -16,16 +16,18 @@ export default function Mesas() {
         addMesa({identificador: '', capacidad: 0});
     }
     return (
-        <div id='mesas-section'>
-            <h1>Mesas</h1>
+        <>
+            <h3 className="section-title">Mesas</h3>
             <div id='mesas-container'>
                 {mesas.map((mesa) => (
                     <MesaRow key={mesa._id} mesa={mesa} />
                 ))}
                 <button
                     onClick={() => handleAddMesa()}
-                    >Añadir</button>
+                    className="button-add">
+                    Añadir
+                </button>
             </div>
-        </div>
+        </>
     )
 }

@@ -1,5 +1,3 @@
-import './DatosRestaurante.css'
-
 import { useLoginContext } from '../../lib/context'
 import { useEffect } from 'react'
 import { fetchRestaurant } from '../../lib/fetchers'
@@ -31,8 +29,8 @@ export default function DatosRestaurante() {
         )()
     }, [login.data.restauranteId, updateRestauranteData])
     return (
-        <section id="datos-restaurante">
-            <h1>Datos Restaurante</h1>
+        <>
+            <h3 className="section-title">Datos Restaurante</h3>
             <div>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="nombre">Nombre</label>
@@ -46,6 +44,6 @@ export default function DatosRestaurante() {
                     <button type="submit">Guardar</button>
                 </form>
             </div>
-        </section>
+        </>
     )
 }

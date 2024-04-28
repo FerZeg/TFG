@@ -1,14 +1,4 @@
 /* CSS for Mesas component */
-#mesas-section {
-    width: 100%;
-}
-
-#mesas-section h1 {
-    font-size: 2em;
-    color: #333;
-    margin-bottom: 20px;
-}
-
 #mesas-container {
     display: flex;
     flex-direction: column;

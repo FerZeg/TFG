@@ -1,13 +1,11 @@
-#personal-section input {
+#personal input {
     padding: 5px;
     border: none;
     border-radius: 5px;
     width: 100%;
     max-width: 120px;
     height: 100%;
-
 }
-
 
 a.delete {
     color: red;

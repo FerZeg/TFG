@@ -42,7 +42,11 @@ function PersonalTable({ fields }) {
                     ))}
                 </tbody>
             </table>
-            <button onClick={handleAddButton}>Añadir</button>
+            <button 
+                onClick={handleAddButton} 
+                className='button-add'>
+                Añadir
+            </button>
         </>
     );
 }

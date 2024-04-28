@@ -9,16 +9,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 .page {
   max-width: 720px;
   margin: 0 auto;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.box-section {
+  border: 1px solid #9c9b9b;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px 0;
 }
 
 .center-page {
@@ -28,17 +34,14 @@
   height: 100vh;
   flex-direction: column;
 }
+
+/*Title Login Page CSS*/
 .title {
   font-family: "Dancing Script", cursive;
   font-size: 7rem;
   margin: 1rem 0;
   text-align: center;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-}
-@media (max-width: 768px) {
-  .title {
-    font-size: 4rem;
-  }
 }
 
 /*Table CSS*/
@@ -70,4 +73,45 @@
 }
 .table tr {
   transition: background-color 0.2s ease-out;
+}
+
+/*Button CSS*/
+.button-add {
+  background-color: rgba(6, 165, 33, 0.563);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 0.5rem 0;
+  transition: background-color 0.2s ease-out;
+  font-weight: 500;
+}
+.button-add:hover {
+  background-color: rgba(0, 84, 14, 0.8);
+}
+
+.section-title {
+  text-decoration: underline 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+/*Datos Restaurante*/
+#datos-restaurante form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+#datos-restaurante input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+/*Responsive CSS*/
+@media (max-width: 768px) {
+  .title {
+    font-size: 4rem;
+  }
 }

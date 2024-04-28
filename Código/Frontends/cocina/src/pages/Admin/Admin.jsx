@@ -1,4 +1,3 @@
-import './Admin.css'
 import DatosRestaurante from "../../components/DatosRestaurante/DatosRestaurante";
 import Personal from "../../components/Personal/Personal";
 import Mesas from "../../components/Mesas/Mesas";
@@ -36,9 +35,15 @@ export default function Admin() {
     }, [setData, login.data.restauranteId])
     return (
         <section id="admin" className='page'>
-            <DatosRestaurante/>
-            <Personal/>
-            <Mesas/>
+            <section id="datos-restaurante" className='box-section'>
+                <DatosRestaurante/>
+            </section>
+            <section id="personal" className='box-section'>
+                <Personal/>
+            </section>
+            <section id="mesas" className='box-section'>
+                <Mesas/>
+            </section>
         </section>
     )
 }
