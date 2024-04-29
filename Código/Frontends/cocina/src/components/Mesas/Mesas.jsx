@@ -1,7 +1,6 @@
 import { useShallow } from "zustand/react/shallow"
 import { useRestauranteContext } from "../../lib/context"
 import MesaRow from "./MesaRow"
-import './Mesas.css'
 import { toast } from 'sonner'
 
 export default function Mesas() {
@@ -18,16 +17,26 @@ export default function Mesas() {
     return (
         <>
             <h3 className="section-title">Mesas</h3>
-            <div id='mesas-container'>
-                {mesas.map((mesa) => (
-                    <MesaRow key={mesa._id} mesa={mesa} />
-                ))}
-                <button
-                    onClick={() => handleAddMesa()}
-                    className="button-add">
-                    Añadir
-                </button>
-            </div>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Identificador</th>
+                        <th>Capacidad</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {mesas.map((mesa) => (
+                        <MesaRow key={mesa._id} mesa={mesa} />
+                    ))}
+                </tbody>
+            </table>
+            <button
+                onClick={() => handleAddMesa()}
+                className="button-add">
+                Añadir
+            </button>
         </>
     )
 }

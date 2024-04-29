@@ -42,16 +42,34 @@ export default function MesaRow({mesa}) {
 
 
     return (
-        <div className='mesa-row'>
-            <div className='mesa-row-info'>
-                <input type="text" name='identificador' value={mesa.identificador} onChange={(e) => handleInputChange(e)}/>
-                <input type="number" name='capacidad' value={mesa.capacidad} onChange={(e) => handleInputChange(e)} />
-            </div>
-            <div className='mesa-row-buttons'>
+        <tr>
+            <td>
+                <input
+                    type="text"
+                    name="identificador"
+                    value={mesa.identificador}
+                    onChange={handleInputChange}
+                />
+            </td>
+            <td>
+                <input
+                    type="number"
+                    name="capacidad"
+                    value={mesa.capacidad}
+                    onChange={handleInputChange}
+                />
+            </td>
+            <td>
+                <select name="estado" id="" value={mesa.estado} onChange={handleInputChange}>
+                    <option value="LIBRE">LIBRE</option>
+                    <option value="OCUPADA">OCUPADA</option>
+                </select>
+            </td>
+            <td>
                 <button disabled={!changed} onClick={handleSave}>Guardar</button>
                 <button onClick={handleDelete}>Eliminar</button>
-            </div>
-        </div>
+            </td>
+        </tr>
     )
 }
 

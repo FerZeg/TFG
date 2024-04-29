@@ -18,11 +18,10 @@ function PersonalTable({ fields }) {
             alreadyExist: false
         })
         if (users.some(u => u.alreadyExist === false)) {
-            return toast.warning("Hay mesas sin guardar cambios");
+            return toast.warning("Ya hay un usuario sin guardar");
         }
         addUser(newPersonal)
     }
-    console.log(users)
     return (
         <>
             <table className='table'>

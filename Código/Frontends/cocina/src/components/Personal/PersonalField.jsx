@@ -71,15 +71,23 @@ export default function PersonalField({user}) {
             <td><input type="password" name="password" value={user.password} onChange={handleInputChange} /></td>
             <td><input type="email" name="email" value={user.email} onChange={handleInputChange} /></td>
             <td>
-                <a 
-                    className={'save' + (changed ? ' changed' : '')}
-                    onClick={handleSaveButton}>
-                    {user.alreadyExist ? 'Guardar' : 'Crear'}
-                </a>
+                {!user.alreadyExist && (
+                    <button onClick={handleSaveButton}>
+                        Crear
+                    </button>
+                )}
                 {user.alreadyExist && (
-                    <a onClick={handleDeleteButton} className='delete'>
-                        Eliminar
-                    </a>
+                    <>
+                        <button 
+                            onClick={handleSaveButton}
+                            disabled={!changed}
+                        >
+                            Guardar
+                        </button>
+                        <button onClick={handleDeleteButton} className='delete'>
+                            Eliminar
+                        </button>
+                    </>
                 )}
             </td>
         </tr>

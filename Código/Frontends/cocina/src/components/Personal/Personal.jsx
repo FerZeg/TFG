@@ -1,5 +1,4 @@
 import PersonalTable from "./PersonalTable"
-import './Personal.css'
 
 const fields = {
     nombre: {

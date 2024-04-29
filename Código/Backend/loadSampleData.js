@@ -37,7 +37,19 @@ const restaurante = new Restaurante({
 	mesas: [
 		{
 			identificador: "mesa1",
+			capacidad: 4,
 		},
+		{
+			identificador: "mesa2",
+			capacidad: 2,
+		},
+		{
+			identificador: "mesa3",
+			capacidad: 6,
+		},
+		{
+			identificador: "mesa4",
+		}
 	],
 	users: [
 		{
@@ -51,19 +63,22 @@ const restaurante = new Restaurante({
 	],
 	contraseña_mesas: "1234",
 })
-const ticket = new Ticket({
-	mesa: restaurante.mesas[0].identificador,
-	pedidos: [
-		{
-			nombre: "plato1",
-			precio: 10,
-		},
-	],
-	restauranteId: restaurante._id,
-	estado: "PAID",
-
-})
 await restaurante.save()
-await ticket.save()
+for(let i = 0; i < 25; i++){
+	const nMesa = Math.floor(Math.random() * restaurante.mesas.length)
+	const ticket = new Ticket({
+		mesa: restaurante.mesas[nMesa].identificador,
+		pedidos: [
+			{
+				nombre: "plato" + i,
+				precio: Math.random() * 100,
+			},
+		],
+		restauranteId: restaurante._id,
+		estado: Math.random() > 0.5 ? "PAID" : "NOPAID",
+	})
+	await ticket.save()
+}
+
 console.log("Datos de ejemplo cargados")
 process.exit(0)

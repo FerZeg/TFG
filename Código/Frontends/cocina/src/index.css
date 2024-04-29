@@ -25,6 +25,7 @@
   border-radius: 5px;
   padding: 20px;
   margin: 20px 0;
+  overflow: scroll;
 }
 
 .center-page {
@@ -60,12 +61,8 @@
 .table th, .table td {
   border: 1px solid #ddd;
 }
-.table td {
+.table td:not(:has(input)) {
   padding: 0.2rem 0.4rem;
-}
-.table td, .table th {
-  resize: both;
-  overflow: auto;
 }
 
 .table tr:hover {
@@ -74,6 +71,31 @@
 .table tr {
   transition: background-color 0.2s ease-out;
 }
+.table input[type="number"] {
+  width: 50px;
+  padding: 0.2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+}
+
+.table input:not([type="number"]) {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 150px;
+  height: 100%;
+}
+.table select {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 150px;
+  height: 100%;
+}
+
 
 /*Button CSS*/
 .button-add {

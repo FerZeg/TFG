@@ -4,11 +4,16 @@ import Mesas from "../../components/Mesas/Mesas";
 import { useEffect } from 'react';
 import { useLoginContext, useRestauranteContext } from '../../lib/context';
 import { fetchRestaurant } from '../../lib/fetchers';
+import { useShallow } from "zustand/react/shallow";
 
 export default function Admin() {
-    const { setData } = useRestauranteContext()    
+    const { setData } = useRestauranteContext(useShallow(state => ({
+        setData: state.setData,
+    })))    
     const { login } = useLoginContext()
+    console.log("render")
     useEffect(() => {
+        console.log("useEffect")
         document.title = "Admin - Restaurante";
         (async() => {
             const data = await fetchRestaurant(login.data.restauranteId)
@@ -18,7 +23,7 @@ export default function Admin() {
                         ...user, 
                         ...user.user, 
                         alreadyExist: true, 
-                        user: undefined
+                        user: undefined, 
                     })),
                     platos: data.platos,
                     mesas: data.mesas,
@@ -26,15 +31,18 @@ export default function Admin() {
                         nombre: data.nombre, 
                         direccion: data.direccion, 
                         telefono: data.telefono, 
-                        contraseña_mesas: "********"
+                        contraseña_mesas: "********",
                     }
                 })
             }
             }
         )()
-    }, [setData, login.data.restauranteId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [login.data.restauranteId])
     return (
         <section id="admin" className='page'>
+            { 
+                <>
             <section id="datos-restaurante" className='box-section'>
                 <DatosRestaurante/>
             </section>
@@ -44,6 +52,9 @@ export default function Admin() {
             <section id="mesas" className='box-section'>
                 <Mesas/>
             </section>
+            </>
+            }
         </section>
+    
     )
 }
