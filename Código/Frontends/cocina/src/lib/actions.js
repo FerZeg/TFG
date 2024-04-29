@@ -92,3 +92,17 @@ export async function deleteMesaRemote(mesa, restaurantId) {
         return null
     }
 }
+export async function deleteTicketRemote(ticket, restaurantId) {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/tickets/${ticket._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        return response.ok
+    } catch(e) {
+        return null
+    }
+}

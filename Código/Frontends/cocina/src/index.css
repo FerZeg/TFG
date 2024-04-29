@@ -98,19 +98,21 @@
 
 
 /*Button CSS*/
+
 .button-add {
-  background-color: rgba(6, 165, 33, 0.563);
-  color: white;
-  padding: 0.5rem 1rem;
+  padding: 5px;
+  margin-top: 20px;
   border: none;
+  border-bottom: 1px solid #249d19;
+  border-top: 1px solid #249d19;
+  background-color: transparent;
   cursor: pointer;
-  border-radius: 5px;
-  margin: 0.5rem 0;
-  transition: background-color 0.2s ease-out;
-  font-weight: 500;
+  color: #249d19;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
 }
 .button-add:hover {
-  background-color: rgba(0, 84, 14, 0.8);
+  background-color: #249d19;
+  color: white;
 }
 
 .section-title {
