@@ -11,10 +11,20 @@ const RestauranteSchema = new Schema({
 	direccion: String,
 	telefono: String,
 	platos: [{
-		nombre: String,
-		precio: Number,  
+		nombre: {
+			type: String,
+			required: true,
+		},
+		precio: {
+			type: Number,
+			default: 0,
+		},
 		tipo: String,
 		ingredientes: [String],
+		active: {
+			default: true,
+			type: Boolean,
+		}
 	}],
 	mesas: [{
 		identificador: {
