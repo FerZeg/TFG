@@ -22,22 +22,35 @@
     color: #333;
     font-size: 1.2rem;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: color 0.3s ease-in, transform 0.3s ease-in;
+    position: relative;
+    display: block;
 }
 .main-header ul li a:hover {
     color: #007bff;
 }
 .main-header ul li a.active {
     color: #007bff;
+    /* Remove transform: translateY(-5px); */
 }
-.main-header ul li a.active::after {
+.main-header ul li a::after {
     content: '';
     display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #007bff;
-    margin-top: 5px;
+    position: absolute;
+    width: 0;
+    height: 1px;
+    background-color: transparent;
+    top: 30px;
+    left: 50%; /* Adjusted left position */
+    transform: translateX(-50%); /* Centering the pseudo-element horizontally */
+    transform-origin: 50% 0; /* Setting transform origin to center horizontally */
+    transition: width 0.3s ease-out;
 }
+.main-header ul li a.active::after {
+    background-color: #007bff;
+    width: 100%;
+}
+
 @media screen and (max-width: 768px) {
     .main-header {
         padding: 0;
