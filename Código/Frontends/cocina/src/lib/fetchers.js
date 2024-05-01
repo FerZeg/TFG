@@ -39,7 +39,7 @@ export const fetchLogin = async (email, password) => {
     }
 }
 
-export const fetchRestaurant = async (restaurantId) => {
+export const fetchRestaurant = async (restaurantId, setData) => {
     try {
         const response = await fetch(`${URL}/restaurantes/${restaurantId}`, {
             method: "GET",
@@ -50,28 +50,31 @@ export const fetchRestaurant = async (restaurantId) => {
         })
         if(response.ok) {
             const data = await response.json()
-            return data
-        }
+            setData(
+                {
+                    users: data.users.map(user => ({
+                        ...user, 
+                        ...user.user, 
+                        alreadyExist: true, 
+                        user: undefined, 
+                    })),
+                    platos: data.platos,
+                    mesas: data.mesas,
+                    restauranteData: {
+                        nombre: data.nombre, 
+                        direccion: data.direccion, 
+                        telefono: data.telefono, 
+                        contraseña_mesas: "********",
+                        }
+                    })
+            return true
+            }
         return null
     }
     catch(e) {
         return null
     }
 }
-/*export const fetchPersonal = async (restaurantId) => {
-    try {
-        const response = await fetch(`${URL}/restaurantes/${restaurantId}/users`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-            }
-        });
-        return response.ok ? await response.json() : undefined;
-    } catch (e) {
-        return undefined;
-    }
-}*/
 
 export const fetchTickets = async (restaurantId) => {
     try {
