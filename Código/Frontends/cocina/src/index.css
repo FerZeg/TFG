@@ -1,7 +1,5 @@
 :root {
   font-family: "Roboto", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
   color: rgba(10, 9, 9, 0.87);
   background-color: #fcfcfc;
   font-synthesis: none;
@@ -9,15 +7,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 .page {
   max-width: 720px;
   margin: 0 auto;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .box-section {
@@ -25,7 +29,7 @@
   border-radius: 5px;
   padding: 20px;
   margin: 20px 0;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .center-page {
