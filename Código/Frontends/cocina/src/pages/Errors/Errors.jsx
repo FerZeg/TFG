@@ -1,14 +1,14 @@
-import { useRouteError } from 'react-router-dom';
-import './Errors.css'
-import { isRouteErrorResponse } from 'react-router-dom';
+import { useRouteError } from "react-router-dom"
+import "./Errors.css"
+import { isRouteErrorResponse } from "react-router-dom"
 
 export function Errors() {
-  const error = useRouteError();
+  const error = useRouteError()
   let code = 404
-  let message = 'Página no encontrada'
+  let message = "Página no encontrada"
   if(!isRouteErrorResponse(error)) {
     code = 500
-    message = 'Ha ocurrido un error interno'
+    message = "Ha ocurrido un error interno"
   }
   return (
     <section className='error-section'>
@@ -24,7 +24,7 @@ export function Errors() {
           </div>
       </main>
     </section>
-  );
+  )
 }
 
 

@@ -1,10 +1,10 @@
-import Header from "../components/mainUI/Header";
-import { useLoginContext } from "../lib/context";
-import './MainLayout.css';
-import { useEffect } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
-import { fetchUserData } from '../lib/fetchers';
-import { Toaster } from 'sonner';
+import Header from "../components/mainUI/Header"
+import { useLoginContext } from "../lib/context"
+import "./MainLayout.css"
+import { useEffect } from "react"
+import { useNavigate, Outlet } from "react-router-dom"
+import { fetchUserData } from "../lib/fetchers"
+import { Toaster } from "sonner"
 
 
 export default function Layout() {
@@ -13,14 +13,14 @@ export default function Layout() {
 
   useEffect(() => {
       if(login.value) return
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem("token")
       if(!token) {
-          return navigate('/login')
+          return navigate("/login")
       }
       (async() => {
           const data = await fetchUserData()
           if(data) updateLogin({value: true, data})
-          else navigate('/logout')
+          else navigate("/logout")
       })()
       }, [navigate, login.value, updateLogin])
 
@@ -37,5 +37,5 @@ export default function Layout() {
       }
       </>
 
-    );
+    )
 }

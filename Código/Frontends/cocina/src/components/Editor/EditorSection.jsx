@@ -1,7 +1,7 @@
-import { useRestauranteContext } from '../../lib/context';
+import { useRestauranteContext } from "../../lib/context"
 
 export default function EditorSection() {
-    const { platos } = useRestauranteContext();
+    const { platos } = useRestauranteContext()
     return (
         <>
             {platos.map(plato => (
@@ -13,5 +13,5 @@ export default function EditorSection() {
             ))
             }
         </>
-    );
+    )
 }

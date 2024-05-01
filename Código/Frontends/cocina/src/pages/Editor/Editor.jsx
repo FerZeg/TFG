@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import { useRestauranteContext } from '../../lib/context';
-import { useShallow } from 'zustand/react/shallow';
-import { fetchRestaurant } from '../../lib/fetchers';
-import { useLoginContext } from '../../lib/context';
-import { toast } from 'sonner';
-import EditorSection from '../../components/Editor/EditorSection';
+import { useEffect } from "react"
+import { useRestauranteContext } from "../../lib/context"
+import { useShallow } from "zustand/react/shallow"
+import { fetchRestaurant } from "../../lib/fetchers"
+import { useLoginContext } from "../../lib/context"
+import { toast } from "sonner"
+import EditorSection from "../../components/Editor/EditorSection"
 
 
 export default function EditorPage() {
@@ -25,5 +25,5 @@ export default function EditorPage() {
     <section id='editor' className='page'>
       <EditorSection/>
     </section>
-  );
+  )
 }

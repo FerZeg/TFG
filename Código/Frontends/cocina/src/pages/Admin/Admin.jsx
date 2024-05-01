@@ -1,11 +1,11 @@
-import DatosRestaurante from "../../components/DatosRestaurante/DatosRestaurante";
-import Personal from "../../components/Personal/Personal";
-import Mesas from "../../components/Mesas/Mesas";
-import { useEffect } from 'react';
-import { useLoginContext, useRestauranteContext } from '../../lib/context';
-import { fetchRestaurant } from '../../lib/fetchers';
-import { useShallow } from "zustand/react/shallow";
-import { toast } from "sonner";
+import DatosRestaurante from "../../components/DatosRestaurante/DatosRestaurante"
+import Personal from "../../components/Personal/Personal"
+import Mesas from "../../components/Mesas/Mesas"
+import { useEffect } from "react"
+import { useLoginContext, useRestauranteContext } from "../../lib/context"
+import { fetchRestaurant } from "../../lib/fetchers"
+import { useShallow } from "zustand/react/shallow"
+import { toast } from "sonner"
 
 export default function Admin() {
     const { setData } = useRestauranteContext(useShallow(state => ({

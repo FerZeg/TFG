@@ -1,8 +1,8 @@
-import './Tickets.css'
-import { useTicketsContext, useLoginContext } from '../../lib/context'
-import TicketTable from '../../components/Tickets/TicketTable'
-import { useEffect } from 'react'
-import { fetchTickets } from '../../lib/fetchers'
+import "./Tickets.css"
+import { useTicketsContext, useLoginContext } from "../../lib/context"
+import TicketTable from "../../components/Tickets/TicketTable"
+import { useEffect } from "react"
+import { fetchTickets } from "../../lib/fetchers"
 
 export default function TicketsPage() {
     const { setTickets } = useTicketsContext()
