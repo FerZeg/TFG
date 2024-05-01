@@ -7,6 +7,7 @@ import Logout from './components/Logout';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Admin from './pages/Admin/Admin.jsx';
 import TicketsPage from './pages/Tickets/Tickets.jsx';
+import EditorPage from './pages/Editor/Editor.jsx';
 
 
 const router = createBrowserRouter([
@@ -17,11 +18,19 @@ const router = createBrowserRouter([
     element: <Layout/>,
     children: [
       { path: "", element: <Cocina/>},
-      { path: "edit", element: <h1>Editar</h1>},
+      { path: "edit", element: <EditorPage/>},
       { path: "admin", element: <Admin/>},
       { path: "tickets", element: <TicketsPage/>},
     ]
-  }
+  },
+  { 
+    path: "*", 
+    async lazy() {
+      const {Error404} = await import('./pages/Errors/Error404');
+      return {Component: Error404}
+    }
+
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
