@@ -7,35 +7,33 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Admin from './pages/Admin/Admin.jsx';
 import TicketsPage from './pages/Tickets/Tickets.jsx';
 import EditorPage from './pages/Editor/Editor.jsx';
+import { Errors } from './pages/Errors/Errors.jsx';
 
-import './index.css'
 import 'modern-normalize/modern-normalize.css'
+import './index.css'
 
 
 const router = createBrowserRouter([
-  { path: "logout", element: <Logout/> },
-  { path: "login", element: <Login/> },
-  {
-    path: "/",
-    element: <Layout/>,
-    children: [
-      { path: "", element: <Cocina/>},
-      { path: "edit", element: <EditorPage/>},
-      { path: "admin", element: <Admin/>},
-      { path: "tickets", element: <TicketsPage/>},
-    ]
-  },
   { 
-    path: "*", 
-    async lazy() {
-      const {Error404} = await import('./pages/Errors/Error404');
-      return {Component: Error404}
-    }
-
-  },
-]);
+    path: "",
+    errorElement: <Errors/>,
+    children: [
+      { path: "logout", element: <Logout/> },
+      { path: "login", element: <Login/> },
+      {
+        path: "/",
+        element: <Layout/>,
+        children: [
+          { path: "", element: <Cocina/>},
+          { path: "edit", element: <EditorPage/>},
+          { path: "admin", element: <Admin/>},
+          { path: "tickets", element: <TicketsPage/>},
+        ]
+      }
+  ]
+}]
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router}>
-    </RouterProvider>,
+    <RouterProvider router={router}/>
 )

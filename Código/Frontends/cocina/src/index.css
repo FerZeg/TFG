@@ -1,3 +1,8 @@
+body {
+  height: 100dvh;
+}
+
+
 :root {
   font-family: "Roboto", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: rgba(10, 9, 9, 0.87);
@@ -13,6 +18,7 @@
   margin: 0 auto;
   opacity: 0;
   animation: fadeIn 0.3s ease-out forwards;
+  overflow: auto;
 }
 
 @keyframes fadeIn {

@@ -2,8 +2,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-
+      height: 100dvh;
+      position: absolute;
+      overflow: hidden;
+      width: 100%;
 }
 
 .main-main-404 {
@@ -92,4 +94,29 @@
 .main-image-404 img{
     width: 720px;
      animation: move 10s infinite linear;
+}
+
+@media screen and (max-width: 1100px) {
+    .main-main-404 {
+        flex-direction: column;
+        padding: 0 5%;
+    }
+    .main-text-404 {
+        width: 100%;
+        text-align: center;
+    }
+    .main-text-404 h1{
+        font-size: 40px;
+    }
+    .main-text-404 h2{
+        font-size: 25px;
+        line-height: 30px;
+    }
+    .main-image-404 {
+         margin: 0 auto;
+    }
+    .main-image-404 img{
+        width: 400px;
+    }
+   
 }
