@@ -41,7 +41,7 @@ export default function Login() {
     }, [login.value, navigate])
 
     return (
-        <div className="center-page margin-top-20">
+        <div className="center-page margin-top-20 fade-in">
             <h1 className='title'>ComidaEnMarcha</h1>
             <div className='loginFormContainer'>
                 <h2 className="loginTitle">Entrar</h2>
