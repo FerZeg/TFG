@@ -20,7 +20,14 @@ export function Errors() {
               <a href="/">Volver</a>
           </div>
           <div className="main-image-404">
-              <img src="foto.jpg" alt=""/>
+              <img 
+                src="https://media.comidaenmarcha.com/logoXXL.jpg" 
+                alt="Logo comidaenmarcha"
+                style={{
+                  minWidth: "300px",
+                  minHeight: "300px"
+                }}
+                />
           </div>
       </main>
     </section>
