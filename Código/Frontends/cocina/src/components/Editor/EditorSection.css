@@ -1,17 +1,20 @@
-.flex-editor {
+.plato-box {
     display: flex;
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 12px;
-    padding: 0.2rem;
+    padding: 0.2rem 0.5rem;
     box-shadow: 0 0 3px #ccccccab;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 .platos-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 0.8rem 0;
     gap: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 0;
 }
 .filter-section {
     display: flex;
@@ -19,7 +22,6 @@
     margin: 0.8rem 0;
     gap: 0.5rem;
     align-items: center;
-
 }
 select.filter {
     padding: 5px;
@@ -28,13 +30,33 @@ select.filter {
     margin: 0.2rem 0;
 }
 input[type="search"] {
-    padding: 5px;
+    padding: 6px;
     border: 1px solid #ccc;
     border-radius: 12px;
     margin: 0.2rem 0;
+    min-height: 30px;
 }
 input[type="search"]:focus {
     outline: 1px solid #249d19;
+}
+.plato-box img {
+    width: 50px;
+    border-radius: 12px;
+}
+.plato-box button {
+    padding: 0.2rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #383efc;
+    color: white;
+    cursor: pointer;
+    height: 30px;
+    position: relative;
+    left: 20px;
+    transition: background-color 0.2s ease-out;
+}
+.plato-box button:hover {
+    background-color: #1f22b7;
 }
 
   

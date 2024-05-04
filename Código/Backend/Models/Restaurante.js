@@ -19,7 +19,10 @@ const RestauranteSchema = new Schema({
 			type: Number,
 			default: 0,
 		},
-		tipo: String,
+		tipo: {
+			type: String,
+			required: true,
+		},
 		ingredientes: [String],
 		active: {
 			default: true,

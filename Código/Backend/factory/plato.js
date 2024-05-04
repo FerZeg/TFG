@@ -16,13 +16,14 @@ export default function generatePlatos(n) {
 		}
 	]
 	for(let i = 0; i < n; i++) {
-		const tipo = Math.floor(Math.random() * tipos.length)
-		const ingrediente = ingredientes.find(ingrediente => ingrediente.tipo === tipos[tipo])
+		const tipo = tipos[Math.floor(Math.random() * tipos.length)]
+		const ingrediente = ingredientes.find(ingrediente => ingrediente.tipo === tipo)
 		const plato = {
-			nombre: `plato${i}`,
+			nombre: tipo + " " + i,
 			precio: 10,
-			tipo: tipos[tipo],
+			tipo: tipo,
 			ingredientes: ingrediente.ingredientes,
+			active: Math.random() > 0.5 ? true : false,
 		}
 		platos.push(plato)
 	}
