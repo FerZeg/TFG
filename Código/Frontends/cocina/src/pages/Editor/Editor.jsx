@@ -13,7 +13,7 @@ export default function EditorPage() {
   })))    
   const { login } = useLoginContext()
   useEffect(() => {
-      document.title = "Admin - Restaurante";
+      document.title = "Editor - Restaurante";
       (async() => {
           if(!await fetchRestaurant(login.data.restauranteId, setData))
               toast.error("Error al cargar los datos del restaurante")

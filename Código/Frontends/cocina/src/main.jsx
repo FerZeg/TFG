@@ -8,6 +8,7 @@ import Admin from "./pages/Admin/Admin.jsx"
 import TicketsPage from "./pages/Tickets/Tickets.jsx"
 import EditorPage from "./pages/Editor/Editor.jsx"
 import { Errors } from "./pages/Errors/Errors.jsx"
+import React from "react"
 
 import "modern-normalize/modern-normalize.css"
 import "./index.css"
@@ -35,5 +36,7 @@ const router = createBrowserRouter([
 )
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <RouterProvider router={router}/>
+  </React.StrictMode>
 )

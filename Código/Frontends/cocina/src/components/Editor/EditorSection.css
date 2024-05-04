@@ -1,0 +1,41 @@
+.flex-editor {
+    display: flex;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 0.2rem;
+    box-shadow: 0 0 3px #ccccccab;
+}
+.platos-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0.8rem 0;
+    gap: 0.5rem;
+}
+.filter-section {
+    display: flex;
+    width: 100%;
+    margin: 0.8rem 0;
+    gap: 0.5rem;
+    align-items: center;
+
+}
+select.filter {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin: 0.2rem 0;
+}
+input[type="search"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin: 0.2rem 0;
+}
+input[type="search"]:focus {
+    outline: 1px solid #249d19;
+}
+
+  
+  
