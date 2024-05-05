@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { useState } from "react"
 
-export default function FormEditPlato({plato, handleSubmit}) {
+export default function FormEditPlato({plato, handleSubmit, handleDelete}) {
     const [state, setState] = useState({
         _id: plato._id,
         nombre: plato.nombre,
@@ -63,6 +63,7 @@ export default function FormEditPlato({plato, handleSubmit}) {
                 <input type="file" name="imagen" id="imagen" accept="image/*" onChange={handleImageChange}/>
             </div>
             <button type="submit">Guardar</button>
+            <button type='button' onClick={() => handleDelete(plato)}>Eliminar</button>
         </form>
         </>
     )
@@ -70,6 +71,6 @@ export default function FormEditPlato({plato, handleSubmit}) {
 
 FormEditPlato.propTypes = {
     plato: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired
-    
+    handleSubmit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired
 }

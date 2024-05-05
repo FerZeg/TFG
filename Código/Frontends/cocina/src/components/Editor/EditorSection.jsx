@@ -4,14 +4,15 @@ import { useShallow } from "zustand/react/shallow"
 import "./EditorSection.css"
 import Dialog from "../mainUI/Dialog"
 import FormEditPlato from "./FormEditPlato"
-import { updatePlatoRemote } from "../../lib/actions"
+import { updatePlatoRemote, deletePlatoRemote} from "../../lib/actions"
 import { toast } from "sonner"
 
 export default function EditorSection() {
-    const { platos, updatePlato } = useRestauranteContext(useShallow(state => {
+    const { platos, updatePlato, removePlato } = useRestauranteContext(useShallow(state => {
         return {
             platos: state.platos,
-            updatePlato: state.updatePlato
+            updatePlato: state.updatePlato,
+            removePlato: state.removePlato
 
         }
     }))
@@ -61,6 +62,16 @@ export default function EditorSection() {
             toast.error("Error al actualizar el plato")
         }
 
+    }
+
+    const handleDelete = async (plato) => {
+        if(await deletePlatoRemote(plato, login.data.restauranteId)) {
+            removePlato(plato)
+            setIsDialogOpen({isOpen: false, plato: null})
+            toast.success("Plato eliminado correctamente")
+        } else {
+            toast.error("Error al eliminar el plato")
+        }
     }
 
 
@@ -126,6 +137,7 @@ export default function EditorSection() {
                     <FormEditPlato
                         plato={isDialogOpen.plato}
                         handleSubmit={handleSubmit}
+                        handleDelete={handleDelete}
                     />
                 </Dialog>
             }

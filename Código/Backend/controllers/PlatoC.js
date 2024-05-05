@@ -6,7 +6,7 @@ import { Upload } from "@aws-sdk/lib-storage"
 import PlatoService from "../services/PlatoService.js"
 
 export const putPlato = async(req, res) => {
-	const uploads = [] // Array to hold all upload promises
+	const uploads = []
   
 	const form = formidable({ 
 		maxFiles: 1, 
@@ -59,5 +59,10 @@ export const putPlato = async(req, res) => {
 }
 
 export const deletePlato = (req, res) => {
-	res.send("DELETE plato")
+	PlatoService.deleteOne(req)
+		.then(() => res.status(204).send())
+		.catch((err) => {
+			console.log(err)
+			throw new BadRequestError("Error al eliminar el plato")
+		})
 }
