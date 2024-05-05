@@ -1,10 +1,10 @@
-import { useLoginContext } from '../../lib/context'
-import { useEffect } from 'react'
-import { fetchRestaurant } from '../../lib/fetchers'
-import { updateRestaurantRemote } from '../../lib/actions'
-import { toast } from 'sonner'
-import { useRestauranteContext } from '../../lib/context'
-import { useShallow } from 'zustand/react/shallow'
+import { useLoginContext } from "../../lib/context"
+import { useEffect } from "react"
+import { fetchRestaurant } from "../../lib/fetchers"
+import { updateRestaurantRemote } from "../../lib/actions"
+import { toast } from "sonner"
+import { useRestauranteContext } from "../../lib/context"
+import { useShallow } from "zustand/react/shallow"
 
 export default function DatosRestaurante() {
     const { restauranteData, updateRestauranteData } = useRestauranteContext(useShallow(state => ({

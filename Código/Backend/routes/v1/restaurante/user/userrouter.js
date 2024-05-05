@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { getUsers, postUser, deleteUser, putUser } from "../../../controllers/UserC.js"
-import { permissionController } from "../../../controllers/PermissionC.js"
+import { getUsers, postUser, deleteUser, putUser } from "../../../../controllers/UserC.js"
+import { permissionController } from "../../../../controllers/PermissionC.js"
 import asyncMiddleware from "middleware-async"
 
 const userRouter = Router({ mergeParams: true })

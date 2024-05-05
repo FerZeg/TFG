@@ -1,7 +1,43 @@
+body {
+  min-height: 100dvh;
+  padding-left: calc(100vw - 100%);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.dialog-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+}
+.dialog {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 90vw;
+  width: 400px;
+  position: relative;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+
 :root {
   font-family: "Roboto", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
   color: rgba(10, 9, 9, 0.87);
   background-color: #fcfcfc;
   font-synthesis: none;
@@ -9,23 +45,41 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 .page {
   max-width: 720px;
   margin: 0 auto;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+  overflow: auto;
 }
+
+/* Textos */
+.text-l {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 
 .box-section {
   border: 1px solid #9c9b9b;
   border-radius: 5px;
   padding: 20px;
   margin: 20px 0;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .center-page {
@@ -53,13 +107,15 @@
 .table th {
   background-color: #f2f2f2;
   color: #333;
-  border: 1px solid #ddd;
   text-align: left;
   padding: 0.4rem 0.3rem;
   font-weight: 500;
 }
 .table th, .table td {
-  border: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+.table th:last-child, .table td:last-child {
+  border-right: none;
 }
 .table td:not(:has(input)) {
   padding: 0.2rem 0.4rem;
@@ -94,6 +150,23 @@
   width: 100%;
   max-width: 150px;
   height: 100%;
+  font-size: 0.8rem;
+}
+.table button {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  transition: background-color 0.2s ease-out;
+  cursor: pointer;
+  margin: 3px;
+}
+
+.table button:hover {
+  background-color: #ffeb7b;
+}
+.table button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 
@@ -116,8 +189,7 @@
 }
 
 .section-title {
-  text-decoration: underline 1px solid #ccc;
-  margin-bottom: 1rem;
+  margin-top: 0.2rem;
 }
 
 /*Datos Restaurante*/
@@ -137,5 +209,8 @@
 @media (max-width: 768px) {
   .title {
     font-size: 4rem;
+  }
+  body {
+    padding-left: 0;
   }
 }

@@ -1,9 +1,9 @@
-import './Cocina.css';
+import "./Cocina.css"
 
 
 
 export default function Cocina() {
   return (
     <></>
-  );
+  )
 }

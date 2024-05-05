@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types'
-import { useState } from 'react'
-import { toast } from 'sonner';
-import { deleteUserRemote, updateUserRemote } from '../../lib/actions';
-import { useLoginContext } from '../../lib/context';
-import { createUserRemote } from '../../lib/actions';
-import { useRestauranteContext } from '../../lib/context';
-import { useShallow } from 'zustand/react/shallow';
+import PropTypes from "prop-types"
+import { useState } from "react"
+import { toast } from "sonner"
+import { deleteUserRemote, updateUserRemote } from "../../lib/actions"
+import { useLoginContext } from "../../lib/context"
+import { createUserRemote } from "../../lib/actions"
+import { useRestauranteContext } from "../../lib/context"
+import { useShallow } from "zustand/react/shallow"
 
 export default function PersonalField({user}) {
     const { login } = useLoginContext()
@@ -18,17 +18,17 @@ export default function PersonalField({user}) {
     
     const handleSaveButton = async () => {
         if(!changed) {
-            toast.error('No se han realizado cambios')
+            toast.error("No se han realizado cambios")
             return
         }
         if(user.alreadyExist) {
             const response = await updateUserRemote(user, login.data.restauranteId)
             if(response.ok) {
                 setChanged(false)
-                toast.success('Usuario actualizado')
+                toast.success("Usuario actualizado")
                 updateUser(user, {...user, alreadyExist: true, _id: response._id})
             } else {
-                toast.error('Error al actualizar el usuario')
+                toast.error("Error al actualizar el usuario")
             }
             return
         }
@@ -37,27 +37,27 @@ export default function PersonalField({user}) {
             const data = await response.json()
             const {_id} = data
             setChanged(false)
-            toast.success('Usuario creado')
+            toast.success("Usuario creado")
             updateUser(user, {...user, alreadyExist: true, _id})
 
         }
         else {
-            toast.error('Error al crear el usuario')
+            toast.error("Error al crear el usuario")
         }
     }
     const handleDeleteButton = async () => {
         const response = await deleteUserRemote(user, login.data.restauranteId)
         if(response) {
             removeUser(user)
-            toast.success('Usuario eliminado')
+            toast.success("Usuario eliminado")
         } else {
-            toast.error('Error al eliminar el usuario')
+            toast.error("Error al eliminar el usuario")
         }
     }
     const handleInputChange = (e) => {
-        setChanged(true);
+        setChanged(true)
         updateUser(user, {...user, [e.target.name]: e.target.value})
-    };
+    }
 
     return (
         <tr>
@@ -91,7 +91,7 @@ export default function PersonalField({user}) {
                 )}
             </td>
         </tr>
-    );
+    )
 }
 
 PersonalField.propTypes = {

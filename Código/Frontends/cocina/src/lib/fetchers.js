@@ -84,9 +84,9 @@ export const fetchTickets = async (restaurantId) => {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
-        });
-        return response.ok ? await response.json() : undefined;
+        })
+        return response.ok ? await response.json() : undefined
     } catch (e) {
-        return undefined;
+        return undefined
     }
 }

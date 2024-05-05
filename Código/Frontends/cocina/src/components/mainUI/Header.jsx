@@ -1,14 +1,14 @@
-import { useLoginContext } from "../../lib/context";
-import { Link } from "react-router-dom";
-import './Header.css';
-import { useLocation } from "react-router-dom";
+import { useLoginContext } from "../../lib/context"
+import { Link } from "react-router-dom"
+import "./Header.css"
+import { useLocation } from "react-router-dom"
 
 export default function Header() {
-    const { login } = useLoginContext();
-    const { pathname } = useLocation();
+    const { login } = useLoginContext()
+    const { pathname } = useLocation()
     const isActive = (path) => {
-        return pathname === path ? "active" : "";
-    };
+        return pathname === path ? "active" : ""
+    }
     return (
         <div className="main-header">
             <nav>
@@ -26,5 +26,5 @@ export default function Header() {
                 </ul>
             </nav>
         </div>
-    );
+    )
 }

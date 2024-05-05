@@ -1,10 +1,11 @@
 import { Router } from "express"
 import { getRestaurante, createRestaurante, deleteRestaurante, putRestaurante } from "../../../controllers/RestauranteC.js"
 import { permissionController } from "../../../controllers/PermissionC.js"
-import userRouter from "./userrouter.js"
-import mesasRouter from "./mesarouter.js"
+import userRouter from "./user/userrouter.js"
+import mesasRouter from "./mesa/mesarouter.js"
 import asyncMiddleware from "middleware-async"
 import ticketRouter from "./ticket/ticketrouter.js"
+import platoRouter from "./plato/platorouter.js"
 
 
 const restauranteRouter = Router()
@@ -17,5 +18,6 @@ restauranteRouter.delete("/:restauranteId", permissionController("superadmin"), 
 restauranteRouter.use("/:restauranteId/users", userRouter)
 restauranteRouter.use("/:restauranteId/mesas", mesasRouter)
 restauranteRouter.use("/:restauranteId/tickets", ticketRouter)
+restauranteRouter.use("/:restauranteId/platos", platoRouter)
 
 export default restauranteRouter

@@ -2,6 +2,7 @@ import Usuario from "./Models/Usuario.js"
 import Restaurante from "./Models/Restaurante.js"
 import Ticket from "./Models/Ticket.js"
 import {connectDB} from "./connection.js"
+import generatePlatos from "./factory/plato.js"
 await connectDB()
 const user = new Usuario({
 	nombre: "admin",
@@ -26,14 +27,7 @@ const restaurante = new Restaurante({
 	nombre: "restaurante",
 	direccion: "calle",
 	telefono: "123456789",
-	platos: [
-		{
-			nombre: "plato1",
-			precio: 10,
-			tipo: "tipo1",
-			ingredientes: ["ingrediente1", "ingrediente2"],
-		},
-	],
+	platos: generatePlatos(15),
 	mesas: [
 		{
 			identificador: "mesa1",

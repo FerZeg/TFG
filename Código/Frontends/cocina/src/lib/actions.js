@@ -103,6 +103,39 @@ export async function deleteTicketRemote(ticket, restaurantId) {
         })
         return response.ok
     } catch(e) {
-        return null
+        console.log(e)
+    }
+}
+
+export async function updatePlatoRemote(plato, restaurantId, imagen) {
+    try {
+        const formData = new FormData()
+        formData.append("file", imagen)
+        formData.append("datos", JSON.stringify(plato))
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/platos/${plato._id}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: formData
+        })
+        return response
+    } catch(e) {
+        console.log(e)
+    }
+}
+
+export async function deletePlatoRemote(plato, restaurantId) {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/platos/${plato._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        return response.ok
+    } catch(e) {
+        console.log(e)
     }
 }

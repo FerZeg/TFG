@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
-import PersonalField from './PersonalField';
-import { useRestauranteContext } from '../../lib/context';
-import { useShallow } from 'zustand/react/shallow';
-import { toast } from 'sonner';
+import PropTypes from "prop-types"
+import PersonalField from "./PersonalField"
+import { useRestauranteContext } from "../../lib/context"
+import { useShallow } from "zustand/react/shallow"
+import { toast } from "sonner"
 
 function PersonalTable({ fields }) {
     const { users, addUser } = useRestauranteContext(
@@ -12,13 +12,13 @@ function PersonalTable({ fields }) {
     })))
     const handleAddButton = () => {
         const newPersonal = ({
-            nombre: '',
-            email: '',
-            role: 'cocinero',
+            nombre: "",
+            email: "",
+            role: "cocinero",
             alreadyExist: false
         })
         if (users.some(u => u.alreadyExist === false)) {
-            return toast.warning("Ya hay un usuario sin guardar");
+            return toast.warning("Ya hay un usuario sin guardar")
         }
         addUser(newPersonal)
     }
@@ -47,10 +47,10 @@ function PersonalTable({ fields }) {
                 Añadir
             </button>
         </>
-    );
+    )
 }
 
-export default PersonalTable;
+export default PersonalTable
 PersonalTable.propTypes = {
     fields: PropTypes.object.isRequired,
 }
