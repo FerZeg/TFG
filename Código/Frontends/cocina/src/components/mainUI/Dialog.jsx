@@ -25,7 +25,7 @@ export default function Dialog({setDialogIsOpen, children})  {
             <div className="backdrop" onClick={handleClose}></div>
             <motion.div className="dialog"
             initial={{ scale: 0 }}
-            animate={{ rotate: 360, scale: 1 }}
+            animate={{ scale: 1 }}
             transition={{
               type: "spring",
               stiffness: 260,

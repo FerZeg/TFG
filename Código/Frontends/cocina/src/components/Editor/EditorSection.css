@@ -63,7 +63,7 @@ input[type="search"]:focus {
 }
 
 .dialog-img {
-    width: 100%;
+    width: 95%;
     margin: 0 auto;
 }
 
@@ -89,6 +89,14 @@ input[type="search"]:focus {
     display: flex;
     gap: 0.5rem;
     align-items: center;
+}
+
+/* Formulario de plato */
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.3rem 0;
 }
 
   

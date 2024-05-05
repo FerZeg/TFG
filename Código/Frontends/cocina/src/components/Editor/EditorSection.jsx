@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react"
-import { useRestauranteContext } from "../../lib/context"
+import { useLoginContext, useRestauranteContext } from "../../lib/context"
 import { useShallow } from "zustand/react/shallow"
 import "./EditorSection.css"
 import Dialog from "../mainUI/Dialog"
+import FormEditPlato from "./FormEditPlato"
+import { updatePlatoRemote } from "../../lib/actions"
+import { toast } from "sonner"
 
 export default function EditorSection() {
-    const { platos } = useRestauranteContext(useShallow(state => {
+    const { platos, updatePlato } = useRestauranteContext(useShallow(state => {
         return {
-            platos: state.platos
+            platos: state.platos,
+            updatePlato: state.updatePlato
+
         }
     }))
+    const { login } = useLoginContext()
+
     const [filtro, setFiltro] = useState({
         tipo: "todos",
         estado: "true"
@@ -34,7 +41,6 @@ export default function EditorSection() {
                 return plato.active === (filtro.estado === "true")
             })
         }
-        console.log(filtro)
 
         const platosFiltrados = filteredPlatos.filter(plato => {
             const nombre = plato.nombre.toLowerCase()
@@ -44,6 +50,18 @@ export default function EditorSection() {
 
         setPlatosFiltrados(platosFiltrados)
     }, [filtro, platos, search])
+
+    const handleSubmit = async (plato, imagen) => {
+        const oldPlato = isDialogOpen.plato
+        if(await updatePlatoRemote(plato, login.data.restauranteId, imagen)) {
+            updatePlato(oldPlato, plato)
+            setIsDialogOpen({isOpen: false, plato: null})
+            toast.success("Plato actualizado correctamente")
+        } else {
+            toast.error("Error al actualizar el plato")
+        }
+
+    }
 
 
     return (
@@ -104,32 +122,12 @@ export default function EditorSection() {
                 ))}
             </div>
             {isDialogOpen.isOpen && 
-                <Dialog
-                    setDialogIsOpen={setIsDialogOpen}
-                >
-                    <h1>Editar Plato</h1>
-                    <form>
-                        <label htmlFor="nombre">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" value={isDialogOpen.plato.nombre}/>
-                        <label htmlFor="precio">Precio</label>
-                        <input type="number" name="precio" id="precio" value={isDialogOpen.plato.precio}/>
-                        <label htmlFor="tipo">Tipo</label>
-                        <select name="tipo" id="tipo" value={isDialogOpen.plato.tipo}>
-                            <option value="plato">Plato</option>
-                            <option value="bebida">Bebida</option>
-                            <option value="postre">Postre</option>
-                        </select>
-                        <label htmlFor="active">Activo</label>
-                        <select name="active" id="active" value={isDialogOpen.plato.active}>
-                            <option value="true">Activo</option>
-                            <option value="false">Inactivo</option>
-                        </select>
-                        <label htmlFor="imagen">Imagen</label>
-                        <input type="file" name="imagen" id="imagen"/>
-                        <button type="submit">Guardar</button>
-                    </form>
+                <Dialog setDialogIsOpen={setIsDialogOpen}>
+                    <FormEditPlato
+                        plato={isDialogOpen.plato}
+                        handleSubmit={handleSubmit}
+                    />
                 </Dialog>
-
             }
         </div>
     )

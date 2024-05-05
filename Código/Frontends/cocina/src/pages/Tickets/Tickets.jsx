@@ -12,6 +12,10 @@ export default function TicketsPage() {
         fetchTickets(login.data.restauranteId)
             .then(data => setTickets(data))
     }, [login, setTickets])
+    useEffect(() => {
+        document.title = "Tickets - Restaurante"
+    }
+    , [])
     return (
         <section id='tickets' className='page'>
             <TicketTable />
