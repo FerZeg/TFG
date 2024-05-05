@@ -1,5 +1,8 @@
 .main-header {
     padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 .main-header nav {
     width: 768px;
@@ -16,6 +19,7 @@
     list-style: none;
     justify-content: space-around;
     align-items: center;
+    padding: 0 1rem;
 }
 .main-header ul li a {
     text-decoration: none;

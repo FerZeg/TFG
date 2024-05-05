@@ -8,6 +8,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    height: 60px;
 }
 .platos-container {
     display: flex;
@@ -15,6 +16,8 @@
     width: 100%;
     gap: 0.5rem;
     padding: 0.5rem 1rem 0.5rem 0;
+    height: 60dvh;
+    overflow: auto;
 }
 .filter-section {
     display: flex;
@@ -57,6 +60,35 @@ input[type="search"]:focus {
 }
 .plato-box button:hover {
     background-color: #1f22b7;
+}
+
+.dialog-img {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.flex-dialog {
+    display: flex;
+    gap: 0.1rem;
+    flex-direction: column;
+}
+
+.dialog .button-container {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .filter-section {
+        flex-direction: column;
+    }
+}
+
+.select-filters {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
   

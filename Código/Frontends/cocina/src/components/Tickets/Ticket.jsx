@@ -5,6 +5,7 @@ import { useLoginContext } from "../../lib/context"
 import { useTicketsContext } from "../../lib/context"
 import { useShallow } from "zustand/react/shallow"
 import { toast } from "sonner"
+import { motion } from "framer-motion"
 
 export default function Ticket({ ticket }) {
     const { login } = useLoginContext()
@@ -23,7 +24,12 @@ export default function Ticket({ ticket }) {
         }
     }
     return (
-        <tr>
+        
+        <motion.tr
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <td>{ticket.mesa}</td>
             <td>{fechaTicket.fecha + " " + fechaTicket.hora}</td>
             <td style={style}>{ticket.estado}</td>
@@ -33,7 +39,7 @@ export default function Ticket({ ticket }) {
                     Eliminar
                 </button>
             </td>
-        </tr>
+        </motion.tr>
     )
 }
 

@@ -1,6 +1,7 @@
 import { useTicketsContext } from "../../lib/context"
 import { useShallow } from "zustand/react/shallow"
 import Ticket from "./Ticket"
+import { AnimatePresence } from "framer-motion"
 
 export default function TicketTable() {
     const { tickets } = useTicketsContext(
@@ -9,7 +10,10 @@ export default function TicketTable() {
     })))
     return (
         <div className="box-section">
-            <table id="ticketTable" className="table">
+            <table 
+            id="ticketTable" 
+            className="table"          
+            >
                 <thead>
                     <tr>
                         <th>Mesa</th>
@@ -20,11 +24,13 @@ export default function TicketTable() {
                     </tr>
                 </thead>
                 <tbody>
+                    <AnimatePresence>
                     {
                         tickets && tickets.map(ticket => (
                             <Ticket ticket={ticket} key={ticket._id} />
                         ))
                     }
+                    </AnimatePresence>
                 </tbody>
             </table>
         </div>

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react"
 import { useRestauranteContext } from "../../lib/context"
 import { useShallow } from "zustand/react/shallow"
 import "./EditorSection.css"
-import EditorDialog from "./EditorDialog"
-import { createPortal } from "react-dom"
+import Dialog from "../mainUI/Dialog"
 
 export default function EditorSection() {
     const { platos } = useRestauranteContext(useShallow(state => {
@@ -48,31 +47,33 @@ export default function EditorSection() {
 
 
     return (
-        <div className="box-section">
+        <div className="box-section"> 
             <div className="filter-section">
-                <select 
-                    name="tipofiltro" 
-                    id="tipofiltro" 
-                    value={filtro.tipo} 
-                    onChange={(e) => setFiltro(oldState => ({...oldState, tipo: e.target.value}))}
-                    className="filter"
-                    >
-                    <option value="todos">Todos</option>
-                    <option value="plato">Platos</option>
-                    <option value="bebida">Bebidas</option>
-                    <option value="postre">Postres</option>
-                </select>
-                <select 
-                    name="estadofiltro" 
-                    id="estadofiltro" 
-                    value={filtro.estado} 
-                    onChange={(e) => setFiltro(oldState => ({...oldState, estado: e.target.value}))}
-                    className="filter"
-                    >
-                    <option value="todos">Todos</option>
-                    <option value="true">Activos</option>
-                    <option value="false">Inactivos</option>
-                </select>
+                <div className="select-filters">
+                    <select 
+                        name="tipofiltro" 
+                        id="tipofiltro" 
+                        value={filtro.tipo} 
+                        onChange={(e) => setFiltro(oldState => ({...oldState, tipo: e.target.value}))}
+                        className="filter"
+                        >
+                        <option value="todos">Todos</option>
+                        <option value="plato">Platos</option>
+                        <option value="bebida">Bebidas</option>
+                        <option value="postre">Postres</option>
+                    </select>
+                    <select 
+                        name="estadofiltro" 
+                        id="estadofiltro" 
+                        value={filtro.estado} 
+                        onChange={(e) => setFiltro(oldState => ({...oldState, estado: e.target.value}))}
+                        className="filter"
+                        >
+                        <option value="todos">Todos</option>
+                        <option value="true">Activos</option>
+                        <option value="false">Inactivos</option>
+                    </select>
+                </div>
                 <input 
                     type="search" 
                     name="buscar" 
@@ -102,13 +103,33 @@ export default function EditorSection() {
                     </div>
                 ))}
             </div>
-            {isDialogOpen.isOpen && createPortal(
-                <EditorDialog 
-                    plato={isDialogOpen.plato}
+            {isDialogOpen.isOpen && 
+                <Dialog
                     setDialogIsOpen={setIsDialogOpen}
-                />,
-                document.body
-            )
+                >
+                    <h1>Editar Plato</h1>
+                    <form>
+                        <label htmlFor="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" value={isDialogOpen.plato.nombre}/>
+                        <label htmlFor="precio">Precio</label>
+                        <input type="number" name="precio" id="precio" value={isDialogOpen.plato.precio}/>
+                        <label htmlFor="tipo">Tipo</label>
+                        <select name="tipo" id="tipo" value={isDialogOpen.plato.tipo}>
+                            <option value="plato">Plato</option>
+                            <option value="bebida">Bebida</option>
+                            <option value="postre">Postre</option>
+                        </select>
+                        <label htmlFor="active">Activo</label>
+                        <select name="active" id="active" value={isDialogOpen.plato.active}>
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                        <label htmlFor="imagen">Imagen</label>
+                        <input type="file" name="imagen" id="imagen"/>
+                        <button type="submit">Guardar</button>
+                    </form>
+                </Dialog>
+
             }
         </div>
     )
