@@ -27,7 +27,10 @@ const RestauranteSchema = new Schema({
 		active: {
 			default: true,
 			type: Boolean,
-		}
+		},
+		imagen: {
+			type: String,
+		},
 	}],
 	mesas: [{
 		identificador: {

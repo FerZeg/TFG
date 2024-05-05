@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { deleteMesa, putMesa } from "../../../controllers/MesaC.js"
-import { permissionController } from "../../../controllers/PermissionC.js"
+import { deleteMesa, putMesa } from "../../../../controllers/MesaC.js"
+import { permissionController } from "../../../../controllers/PermissionC.js"
 
 const mesasRouter = Router({ mergeParams: true })
 
