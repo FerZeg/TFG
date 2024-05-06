@@ -3,12 +3,12 @@ import { useState } from "react"
 
 export default function FormEditPlato({plato, handleSubmit, handleDelete}) {
     const [state, setState] = useState({
-        _id: plato._id,
-        nombre: plato.nombre,
-        precio: plato.precio,
-        tipo: plato.tipo,
-        active: plato.active,
-        imagen: plato.imagen
+        _id: plato?._id,
+        nombre: plato?.nombre || "",
+        precio: plato?.precio || 0,
+        tipo: plato?.tipo || "plato",
+        active: plato?.active || false,
+        imagen: plato?.imagen || ""
     })
     const [previewImage, setPreviewImage] = useState(null)
 
@@ -32,12 +32,18 @@ export default function FormEditPlato({plato, handleSubmit, handleDelete}) {
 
     return (
         <>
-        <h1>Editar Plato</h1>
+        <h2>{plato ? "Editar plato" : "Añadir plato"}</h2>
         <form  onSubmit={handleFormSubmit}>
         <img src={previewImage || state.imagen || "Placeholder.svg"} alt="" className="dialog-img"/>
             <div className="input-wrapper">
                 <label htmlFor="nombre">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" value={state.nombre} onChange={handleChange}/>
+                <input 
+                    type="text" 
+                    name="nombre" 
+                    id="nombre" 
+                    value={state.nombre} 
+                    onChange={handleChange}
+                    />
             </div>
             <div className="input-wrapper">
                 <label htmlFor="precio">Precio:</label>
@@ -54,23 +60,31 @@ export default function FormEditPlato({plato, handleSubmit, handleDelete}) {
             <div className="input-wrapper">
                 <label htmlFor="active">Activo:</label>
                 <select name="active" id="active" value={state.active} onChange={handleChange}>
-                    <option value="true">Activo</option>
-                    <option value="false">Inactivo</option>
+                    <option value={true}>Activo</option>
+                    <option value={false}>Inactivo</option>
                 </select>
             </div>
             <div className="input-wrapper">
                 <label htmlFor="imagen">Imagen:</label>
                 <input type="file" name="imagen" id="imagen" accept="image/*" onChange={handleImageChange}/>
             </div>
+            {plato &&
+            <>
             <button type="submit">Guardar</button>
             <button type='button' onClick={() => handleDelete(plato)}>Eliminar</button>
+            </>
+            }
+            {!plato &&
+            <button type="submit">Añadir</button>
+            }
         </form>
         </>
     )
 }
 
 FormEditPlato.propTypes = {
-    plato: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired
+    plato: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    handleDelete: PropTypes.func,
+    isNew: PropTypes.bool
 }

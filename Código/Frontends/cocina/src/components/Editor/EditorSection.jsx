@@ -8,11 +8,12 @@ import { updatePlatoRemote, deletePlatoRemote} from "../../lib/actions"
 import { toast } from "sonner"
 
 export default function EditorSection() {
-    const { platos, updatePlato, removePlato } = useRestauranteContext(useShallow(state => {
+    const { platos, updatePlato, removePlato, addPlato } = useRestauranteContext(useShallow(state => {
         return {
             platos: state.platos,
             updatePlato: state.updatePlato,
-            removePlato: state.removePlato
+            removePlato: state.removePlato,
+            addPlato: state.addPlato
 
         }
     }))
@@ -20,7 +21,7 @@ export default function EditorSection() {
 
     const [filtro, setFiltro] = useState({
         tipo: "todos",
-        estado: "true"
+        estado: "todos"
     })
     const [platosFiltrados, setPlatosFiltrados] = useState([])
     const [search, setSearch] = useState("")
@@ -30,8 +31,9 @@ export default function EditorSection() {
     })
 
     useEffect(() => {
-        console.log(platos)
+        console.log(filtro)
         let filteredPlatos = []
+        console.log(platos)
         if(filtro.tipo === "todos") {
             filteredPlatos = platos
         } else {
@@ -39,7 +41,8 @@ export default function EditorSection() {
         }
         if(filtro.estado !== null && filtro.estado !== "todos") {
             filteredPlatos = filteredPlatos.filter(plato => {
-                return plato.active === (filtro.estado === "true")
+                console.log(plato.active, filtro.estado)
+                return String(plato.active) === String(filtro.estado)
             })
         }
 
@@ -56,15 +59,18 @@ export default function EditorSection() {
         const oldPlato = isDialogOpen.plato
         const response = await updatePlatoRemote(plato, login.data.restauranteId, imagen)
         const newPlato = await response.json()
-        if(response.ok) {
-            updatePlato(oldPlato, newPlato)
-            setIsDialogOpen({isOpen: false, plato: null})
-            toast.success("Plato actualizado correctamente")
-        } else {
-            toast.error("Error al actualizar el plato")
+        if(!response.ok) {
+            return toast.error("Error al actualizar el plato")
         }
-
+        if(!plato._id) {
+            addPlato(newPlato)
+        } else {
+            updatePlato(oldPlato, newPlato)
+        }
+        setIsDialogOpen({isOpen: false, plato: null})
+        toast.success("Plato actualizado correctamente")
     }
+
 
     const handleDelete = async (plato) => {
         if(await deletePlatoRemote(plato, login.data.restauranteId)) {
@@ -76,43 +82,56 @@ export default function EditorSection() {
         }
     }
 
+    const handleAdd = () => {
+        setIsDialogOpen({isOpen: true, plato: null})
+    }
+
 
     return (
         <div className="box-section"> 
             <div className="filter-section">
                 <div className="select-filters">
-                    <select 
-                        name="tipofiltro" 
-                        id="tipofiltro" 
-                        value={filtro.tipo} 
-                        onChange={(e) => setFiltro(oldState => ({...oldState, tipo: e.target.value}))}
-                        className="filter"
-                        >
-                        <option value="todos">Todos</option>
-                        <option value="plato">Platos</option>
-                        <option value="bebida">Bebidas</option>
-                        <option value="postre">Postres</option>
-                    </select>
-                    <select 
-                        name="estadofiltro" 
-                        id="estadofiltro" 
-                        value={filtro.estado} 
-                        onChange={(e) => setFiltro(oldState => ({...oldState, estado: e.target.value}))}
-                        className="filter"
-                        >
-                        <option value="todos">Todos</option>
-                        <option value="true">Activos</option>
-                        <option value="false">Inactivos</option>
-                    </select>
+                    <div className="flex-group mobile">
+                        <div className="flex-group">
+                            <select 
+                                name="tipofiltro" 
+                                id="tipofiltro" 
+                                value={filtro.tipo} 
+                                onChange={(e) => setFiltro(oldState => ({...oldState, tipo: e.target.value}))}
+                                className="filter"
+                                >
+                                <option value="todos">Todos</option>
+                                <option value="plato">Platos</option>
+                                <option value="bebida">Bebidas</option>
+                                <option value="postre">Postres</option>
+                            </select>
+                            <select 
+                                name="estadofiltro" 
+                                id="estadofiltro" 
+                                value={filtro.estado} 
+                                onChange={(e) => setFiltro(oldState => ({...oldState, estado: e.target.value}))}
+                                className="filter"
+                                >
+                                <option value="todos">Todos</option>
+                                <option value="true">Activos</option>
+                                <option value="false">Inactivos</option>
+                            </select>
+                        </div>
+                        <input 
+                            type="search" 
+                            name="buscar" 
+                            id="buscar" 
+                            value={search} 
+                            onChange={(e) => {setSearch(e.target.value)}}
+                            placeholder="Buscar plato..."
+                        />
+                    </div>
+                    <button
+                        onClick={handleAdd}
+                    >
+                        Añadir
+                    </button>
                 </div>
-                <input 
-                    type="search" 
-                    name="buscar" 
-                    id="buscar" 
-                    value={search} 
-                    onChange={(e) => {setSearch(e.target.value)}}
-                    placeholder="Buscar plato..."
-                />
             </div>
             <div className="platos-container">
                 {platosFiltrados.map(plato => (

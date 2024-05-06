@@ -30,13 +30,13 @@ export const createMesasSlice = (set) => ({
 
 export const createPlatosContext = (set) => ({
     platos: [],
-    addPlato: (plato) => set((state) => {
-        plato._id = crypto.randomUUID()
-        plato.alreadyExist = false
-        return ({ platos: [...state.platos, plato] })
-    }),
     removePlato: (plato) => set((state) => ({ platos: state.platos.filter((p) => p._id !== plato._id) })),
-    updatePlato: (oldPlato, newPlato) => set((state) => ({ platos: state.platos.map((p) => p._id === oldPlato._id ? newPlato : p) }))
+    updatePlato: (oldPlato, newPlato) => set((state) => ({ platos: state.platos.map((p) => p._id === oldPlato._id ? newPlato : p) })),
+    addPlato: (plato) => set((state) => {
+        console.log(plato)
+        return { platos: [...state.platos, plato]}
+        }
+    ),
     
 })
 

@@ -142,6 +142,7 @@ body {
   width: 100%;
   max-width: 150px;
   height: 100%;
+  font-size: 0.8rem;
 }
 .table select {
   padding: 5px;

@@ -87,6 +87,13 @@ input[type="search"]:focus {
 
 .select-filters {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+}
+.flex-group {
+    display: flex;
     gap: 0.5rem;
     align-items: center;
 }
@@ -97,6 +104,15 @@ input[type="search"]:focus {
     flex-direction: column;
     gap: 0.2rem;
     padding: 0.3rem 0;
+}
+
+@media screen and (max-width: 768px) {
+    .select-filters {
+        flex-direction: column;
+    }
+    .mobile {
+        flex-direction: column;
+    }
 }
 
   

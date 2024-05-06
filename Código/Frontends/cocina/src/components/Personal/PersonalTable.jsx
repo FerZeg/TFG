@@ -10,6 +10,7 @@ function PersonalTable({ fields }) {
             users: state.users,
             addUser: state.addUser
     })))
+    console.log(users)
     const handleAddButton = () => {
         const newPersonal = ({
             nombre: "",
