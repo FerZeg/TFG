@@ -41,7 +41,6 @@ export default function EditorSection() {
         }
         if(filtro.estado !== null && filtro.estado !== "todos") {
             filteredPlatos = filteredPlatos.filter(plato => {
-                console.log(plato.active, filtro.estado)
                 return String(plato.active) === String(filtro.estado)
             })
         }

@@ -110,9 +110,9 @@ export async function deleteTicketRemote(ticket, restaurantId) {
 export async function updatePlatoRemote(plato, restaurantId, imagen) {
     try {
         const formData = new FormData()
-        formData.append("file", imagen)
+        if(imagen) formData.append("file", imagen)
         formData.append("datos", JSON.stringify(plato))
-        const response = await fetch(`${URL}/restaurantes/${restaurantId}/platos/${plato._id}`, {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/platos/${plato._id || ""}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
