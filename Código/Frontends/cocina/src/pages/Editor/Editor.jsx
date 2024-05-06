@@ -8,8 +8,9 @@ import EditorSection from "../../components/Editor/EditorSection"
 
 
 export default function EditorPage() {
-    const { setData } = useRestauranteContext(useShallow(state => ({
+    const { setData, platos } = useRestauranteContext(useShallow(state => ({
       setData: state.setData,
+      platos: state.platos
   })))    
   const { login } = useLoginContext()
   useEffect(() => {
@@ -21,6 +22,13 @@ export default function EditorPage() {
       )()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [login.data.restauranteId])
+  useEffect(() => {
+      platos.forEach(plato => {
+        if(!plato.imagen) return
+          const img = new Image()
+          img.src = plato.imagen
+      })
+  }, [platos])
   return (
     <section id='editor' className='page'>
       <EditorSection/>

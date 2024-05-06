@@ -54,8 +54,10 @@ export default function EditorSection() {
 
     const handleSubmit = async (plato, imagen) => {
         const oldPlato = isDialogOpen.plato
-        if(await updatePlatoRemote(plato, login.data.restauranteId, imagen)) {
-            updatePlato(oldPlato, plato)
+        const response = await updatePlatoRemote(plato, login.data.restauranteId, imagen)
+        const newPlato = await response.json()
+        if(response.ok) {
+            updatePlato(oldPlato, newPlato)
             setIsDialogOpen({isOpen: false, plato: null})
             toast.success("Plato actualizado correctamente")
         } else {
