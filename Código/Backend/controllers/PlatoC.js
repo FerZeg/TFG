@@ -16,9 +16,10 @@ export const putPlato = async(req, res) => {
 		},
 		fileWriteStreamHandler: function(file) {
 			const passThroughStream = new PassThrough()
+			console.log(process.MODE)
 			const params = {
 				Bucket: "tfg",
-				Key: `platos/${file.newFilename}`,
+				Key: process.env.MODE == "production" ? `platos/${file.newFilename}` : `local/${file.newFilename}`,
 				Body: passThroughStream,
 				ContentType: file.mimetype,
 			}
