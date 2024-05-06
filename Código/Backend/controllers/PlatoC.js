@@ -16,10 +16,9 @@ export const putPlato = async(req, res) => {
 		},
 		fileWriteStreamHandler: function(file) {
 			const passThroughStream = new PassThrough()
-			console.log(process.MODE)
 			const params = {
-				Bucket: "tfg",
-				Key: process.env.MODE == "production" ? `platos/${file.newFilename}` : `local/${file.newFilename}`,
+				Bucket: process.env.BUCKET_NAME,
+				Key: `platos/${file.newFilename}`,
 				Body: passThroughStream,
 				ContentType: file.mimetype,
 			}
@@ -29,8 +28,9 @@ export const putPlato = async(req, res) => {
 			})
 			const uploadPromise = upload.done()
 				.then((data) => {
+					console.log(data)
 					console.log("File uploaded successfully")
-					file.location = "https://media.comidaenmarcha.com/" + data.Key
+					file.location = process.env.MEDIA_URL + "/" + data.Key
 				})
   
 			uploads.push(uploadPromise) // Add the upload promise to the array
