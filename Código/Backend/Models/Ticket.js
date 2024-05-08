@@ -1,25 +1,34 @@
 import mongoose from "mongoose"
 const { Schema, model, models } = mongoose
 
-const TicketSchema = new Schema({
-	total: Number,
-	pedidos: [{
-		nombre: String,
-		precio: Number,
-		cantidad: {
-			type: Number,
-			default: 1,
-		},
-		estado: {
-			type: String,
-			default: "PENDIENTE",
-			enum: ["PENDIENTE", "EN_PROCESO", "SERVIDO"],
-		},
-	}],
+export const PedidoSchema = new Schema({
 	estado: {
 		type: String,
-		default: "NOPAID",
-		enum: ["NOPAID", "PAID", "CANCELLED"],
+		default: "EN_PROCESO",
+		enum: ["EN_PROCESO", "HECHO", "CANCELADO"],
+	},
+	productos: [{
+		nombre: String,
+		precio: Number,
+		cantidad: Number,
+		_id: false,
+		categoria: String,
+	}],
+	createdDate: {
+		type: Date,
+		default: Date.now,
+	}
+})
+
+
+const TicketSchema = new Schema({
+	pedidos: [
+		PedidoSchema
+	],
+	estado: {
+		type: String,
+		default: "ABIERTO",
+		enum: ["ABIERTO", "CERRADO", "CANCELADO"],
 	},
 	restauranteId: Schema.Types.ObjectId,
 	mesa: {
@@ -30,25 +39,7 @@ const TicketSchema = new Schema({
 		type: Date,
 		default: Date.now,
 	},
-	lastModifiedDate: {
-		type: Date,
-		default: Date.now,
-	},
 })
 
-TicketSchema.method("updateTotal", function() {
-	this.total = this.pedidos.reduce((acc, pedido) => acc + pedido.precio * pedido.cantidad, 0)
-})
-  
-TicketSchema.pre("save", function(next) {
-	this.updateTotal()
-	next()
-})
-  
-TicketSchema.pre("updateOne", function(next) {
-	this.lastModifiedDate = Date.now()
-	this.updateTotal()
-	next()
-})
 
 export default models.Ticket || model("Ticket", TicketSchema)

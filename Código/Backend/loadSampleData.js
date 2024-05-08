@@ -3,6 +3,8 @@ import Restaurante from "./Models/Restaurante.js"
 import Ticket from "./Models/Ticket.js"
 import {connectDB} from "./connection.js"
 import generatePlatos from "./factory/plato.js"
+import { generateMesas } from "./factory/mesas.js"
+import generateTickets from "./factory/ticket.js"
 await connectDB()
 const user = new Usuario({
 	nombre: "admin",
@@ -23,28 +25,16 @@ const superadmin = new Usuario({
 await user.save()
 await cocinero.save()
 await superadmin.save()
+
+const platos = generatePlatos(15)
+const mesas = generateMesas(5)
+
 const restaurante = new Restaurante({
 	nombre: "restaurante",
 	direccion: "calle",
 	telefono: "123456789",
-	platos: generatePlatos(15),
-	mesas: [
-		{
-			identificador: "mesa1",
-			capacidad: 4,
-		},
-		{
-			identificador: "mesa2",
-			capacidad: 2,
-		},
-		{
-			identificador: "mesa3",
-			capacidad: 6,
-		},
-		{
-			identificador: "mesa4",
-		}
-	],
+	platos: platos,
+	mesas: mesas,
 	users: [
 		{
 			user: user._id,
@@ -58,21 +48,15 @@ const restaurante = new Restaurante({
 	contraseña_mesas: "1234",
 })
 await restaurante.save()
-for(let i = 0; i < 25; i++){
-	const nMesa = Math.floor(Math.random() * restaurante.mesas.length)
-	const ticket = new Ticket({
-		mesa: restaurante.mesas[nMesa].identificador,
-		pedidos: [
-			{
-				nombre: "plato" + i,
-				precio: Math.random() * 100,
-			},
-		],
-		restauranteId: restaurante._id,
-		estado: Math.random() > 0.5 ? "PAID" : "NOPAID",
-	})
-	await ticket.save()
+
+console.log("Generando tickets")
+let tickets = []
+for(let i = 0; i < mesas.length; i++) {
+	const mesa = mesas[i]
+	tickets.push(...generateTickets(mesa, platos, restaurante._id, Math.floor(Math.random() * 5) + 1))
 }
+console.log(tickets)
+await Ticket.insertMany(tickets)
 
 console.log("Datos de ejemplo cargados")
 process.exit(0)
