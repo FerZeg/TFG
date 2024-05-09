@@ -22,10 +22,12 @@ export default class TicketService {
 			mesa: query.mesa,
 		}*/
 		const tickets = await Ticket.find()
-		tickets.map(ticket => {
-			ticket.total = this.getTotal(ticket)
+		const ticketsWithTotal = tickets.map(ticket => {
+			const ticketWithTotal = ticket.toObject()
+			ticketWithTotal.total = this.getTotal(ticket)
+			return ticketWithTotal
 		})
-		return tickets
+		return ticketsWithTotal
 	}
 	static async deleteTicket(req) {
 		const ticket = await Ticket.deleteOne({ _id: req.params.ticketId })
