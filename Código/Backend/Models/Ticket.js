@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 const { Schema, model, models } = mongoose
 
 export const ESTADOS_TICKET = ["ABIERTO", "CERRADO", "CANCELADO"]
+export const ESTADOS_PEDIDO = ["EN_PROCESO", "HECHO", "CANCELADO"]
 
 export const PedidoSchema = new Schema({
 	estado: {

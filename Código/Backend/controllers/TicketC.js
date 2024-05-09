@@ -12,3 +12,8 @@ export const deleteTicket = async (req, res) => {
 	const result = await TicketService.deleteTicket(req)
 	res.send(result)
 }
+
+export const getPendiente = async (req, res) => {
+	const result = await TicketService.getProductosPendientes()
+	res.send(result)
+}

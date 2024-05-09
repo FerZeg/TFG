@@ -36,12 +36,16 @@ export default class TicketService {
 		}
 		return { message: "Ticket eliminado" }
 	}
-	static async putPedido(req) {
-		const ticket = await Ticket.findById(req.params.ticketId)
-		if(!ticket) throw new Error("No se ha encontrado el ticket con ese ID")
-		const pedido = req.body
-		ticket.pedidos.push(pedido)
-		await ticket.save()
-		return ticket
+	static async getProductosPendientes() {
+		const tickets = await Ticket.find({ estado: "ABIERTO" })
+		const productosPendientes = tickets.map(ticket => {
+			const pedidos = ticket.pedidos.filter(pedido => pedido.estado === "EN_PROCESO")
+			return {
+				ticketId: ticket._id,
+				pedidos,
+			}
+			
+		})
+		return productosPendientes
 	}
 }
