@@ -76,9 +76,13 @@ export const fetchRestaurant = async (restaurantId, setData) => {
     }
 }
 
-export const fetchTickets = async (restaurantId) => {
+export const fetchTickets = async (restaurantId, filter = null) => {
     try {
-        const response = await fetch(`${URL}/restaurantes/${restaurantId}/tickets`, {
+        let completeURL = `${URL}/restaurantes/${restaurantId}/tickets`
+        if(filter) {
+            completeURL += "?" + Object.entries(filter).map(([key, value]) => `${key}=${value}`).join("&")
+        }
+        const response = await fetch(completeURL, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -87,6 +91,7 @@ export const fetchTickets = async (restaurantId) => {
         })
         return response.ok ? await response.json() : undefined
     } catch (e) {
+        console.error(e)
         return undefined
     }
 }

@@ -1,6 +1,10 @@
 import TicketService from "../services/TicketService.js"
 
 export const getTicket = async (req, res) => {
+	if(!req.params.ticketId) {
+		const result = await TicketService.getTickets(req)
+		return res.send(result)
+	}
 	const result = await TicketService.getTicket(req)
 	res.send(result)
 }

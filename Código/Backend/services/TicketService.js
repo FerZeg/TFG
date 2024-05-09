@@ -1,24 +1,29 @@
 import Ticket from "../Models/Ticket.js"
 
 export default class TicketService {
-	static async getTicket(req) {
-		if(req.params.id) {
-			const ticket = await Ticket.findById(req.params.ticketId)
-			if(!ticket) throw new Error("No se ha encontrado el ticket con ese ID")
-			ticket.total = ticket.pedidos.reduce((acc, pedido) => {
-				return acc + pedido.productos.reduce((acc, producto) => {
-					return acc + producto.precio * producto.cantidad
-				}, 0)
+	static getTotal(ticket) {
+		return ticket.pedidos.reduce((acc, pedido) => {
+			return acc + pedido.productos.reduce((acc, producto) => {
+				return acc + producto.precio * producto.cantidad
 			}, 0)
-			return ticket
-		}
+		}, 0)
+	}
+	static async getTicket(req) {
+		const ticket = await Ticket.findById(req.params.ticketId)
+		if(!ticket) throw new Error("No se ha encontrado el ticket con ese ID")
+		ticket.total = this.getTotal(ticket)
+		return ticket
+	}
+	static async getTickets(req) {
+		const query = req.query
+		/*const params = {
+			estado: query.estado ? 1 : 0,
+			restauranteId: query.restauranteId,
+			mesa: query.mesa,
+		}*/
 		const tickets = await Ticket.find()
 		tickets.map(ticket => {
-			ticket.total = ticket.pedidos.reduce((acc, pedido) => {
-				return acc + pedido.productos.reduce((acc, producto) => {
-					return acc + producto.precio * producto.cantidad
-				}, 0)
-			}, 0)
+			ticket.total = this.getTotal(ticket)
 		})
 		return tickets
 	}

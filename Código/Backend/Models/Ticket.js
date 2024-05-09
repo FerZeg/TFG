@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 const { Schema, model, models } = mongoose
 
+export const ESTADOS_TICKET = ["ABIERTO", "CERRADO", "CANCELADO"]
+
 export const PedidoSchema = new Schema({
 	estado: {
 		type: String,
@@ -28,7 +30,7 @@ const TicketSchema = new Schema({
 	estado: {
 		type: String,
 		default: "ABIERTO",
-		enum: ["ABIERTO", "CERRADO", "CANCELADO"],
+		enum: ESTADOS_TICKET,
 	},
 	restauranteId: Schema.Types.ObjectId,
 	mesa: {
