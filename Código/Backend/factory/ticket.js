@@ -12,6 +12,5 @@ export default function generateTickets(mesa, productos, restauranteId, n) {
 		}
 		tickets.push(ticket)
 	}
-	console.log(tickets)
 	return tickets
 }

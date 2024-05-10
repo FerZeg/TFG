@@ -6,7 +6,6 @@ import { fetchPendiente } from "../../lib/fetchers"
 import { useShallow } from "zustand/react/shallow"
 
 export default function Cocina() {
-  console.log("rtender")
   const { login } = useLoginContext()
   const { setPendientes } = usePendientesContext(useShallow(state => ({
     setPendientes: state.setPendientes

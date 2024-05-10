@@ -5,22 +5,29 @@ export const ESTADOS_TICKET = ["ABIERTO", "CERRADO", "CANCELADO"]
 export const ESTADOS_PEDIDO = ["EN_PROCESO", "HECHO", "CANCELADO"]
 
 export const PedidoSchema = new Schema({
-	estado: {
-		type: String,
-		default: "EN_PROCESO",
-		enum: ["EN_PROCESO", "HECHO", "CANCELADO"],
-	},
 	productos: [{
+		estado: {
+			type: String,
+			default: "EN_PROCESO",
+			enum: ["EN_PROCESO", "HECHO", "CANCELADO"],
+		},
 		nombre: String,
 		precio: Number,
-		cantidad: Number,
-		_id: false,
-		categoria: String,
+		cantidad: {
+			type: Number,
+			default: 1,
+		},
+		tipo: {
+			type: String,
+			required: true,
+		},
+		imagen: String,
 	}],
 	createdDate: {
 		type: Date,
 		default: Date.now,
 	}
+
 })
 
 
@@ -43,6 +50,8 @@ const TicketSchema = new Schema({
 		default: Date.now,
 	},
 })
+
+TicketSchema.index({ restauranteId: 1, estado: 1})
 
 
 export default models.Ticket || model("Ticket", TicketSchema)

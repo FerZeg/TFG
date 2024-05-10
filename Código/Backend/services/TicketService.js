@@ -39,13 +39,10 @@ export default class TicketService {
 	static async getProductosPendientes() {
 		const tickets = await Ticket.find({ estado: "ABIERTO" })
 		const productosPendientes = tickets.map(ticket => {
-			const pedidos = ticket.pedidos.filter(pedido => pedido.estado === "EN_PROCESO")
-			return {
-				ticketId: ticket._id,
-				pedidos,
-			}
-			
+			return ticket.pedidos.map(pedido => {
+				return pedido.productos.filter(producto => producto.estado === "EN_PROCESO")
+			})
 		})
-		return productosPendientes
+		return productosPendientes.flat(2)
 	}
 }
