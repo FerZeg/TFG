@@ -4,6 +4,7 @@ import { useLoginContext } from "../../lib/context"
 import { usePendientesContext } from "../../lib/context"
 import { fetchPendiente } from "../../lib/fetchers"
 import { useShallow } from "zustand/react/shallow"
+import { Pedidos } from "../../components/Pedidos/Pedidos"
 
 export default function Cocina() {
   const { login } = useLoginContext()
@@ -18,6 +19,8 @@ export default function Cocina() {
       .catch(err => console.error(err))
   }, [login, setPendientes])
   return (
-    <></>
+    <section id="pedidos" className='page'>
+          <Pedidos/>
+    </section>
   )
 }
