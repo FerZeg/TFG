@@ -8,8 +8,8 @@ export const PedidoSchema = new Schema({
 	productos: [{
 		estado: {
 			type: String,
-			default: "EN_PROCESO",
-			enum: ["EN_PROCESO", "HECHO", "CANCELADO"],
+			default: ESTADOS_PEDIDO[0],
+			enum: ESTADOS_PEDIDO,
 		},
 		nombre: String,
 		precio: Number,
@@ -22,6 +22,10 @@ export const PedidoSchema = new Schema({
 			required: true,
 		},
 		imagen: String,
+		hechos: {
+			type: Number,
+			default: 0,
+		},
 	}],
 	createdDate: {
 		type: Date,
@@ -37,7 +41,7 @@ const TicketSchema = new Schema({
 	],
 	estado: {
 		type: String,
-		default: "ABIERTO",
+		default: ESTADOS_TICKET[0],
 		enum: ESTADOS_TICKET,
 	},
 	restauranteId: Schema.Types.ObjectId,

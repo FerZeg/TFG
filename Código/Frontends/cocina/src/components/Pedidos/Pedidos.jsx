@@ -1,17 +1,27 @@
 import { usePendientesContext } from "../../lib/context"
 import "./Pedidos.css"
+import { useState } from "react"
+import PedidosActions from "./PedidosActions"
 
 export function Pedidos() {
     const { pendientes } = usePendientesContext()
-    console.log(pendientes)
+    const [dialog, setDialog] = useState({
+        producto: null,
+        isOpen: false
+    })
+    const handleClick = (pedido) => {
+        setDialog({
+            producto: pedido,
+            isOpen: true
+        })
+    }
     return (
         <div className="box-section">
-            <h1>Pedidos</h1>
             <div className="pedidos-grid">
                 {pendientes && pendientes.map((pedido, index) => (
-                    <div key={index}>
+                    <div key={index} onClick={() => {handleClick(pedido)}} className="pedido">
                         <h3>{pedido.nombre}</h3>
-                        <span>{pedido.cantidad}</span>
+                        <span className="cantidad">{pedido.cantidad}</span>
                         <img 
                             src={pedido.imagen || "Placeholder.svg"} 
                             alt={pedido.nombre} 
@@ -20,6 +30,7 @@ export function Pedidos() {
                     </div>
                 ))}
             </div>	
+            <PedidosActions dialog={dialog} setDialog={setDialog}/>
         </div>
     )
 }
