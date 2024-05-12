@@ -17,3 +17,12 @@ export const getPendiente = async (req, res) => {
 	const result = await TicketService.getProductosPendientes()
 	res.send(result)
 }
+export const updateProductStatus = async (req, res) => {
+	const result = await TicketService.updateProductStatus(req)
+	res.send(result)
+}
+
+export const updateProductQuantity = async (req, res) => {
+	const result = await TicketService.updateProductQuantity(req)
+	res.send(result)
+}

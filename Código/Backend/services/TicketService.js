@@ -1,4 +1,5 @@
 import Ticket from "../Models/Ticket.js"
+import { BadRequestError } from "../lib/Errors.js"
 
 export default class TicketService {
 	static getTotal(ticket) {
@@ -51,5 +52,39 @@ export default class TicketService {
 			})
 		})
 		return productosPendientes.flat(2)
+	}
+	static async searchProduct(req) {
+		const { ticketId } = req.params
+		const { pedidoId, productoId } = req.body
+		const ticket = await Ticket.findById(ticketId)
+		if(!ticket) throw new BadRequestError("No se ha encontrado el ticket con ese ID")
+		const pedido = ticket.pedidos.id(pedidoId)
+		if(!pedido) throw new BadRequestError("No se ha encontrado el pedido con ese ID")
+		const producto = pedido.productos.id(productoId)
+		if(!producto) throw new BadRequestError("No se ha encontrado el producto con ese ID")
+		return {
+			ticket,
+			pedido,
+			producto
+		}
+	}
+
+	static async updateProductStatus(req) {
+		const { estado } = req.body
+		const { producto, ticket } = await this.searchProduct(req)
+		producto.estado = estado
+		await ticket.save()
+		return producto
+	}
+	static async updateProductQuantity(req) {
+		const { hecho } = req.body
+		const { producto, ticket } = await this.searchProduct(req)
+		if(hecho <= 0) throw new BadRequestError("La cantidad hecha debe ser mayor a 0")
+		if(producto.hechos + hecho > producto.cantidad) throw new BadRequestError("La cantidad hecha no puede ser mayor a la cantidad total")
+		if(producto.estado !== "EN_PROCESO") throw new BadRequestError("El producto no está en proceso")
+		if(producto.hechos + hecho === producto.cantidad) producto.estado = "HECHO"
+		producto.hechos += hecho
+		await ticket.save()
+		return producto
 	}
 }

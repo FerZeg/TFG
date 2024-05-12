@@ -2,22 +2,23 @@ import { useEffect } from "react"
 import "./Cocina.css"
 import { useLoginContext } from "../../lib/context"
 import { usePendientesContext } from "../../lib/context"
-import { fetchPendiente } from "../../lib/fetchers"
 import { useShallow } from "zustand/react/shallow"
 import { Pedidos } from "../../components/Pedidos/Pedidos"
 
 export default function Cocina() {
   const { login } = useLoginContext()
-  const { setPendientes } = usePendientesContext(useShallow(state => ({
-    setPendientes: state.setPendientes
+  const { fetchPendientes } = usePendientesContext(useShallow(state => ({
+      fetchPendientes: state.fetchPendientes
   }))
   )
   useEffect(() => {
     document.title = "Cocina - Restaurante"
-    fetchPendiente(login.data.restauranteId)
-      .then(data => setPendientes(data))
-      .catch(err => console.error(err))
-  }, [login, setPendientes])
+    fetchPendientes(login.data.restauranteId)
+    const interval = setInterval(() => {
+        fetchPendientes(login.data.restauranteId)
+    }, 10000)
+    return () => clearInterval(interval)
+  }, [login, fetchPendientes])
   return (
     <section id="pedidos" className='page'>
           <Pedidos/>

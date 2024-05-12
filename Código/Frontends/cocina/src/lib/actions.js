@@ -139,3 +139,42 @@ export async function deletePlatoRemote(plato, restaurantId) {
         console.log(e)
     }
 }
+
+export async function updateProductStatus(product, estado, restaurantId) {
+    try {
+        return await fetch(`${URL}/restaurantes/${restaurantId}/tickets/${product.ticketId}/producto/status`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({
+                pedidoId: product.pedidoId,
+                productoId: product._id,
+                estado: estado
+            })
+        })
+    } catch(e) {
+        console.log(e)
+    }
+
+}
+
+export async function updateProductQuantity(product, cantidad, restaurantId) {
+    try {
+        return await fetch(`${URL}/restaurantes/${restaurantId}/tickets/${product.ticketId}/producto/quantity`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({
+                pedidoId: product.pedidoId,
+                productoId: product._id,
+                hecho: cantidad
+            })
+        })
+    } catch(e) {
+        console.log(e)
+    }
+}

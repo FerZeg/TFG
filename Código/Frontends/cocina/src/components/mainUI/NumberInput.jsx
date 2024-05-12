@@ -1,25 +1,24 @@
-import { useState } from "react"
 import PropTypes from "prop-types"
 import "./NumberInput.css"
 
 export default function NumberInput(props) {
-    const [quantity, setQuantity] = useState(1)
+    const { number, setNumber } = props
     const handleClick = (e) => {
-        let newQuantity = quantity
+        let newNumber = number
         if(e.target.value === "+") {
-            if(props.max < quantity + 1) return
-            newQuantity = quantity + 1
+            if(props.max < number + 1) return
+            newNumber = number + 1
         } else {
-            if(quantity - 1 === 0) return
-            newQuantity = quantity - 1
+            if(number - 1 === 0) return
+            newNumber = number - 1
         }
-        setQuantity(newQuantity)
+        setNumber(newNumber)
     }
 
     return (
         <div className="input-group-number">
             <input type="button" value="-" className="button-minus" data-field="quantity" onClick={handleClick}/>
-            <input type="number" value={quantity} name="quantity" className="quantity-field" readOnly/>
+            <input type="number" value={number} name="quantity" className="quantity-field" readOnly/>
             <input type="button" value="+" className="button-plus" data-field="quantity" onClick={handleClick}/>
         </div>
     )
@@ -27,4 +26,6 @@ export default function NumberInput(props) {
 
 NumberInput.propTypes = {
     max: PropTypes.number,
+    number: PropTypes.number,
+    setNumber: PropTypes.func.isRequired,
 }

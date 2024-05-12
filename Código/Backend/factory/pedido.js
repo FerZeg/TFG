@@ -9,7 +9,7 @@ export const generatePedidos = (productos, n) => {
 					nombre: producto.nombre,
 					estado: getRandomEstado(ESTADOS_PEDIDO),
 					precio: producto.precio,
-					cantidad: Math.floor(Math.random() * 5),
+					cantidad: Math.floor(Math.random() * 3) + 1,
 					categoria: producto.categoria,
 					imagen: producto.imagen,
 					tipo: producto.tipo,
