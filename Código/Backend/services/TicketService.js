@@ -5,7 +5,7 @@ export default class TicketService {
 	static getTotal(ticket) {
 		return ticket.pedidos.reduce((acc, pedido) => {
 			return acc + pedido.productos.reduce((acc, producto) => {
-				return acc + producto.precio * producto.cantidad
+				return acc + producto.precio * producto.hechos
 			}, 0)
 		}, 0)
 	}
