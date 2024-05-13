@@ -1,7 +1,7 @@
-import { sign } from "../lib/JWT.js"
+import { sign, signMesa } from "../lib/JWT.js"
 import AuthService from "../services/AuthService.js"
 
-const loginController = async (req, res) => {
+export const loginController = async (req, res) => {
 	const { email, password } = req.body
 	const user = await AuthService.login({ email, password })
 	if(user.type === "superadmin") {
@@ -11,9 +11,16 @@ const loginController = async (req, res) => {
 	const token = sign({ id: user.id, type: user.type, role, restauranteId: restaurant._id})
 	res.json({ token })
 }
-const dataController = async (req, res) => {
+export const dataController = async (req, res) => {
 	const user = req.user
 	const data = await AuthService.getUserData(user.id)
 	res.json({data, role: user.role, restauranteId: user.restauranteId})
 }
-export { loginController, dataController }
+export const authenticateMesa = async (req, res) => {
+	const result = await AuthService.authenticateMesa(req)
+	res.json({ token: signMesa({ id: result.mesa._id, restauranteId: result.restauranteId }) })
+}
+export const getMesaData = async (req, res) => {
+	const data = await AuthService.getMesaData(req)
+	res.json(data)
+}
