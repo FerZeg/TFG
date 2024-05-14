@@ -7,11 +7,16 @@ export const useLoginContext = create((set) => ({
 
 export const useRestauranteContext = create((set) => ({
     productos: [],
-    setProdutos: (productos) => set({ productos }),
+    setProductos: (productos) => set({ productos }),
 }))
 
 export const useCartContext = create((set) => ({
     cart: [],
     setCart: (cart) => set({ cart }),
     addProduct: (product) => set(state => ({ cart: [...state.cart, product] })),
+}))
+
+export const useNavigationContext = create((set) => ({
+    active: "plato",
+    setActive: (active) => set({ active }),
 }))

@@ -13,6 +13,7 @@ function App() {
   const token = localStorage.getItem("token")
   useEffect(() => {
     if (!token) return setLoading(false)
+    if (login.value) return setLoading(false)
     fetchMesaData().then(
       data => {
         if (data) {
@@ -22,19 +23,9 @@ function App() {
     ).finally(() => setLoading(false)
     )
   }, [login, token, updateLogin])
-  return (
-    <>
-      {!login.value && !loading
-        ? (
-          <LoginPage />
-        )
-        : (
-          <div>
-            <RestaurantePage />
-          </div>
-        )}
-    </>
-  )
+  if (!loading) {
+    return login.value ? <RestaurantePage /> : <LoginPage />
+  }
 }
 
 export default App

@@ -40,3 +40,15 @@ export async function fetchMesaData() {
     }
 }
 
+export async function fetchProductos(restaurantId) {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/platos?active`)
+        if(response.status === 200) {
+            return response.json()
+        }
+        throw new Error(`Error: ${response.status}`)
+    } catch (error) {
+        console.error(error)
+        return null
+    }
+}

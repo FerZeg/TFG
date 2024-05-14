@@ -8,6 +8,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -32,3 +33,44 @@
   height: 100vh;
   flex-direction: column;
 }
+
+
+/* Layout styles */
+.main-container {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  height: 100dvh;
+}
+
+.sub-container {
+  display: grid;
+  grid-template-rows: 1fr 100px;
+}
+
+/* Finish styles */
+.finish-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  background-color: #242424;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.finish-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: white;
+  color: #242424;
+}
+
+.third-container {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+}
+

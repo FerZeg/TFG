@@ -1,20 +1,26 @@
 import Navigation from "../components/Navigation/Navigation"
 import Main from "../components/Main/Main"
+import Finish from "../components/Finish"
+import { useEffect } from "react"
+import { useRestauranteContext, useLoginContext } from "../lib/context"
+import { fetchProductos } from "../lib/fetchers"
 
 export default function RestaurantePage() {
-    /*const { produtos, setProdutos } = useRestauranteContext()
+    const { setProductos } = useRestauranteContext()
+    const { login } = useLoginContext()
     useEffect(() => {
-        fetchProdutos().then(
+        fetchProductos(login.data.restauranteId).then(
             data => {
-                setProdutos(data)
+                setProductos(data)
             }
         )
-    }, [setProdutos])*/
+    }, [setProductos, login])
     return (
-        <div>
+        <div className="main-container">
             <Navigation />
-            <div>   
+            <div className="sub-container">
                 <Main />
+                <Finish />
             </div>
         </div>
     )
