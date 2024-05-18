@@ -10,13 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "currency.js": "^2.0.4",
+    "framer-motion": "11.1.9",
+    "modern-normalize": "^2.0.0",
+    "prop-types": "^15.8.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "prop-types": "^15.8.1",
-    "zustand": "^4.5.2",
     "sonner": "^1.4.41",
-    "framer-motion": "11.1.9",
-    "modern-normalize": "^2.0.0"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/react": "18.3.2",

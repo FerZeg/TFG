@@ -1,6 +1,7 @@
 import { useNavigationContext } from "../../lib/context"
 import "./Products.css"
 import { useRestauranteContext } from "../../lib/context"
+import ProductCard from "./ProductCard"
 
 export default function Products() {
     const { active } = useNavigationContext()
@@ -11,10 +12,7 @@ export default function Products() {
             <h1>{active}</h1>
             <div className="item-box">
                 {productos && productosFiltered.map(p => (
-                    <div key={p._id} className="item">
-                        <h2>{p.nombre}</h2>
-                        <p>{p.precio}</p>
-                    </div>
+                    <ProductCard key={p._id} product={p}/>
                 ))}
             </div>
         </div>

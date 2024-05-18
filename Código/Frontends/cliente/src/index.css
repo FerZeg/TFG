@@ -71,6 +71,6 @@
 
 .third-container {
   display: grid;
-  grid-template-columns: 1fr 200px;
+  grid-template-columns: 1fr 300px;
 }
 
