@@ -80,3 +80,12 @@ body {
   overflow: hidden;
 }
 
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.text-bold {
+  font-weight: bold;
+} 
+

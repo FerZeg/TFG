@@ -16,8 +16,8 @@ export default class TicketService {
 		return ticket
 	}
 	static async getTickets(req) {
-		const query = req.query
-		/*const params = {
+		/*const query = req.query
+		const params = {
 			estado: query.estado ? 1 : 0,
 			restauranteId: query.restauranteId,
 			mesa: query.mesa,

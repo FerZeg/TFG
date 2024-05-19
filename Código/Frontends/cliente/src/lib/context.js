@@ -26,6 +26,9 @@ export const useCartContext = create(
             } else {
                 set(state => ({ cart: [...state.cart, product] }))
             }
+        },
+        removeProduct: (id) => {
+            set(state => ({ cart: state.cart.filter(p => p._id !== id) }))
         }
     }),
     {

@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 const { Schema, model, models } = mongoose
 
-import bcrypt  from "bcrypt"
+import bcrypt from "bcrypt"
 
 const RestauranteSchema = new Schema({
 	nombre: {
