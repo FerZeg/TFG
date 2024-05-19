@@ -12,3 +12,22 @@ export const deleteTicket = async (req, res) => {
 	const result = await TicketService.deleteTicket(req)
 	res.send(result)
 }
+
+export const getPendiente = async (req, res) => {
+	const result = await TicketService.getProductosPendientes()
+	res.send(result)
+}
+export const updateProductStatus = async (req, res) => {
+	const result = await TicketService.updateProductStatus(req)
+	res.send(result)
+}
+
+export const updateProductQuantity = async (req, res) => {
+	const result = await TicketService.updateProductQuantity(req)
+	res.send(result)
+}
+
+export const createPedido = async (req, res) => {
+	const result = await TicketService.createPedido(req)
+	res.send(result)
+}

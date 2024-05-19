@@ -95,3 +95,19 @@ export const fetchTickets = async (restaurantId, filter = null) => {
         return undefined
     }
 }
+
+export const fetchPendiente = async (restaurantId) => {
+    try {
+        const response = await fetch(`${URL}/restaurantes/${restaurantId}/tickets/pendiente`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        return response.ok ? await response.json() : undefined
+    } catch (e) {
+        console.error(e)
+        return undefined
+    }
+}

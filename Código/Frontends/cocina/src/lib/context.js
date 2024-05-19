@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { fetchPendiente } from "./fetchers"
 
 export const useLoginContext = create((set) => ({
     login: { value: false, data: {} },
@@ -39,6 +40,18 @@ export const createPlatosContext = (set) => ({
     ),
     
 })
+
+export const usePendientesContext = create((set) => ({
+    pendientes: [],
+    setPendientes: (pendientes) => set({ pendientes }),
+    removePendiente: (pendiente) => set((state) => ({ pendientes: state.pendientes.filter((p) => p._id !== pendiente._id) })),
+    updatePendiente: (oldPendiente, newPendiente) => set((state) => ({ pendientes: state.pendientes.map((p) => p._id === oldPendiente._id ? newPendiente : p) })),
+    fetchPendientes: async (restaurantId) => {
+        const response = await fetchPendiente(restaurantId)
+        if(!response) return
+        set({ pendientes: response })
+    }
+}))
 
 export const createUsersSlice = (set) => ({
     users: [],

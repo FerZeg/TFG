@@ -10,3 +10,8 @@ export const putMesa = (req, res, next) => {
 		.then((result) => res.send({ message: "Mesa actualizada", _id: result._id}))
 		.catch(err => next(err))
 }
+
+export const createTicket = async (req, res) => {
+	const result = await MesaService.createTicket(req)
+	res.send({ message: "Ticket creado", _id: result})
+}

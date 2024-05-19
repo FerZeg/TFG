@@ -1,0 +1,91 @@
+:root {
+  font-family: "Roboto", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: rgba(10, 9, 9, 0.87);
+  background-color: #fcfcfc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  height: 100dvh;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.title {
+  font-family: "Dancing Script", cursive;
+  font-size: 7rem;
+  margin: 1rem 0;
+  text-align: center;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.center-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+
+/* Layout styles */
+.main-container {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  height: 100dvh;
+}
+
+.sub-container {
+  display: grid;
+  grid-template-rows: 1fr 100px;
+  overflow: hidden;
+}
+
+/* Finish styles */
+.finish-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  background-color: #242424;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.finish-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: white;
+  color: #242424;
+}
+
+.third-container {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  overflow: hidden;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+

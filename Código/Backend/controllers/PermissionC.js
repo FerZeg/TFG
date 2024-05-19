@@ -20,4 +20,10 @@ const extractToken = (req, res, next) => {
 	next()
 }
 
-export { permissionController, extractToken }
+const extractMesaToken = (req, res, next) => {
+	const token = extractBearerToken(req.headers.authorization)
+	req.mesa = verify(token)
+	next()
+}
+
+export { permissionController, extractToken, extractMesaToken}

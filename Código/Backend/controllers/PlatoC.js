@@ -67,3 +67,11 @@ export const deletePlato = (req, res) => {
 			throw new BadRequestError("Error al eliminar el plato")
 		})
 }
+
+export const getPlatos = (req, res, next) => {
+	PlatoService.getPlatos(req)
+		.then((platos) => res.send(platos))
+		.catch((err) => {
+			next(err)
+		})
+}

@@ -20,10 +20,21 @@ function sign(payload) {
 	return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" })
 }
 
+export function signMesa(payload) {
+	if(!payload.restauranteId) {
+		throw new Error("Restaurant ID is required to generate token")
+	}
+	if(!payload.id) {
+		throw new Error("Id is required to generate token")
+	}
+	return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" })
+
+}
+
 function verify(token) {
 	try {
 		return jwt.verify(token, process.env.JWT_SECRET)
-	} catch (error) {
+	} catch {
 		throw new UnauthorizedError("The token is invalid or has expired")
 	}
 }

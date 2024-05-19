@@ -32,4 +32,17 @@ export default class PlatoService {
 		return plato
 	}
 
+	static async getPlatos(req) {
+		const { restauranteId } = req.params
+		const { active } = req.query
+		const restaurant = await Restaurante.findById(restauranteId)
+		if (!restaurant) throw new BadRequestError("No se ha encontrado el restaurante con ese ID")
+		if (active !== undefined) {
+			return restaurant.platos.filter(plato => plato.active)
+		}
+		return restaurant.platos
+	}
+
+
+
 }

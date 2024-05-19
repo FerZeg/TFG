@@ -15,7 +15,7 @@ export default function Ticket({ ticket }) {
     const fechaCreada = new Date(ticket.createdDate)
     const fechaTicket  = { fecha: fechaCreada.toLocaleDateString(), hora: fechaCreada.toLocaleTimeString() }
     const moneda = currency(ticket.total).toString()
-    const style = ticket.estado === "PAID" ? { color: "green" } : { color: "red" }
+    const style = ticket.estado === "ABIERTO" ? { color: "green" } : { color: "red" }
     const handleDelete = async () => {
         const result = await deleteTicketRemote(ticket, login.data.restauranteId)
         if(result) {
@@ -30,7 +30,7 @@ export default function Ticket({ ticket }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <td>{ticket.mesa}</td>
+            <td>{ticket.mesa.identificador}</td>
             <td>{fechaTicket.fecha + " " + fechaTicket.hora}</td>
             <td style={style}>{ticket.estado}</td>
             <td>{moneda} €</td>

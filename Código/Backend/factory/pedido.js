@@ -1,19 +1,33 @@
-export const generatePedidos = (productos, n) => {
+import { ESTADOS_PEDIDO } from "../Models/Ticket.js"
+
+export const generatePedidos = (estadoTicket, productos, n) => {
 	const pedidos = []
-	const estados = ["EN_PROCESO", "HECHO", "CANCELADO"]
 	for(let i = 0; i < n; i++) {
 		const pedido = {
-			estado: estados[Math.floor(Math.random() * estados.length)],
 			productos: productos.map(producto => {
+				const cantidad = Math.floor(Math.random() * 3) + 1
 				return {
 					nombre: producto.nombre,
+					estado: getRandomEstado(ESTADOS_PEDIDO),
 					precio: producto.precio,
-					cantidad: Math.floor(Math.random() * 5),
+					cantidad,
 					categoria: producto.categoria,
+					tipo: producto.tipo,
+					hechos: estadoTicket === "ABIERTO" ? 0 : cantidad,
 				}
 			}),
 		}
 		pedidos.push(pedido)
 	}
 	return pedidos
+}
+
+function getRandomEstado(estados) {
+	const random = Math.random()
+	if (random < 0.2) {
+		return estados[0]
+	} else {
+		const index = Math.floor(Math.random() * (estados.length - 1)) + 1
+		return estados[index]
+	}
 }
