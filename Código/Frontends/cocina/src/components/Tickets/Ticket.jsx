@@ -30,7 +30,7 @@ export default function Ticket({ ticket }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <td>{ticket.mesa}</td>
+            <td>{ticket.mesa.identificador}</td>
             <td>{fechaTicket.fecha + " " + fechaTicket.hora}</td>
             <td style={style}>{ticket.estado}</td>
             <td>{moneda} €</td>

@@ -9,7 +9,7 @@ export default function RestaurantePage() {
     const { setProductos } = useRestauranteContext()
     const { login } = useLoginContext()
     useEffect(() => {
-        fetchProductos(login.data.restauranteId).then(
+        fetchProductos(login.data).then(
             data => {
                 setProductos(data)
             }

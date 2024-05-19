@@ -4,7 +4,7 @@ import { useLoginContext } from "./lib/context"
 import LoginPage from "./Pages/LoginPage"
 import { fetchMesaData } from "./lib/fetchers"
 import { useState } from "react"
-import RestaurantePage from "./Pages/RestaurantePage"
+import MainLayout from "./Layout/MainLayout"
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
     )
   }, [login, token, updateLogin])
   if (!loading) {
-    return login.value ? <RestaurantePage /> : <LoginPage />
+    return login.value ? <MainLayout /> : <LoginPage />
   }
 }
 

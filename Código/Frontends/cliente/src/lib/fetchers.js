@@ -40,9 +40,9 @@ export async function fetchMesaData() {
     }
 }
 
-export async function fetchProductos(restaurantId) {
+export async function fetchProductos(data) {
     try {
-        const response = await fetch(`${URL}/restaurantes/${restaurantId}/platos?active`)
+        const response = await fetch(`${URL}/restaurantes/${data.restaurante._id}/platos?active`)
         if(response.status === 200) {
             return response.json()
         }

@@ -1,10 +1,24 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
 
-export const useLoginContext = create((set) => ({
+export const useLoginContext = create(
+    (set) => ({
     login: { value: false, data: {} },
-    updateLogin: (context) => set({ login: context }),
-}))
+    updateLogin: (context) => set({ login: context })
+    }), 
+)
+
+export const useTicketContext = create(
+    persist(
+        (set) => ({
+            ticket: {},
+            setTicket: (ticket) => set({ ticket }),
+        }),
+        {
+            name: "ticket-storage",
+            storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
+        },
+))
 
 export const useRestauranteContext = create((set) => ({
     productos: [],

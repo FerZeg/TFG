@@ -52,7 +52,7 @@ await restaurante.save()
 console.log("Generando tickets")
 let tickets = []
 for(let i = 0; i < mesas.length; i++) {
-	const mesa = mesas[i]
+	const mesa = restaurante.mesas[i]
 	tickets.push(...generateTickets(mesa, platos, restaurante._id, Math.floor(Math.random() * 5) + 1))
 }
 console.log(tickets)

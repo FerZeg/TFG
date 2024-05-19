@@ -44,10 +44,18 @@ const TicketSchema = new Schema({
 		default: ESTADOS_TICKET[0],
 		enum: ESTADOS_TICKET,
 	},
-	restauranteId: Schema.Types.ObjectId,
+	restauranteId: {
+		type: Schema.Types.ObjectId,
+		ref: "Restaurante",
+	},
 	mesa: {
-		type: String,
-		required: true,
+		identificador: {
+			type: String,
+			required: true,
+		},
+		_id: {
+			type: Schema.Types.ObjectId,
+		},
 	},
 	createdDate: {
 		type: Date,

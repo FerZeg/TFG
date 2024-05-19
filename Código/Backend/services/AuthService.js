@@ -50,7 +50,10 @@ class AuthService {
 		if (!restaurante) throw new NotFoundError("No se ha encontrado el restaurante")
 		const mesa = restaurante.mesas.find(m => m._id.equals(req.mesa.id))
 		return {
-			restauranteId: restaurante._id,
+			restaurante: {
+				_id: restaurante._id,
+				nombre: restaurante.nombre,
+			},
 			mesa
 		}
 	}
