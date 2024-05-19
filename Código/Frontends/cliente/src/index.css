@@ -8,6 +8,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  height: 100dvh;
+}
+
 
 @keyframes fadeIn {
   from {
@@ -45,6 +49,7 @@
 .sub-container {
   display: grid;
   grid-template-rows: 1fr 100px;
+  overflow: hidden;
 }
 
 /* Finish styles */
@@ -72,5 +77,6 @@
 .third-container {
   display: grid;
   grid-template-columns: 1fr 300px;
+  overflow: hidden;
 }
 

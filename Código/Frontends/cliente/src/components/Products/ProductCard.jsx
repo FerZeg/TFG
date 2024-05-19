@@ -5,11 +5,11 @@ import currency from "currency.js"
 import { useCartContext } from "../../lib/context"
 
 export default function ProductCard(props) {
+    const { addProduct } = useCartContext()
     const p = props.product
     const [quantity, setQuantity] = useState(1)
-    const { addProduct } = useCartContext()
     const handleClick = () => {
-        addProduct({ ...p, cantidad: quantity })
+        addProduct({ ...p, quantity })
     }
     const precio = currency(p.precio).toString()
     return (
