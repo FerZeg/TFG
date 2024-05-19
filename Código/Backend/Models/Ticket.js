@@ -21,7 +21,6 @@ export const PedidoSchema = new Schema({
 			type: String,
 			required: true,
 		},
-		imagen: String,
 		hechos: {
 			type: Number,
 			default: 0,
@@ -31,9 +30,7 @@ export const PedidoSchema = new Schema({
 		type: Date,
 		default: Date.now,
 	}
-
 })
-
 
 const TicketSchema = new Schema({
 	pedidos: [

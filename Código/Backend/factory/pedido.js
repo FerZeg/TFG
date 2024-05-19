@@ -12,7 +12,6 @@ export const generatePedidos = (estadoTicket, productos, n) => {
 					precio: producto.precio,
 					cantidad,
 					categoria: producto.categoria,
-					imagen: producto.imagen,
 					tipo: producto.tipo,
 					hechos: estadoTicket === "ABIERTO" ? 0 : cantidad,
 				}

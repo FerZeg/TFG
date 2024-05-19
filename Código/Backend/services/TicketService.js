@@ -87,4 +87,26 @@ export default class TicketService {
 		await ticket.save()
 		return producto
 	}
+
+	static async createPedido(req) {
+		const { ticketId } = req.params
+		const { productos } = req.body
+		const ticket = await Ticket.findById(ticketId).populate("restauranteId")
+		if(!ticket) throw new BadRequestError("No se ha encontrado el ticket con ese ID")
+		if(ticket.estado !== "ABIERTO") throw new BadRequestError("El ticket no está abierto")
+		const pedido = {
+			productos: productos.map(producto => {
+				const productoEncontrado = ticket.restauranteId.platos.id(producto.plato)
+				return {
+					...productoEncontrado.toObject(),
+					estado: "EN_PROCESO",
+					hechos: 0,
+					cantidad: producto.cantidad,
+				}
+			})
+		}
+		ticket.pedidos.push(pedido)
+		await ticket.save()
+		return pedido
+	}
 }

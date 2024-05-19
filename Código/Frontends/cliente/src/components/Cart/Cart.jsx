@@ -1,15 +1,20 @@
 import "./Cart.css"
-import { useCartContext } from "../../lib/context"
+import { useCartContext, useLoginContext, useTicketContext } from "../../lib/context"
 import currency from "currency.js"
+import { createPedido } from "../../lib/actions"
 
 
 export default function Cart() {
-    const { cart, removeProduct } = useCartContext()
+    const { cart, removeProduct, setCart } = useCartContext()
+    const { login } = useLoginContext()
+    const { ticket } = useTicketContext()
     const total = currency(
         cart.reduce((acc, p) => acc + p.precio * p.quantity, 0)
     ).toString()
     const handleClick = () => {
-        console.log(cart)
+        createPedido(cart, login.data, ticket).then(() => {
+            setCart([])
+        })
     }
     const handleDelete = (id) => {
         removeProduct(id)

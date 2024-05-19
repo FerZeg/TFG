@@ -26,3 +26,8 @@ export const updateProductQuantity = async (req, res) => {
 	const result = await TicketService.updateProductQuantity(req)
 	res.send(result)
 }
+
+export const createPedido = async (req, res) => {
+	const result = await TicketService.createPedido(req)
+	res.send(result)
+}
