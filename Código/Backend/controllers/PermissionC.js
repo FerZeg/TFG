@@ -6,9 +6,13 @@ const permissionController = (role) => {
 	return (req, res, next) => {
 		const token = extractBearerToken(req.headers.authorization)
 		const payload = verify(token)
-		if(payload.type === "superadmin" || (assignPermissionNumber(payload.role) >= assignPermissionNumber(role) && payload.restauranteId == req.params.restauranteId)) {
+		if(payload.type === "superadmin" 
+			|| (assignPermissionNumber(payload.role) >= assignPermissionNumber(role) 
+			&& payload.restauranteId == req.params.restauranteId)) {
+
 			req.user = payload
 			return next()
+			
 		}
 		throw new UnauthorizedError("No tienes permiso para este recurso")
 	}

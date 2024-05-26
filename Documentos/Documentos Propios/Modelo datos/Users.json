@@ -1,0 +1,8 @@
+{
+    "nombre": "String",
+    "contraseña": "String",
+    "email": "String",
+    "createdDate": "Date",
+    "lastModifiedDate": "Date",
+    "type": "String"
+  }

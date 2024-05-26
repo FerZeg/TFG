@@ -1,3 +1,5 @@
+import { useLoginContext, useTicketContext } from "./context"
+
 const URL = import.meta.env.VITE_API_URL
 
 export const createPedido = async (pedido, data, ticket) => {
@@ -37,6 +39,21 @@ export const createTicket = async (data) => {
             body: JSON.stringify({
                 identificador: data.mesa.identificador
             })
+        })
+        if(!response.ok) throw new Error(response.statusText)
+        return response.json()
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+export const finish = async () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const ticket = useTicketContext.getState().ticket
+    const restauranteId = useLoginContext.getState().login.data.restaurante._id
+    try {
+        const response = await fetch(URL + "/restaurantes/" + restauranteId +  "/tickets/" + ticket + "/finish", {
+            method: "POST"
         })
         if(!response.ok) throw new Error(response.statusText)
         return response.json()

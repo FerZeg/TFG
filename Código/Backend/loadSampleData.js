@@ -30,7 +30,7 @@ const platos = generatePlatos(15)
 const mesas = generateMesas(5)
 
 const restaurante = new Restaurante({
-	nombre: "restaurante",
+	nombre: "Gaeguri",
 	direccion: "calle",
 	telefono: "123456789",
 	platos: platos,
