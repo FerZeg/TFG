@@ -1,5 +1,6 @@
 import { createTicket } from "../lib/actions"
 import { useTicketContext, useLoginContext } from "../lib/context"
+import "./StartPage.css"
 
 export default function StartPage() {
     const { setTicket } = useTicketContext()
@@ -15,9 +16,9 @@ export default function StartPage() {
     }
     return (
         <div className="start-page-container">
-            <div className="start-page-box">
-                <h1>{login?.data?.restaurante?.nombre || "Restaurante"}</h1>
-                <h2 onClick={handleStart}>COMENZAR</h2>
+                <h1 className="title">{login?.data?.restaurante?.nombre || "Restaurante"}</h1>
+            <div className="start-page-box"  onClick={handleStart}>
+                <h2>COMENZAR</h2>
             </div>
         </div>
     )

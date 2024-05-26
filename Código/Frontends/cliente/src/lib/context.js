@@ -11,7 +11,7 @@ export const useLoginContext = create(
 export const useTicketContext = create(
     persist(
         (set) => ({
-            ticket: {},
+            ticket: null,
             setTicket: (ticket) => set({ ticket }),
         }),
         {

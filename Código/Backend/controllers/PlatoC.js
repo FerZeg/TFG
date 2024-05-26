@@ -28,12 +28,10 @@ export const putPlato = async(req, res) => {
 			})
 			const uploadPromise = upload.done()
 				.then((data) => {
-					console.log(data)
-					console.log("File uploaded successfully")
 					file.location = process.env.MEDIA_URL + "/" + data.Key
 				})
   
-			uploads.push(uploadPromise) // Add the upload promise to the array
+			uploads.push(uploadPromise)
   
 			return passThroughStream
 		}

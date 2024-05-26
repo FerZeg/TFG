@@ -1,0 +1,24 @@
+{
+    "pedidos": [
+      {
+        "productos": [
+          {
+            "estado": "String",
+            "nombre": "String",
+            "precio": "Number",
+            "cantidad": "Number",
+            "tipo": "String",
+            "hechos": "Number"
+          }
+        ],
+        "createdDate": "Date"
+      }
+    ],
+    "estado": "String",
+    "restauranteId": "Schema.Types.ObjectId",
+    "mesa": {
+      "identificador": "String",
+      "_id": "Schema.Types.ObjectId"
+    },
+    "createdDate": "Date"
+  }

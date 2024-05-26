@@ -49,6 +49,7 @@ class AuthService {
 		const restaurante = await Restaurante.findById(req.mesa.restauranteId)
 		if (!restaurante) throw new NotFoundError("No se ha encontrado el restaurante")
 		const mesa = restaurante.mesas.find(m => m._id.equals(req.mesa.id))
+		if (!mesa) throw new NotFoundError("No se ha encontrado la mesa")
 		return {
 			restaurante: {
 				_id: restaurante._id,

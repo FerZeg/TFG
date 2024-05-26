@@ -31,3 +31,8 @@ export const createPedido = async (req, res) => {
 	const result = await TicketService.createPedido(req)
 	res.send(result)
 }
+
+export const finish = async (req, res) => {
+	const result = await TicketService.finish(req)
+	res.send(result)
+}

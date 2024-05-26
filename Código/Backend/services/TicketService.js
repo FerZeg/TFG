@@ -88,6 +88,16 @@ export default class TicketService {
 		return producto
 	}
 
+	static async finish(req) {
+		const { ticketId } = req.params
+		const ticket = await Ticket.findById(ticketId)
+		if(!ticket) throw new BadRequestError("No se ha encontrado el ticket con ese ID")
+		if(ticket.estado !== "ABIERTO") throw new BadRequestError("El ticket no está abierto")
+		ticket.estado = "CERRADO"
+		await ticket.save()
+		return ticket
+	}
+
 	static async createPedido(req) {
 		const { ticketId } = req.params
 		const { productos } = req.body
