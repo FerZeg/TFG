@@ -91,7 +91,6 @@ export const fetchTickets = async (restaurantId, filter = null) => {
         })
         return response.ok ? await response.json() : undefined
     } catch (e) {
-        console.error(e)
         return undefined
     }
 }
@@ -107,7 +106,6 @@ export const fetchPendiente = async (restaurantId) => {
         })
         return response.ok ? await response.json() : undefined
     } catch (e) {
-        console.error(e)
         return undefined
     }
 }

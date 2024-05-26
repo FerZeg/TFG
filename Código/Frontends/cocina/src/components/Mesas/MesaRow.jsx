@@ -13,10 +13,8 @@ export default function MesaRow({mesa}) {
     })))
     const [changed, setChanged] = useState(false)
     const handleInputChange = (e) => {
-        console.log(mesa)
         if(e.target.value !== mesa.identificador || e.target.value !== mesa.capacidad) {
             setChanged(true)
-            console.log(22)
             updateMesa(mesa, {...mesa, [e.target.name]: e.target.value})
         } else {
             setChanged(false)

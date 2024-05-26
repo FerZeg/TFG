@@ -27,7 +27,6 @@ export const createPedido = async (pedido, data, ticket) => {
 }
 
 export const createTicket = async (data) => {
-    console.log(data)
     const restauranteId  = data.restaurante._id
     const mesaId = data.mesa._id
     try {

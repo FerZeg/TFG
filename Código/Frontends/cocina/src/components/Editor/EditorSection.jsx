@@ -31,9 +31,7 @@ export default function EditorSection() {
     })
 
     useEffect(() => {
-        console.log(filtro)
         let filteredPlatos = []
-        console.log(platos)
         if(filtro.tipo === "todos") {
             filteredPlatos = platos
         } else {

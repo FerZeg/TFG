@@ -6,7 +6,6 @@ export default function StartPage() {
     const { setTicket } = useTicketContext()
     const { login } = useLoginContext()
     const handleStart = () => {
-        console.log(login)
         createTicket(login?.data)
         .then(
             data => {
