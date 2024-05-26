@@ -11,6 +11,7 @@ export const PedidoSchema = new Schema({
 			default: ESTADOS_PEDIDO[0],
 			enum: ESTADOS_PEDIDO,
 		},
+		imagen: String,
 		nombre: String,
 		precio: Number,
 		cantidad: {

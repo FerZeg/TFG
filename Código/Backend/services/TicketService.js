@@ -112,6 +112,7 @@ export default class TicketService {
 					estado: "EN_PROCESO",
 					hechos: 0,
 					cantidad: producto.cantidad,
+					imagen: productoEncontrado.imagen,
 				}
 			})
 		}
