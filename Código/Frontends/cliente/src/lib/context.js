@@ -25,8 +25,7 @@ export const useRestauranteContext = create((set) => ({
     setProductos: (productos) => set({ productos }),
 }))
 
-export const useCartContext = create(
-    persist((set, get) => ({
+export const useCartContext = create((set, get) => ({
         cart: [],
         setCart: (cart) => set({ cart }),
         addProduct: (product) => {
@@ -43,13 +42,9 @@ export const useCartContext = create(
         },
         removeProduct: (id) => {
             set(state => ({ cart: state.cart.filter(p => p._id !== id) }))
-        }
+        },
+        clearCart: () => set({ cart: [] }),
     }),
-    {
-        name: "cart-storage",
-        storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
-    },
-)
 )
 
 export const useNavigationContext = create((set) => ({
