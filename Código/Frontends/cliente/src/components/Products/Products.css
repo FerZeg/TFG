@@ -26,8 +26,10 @@
 }
 
 .item-box .item img {
-    width: 100%;
-    max-height: 135px;
+    max-height: 120px;
+    object-fit: contain;
+    border-radius: 12px;
+    transition: all 0.3s;
 }
 .item-box .item {
     display: flex;

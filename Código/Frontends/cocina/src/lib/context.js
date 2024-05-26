@@ -34,7 +34,6 @@ export const createPlatosContext = (set) => ({
     removePlato: (plato) => set((state) => ({ platos: state.platos.filter((p) => p._id !== plato._id) })),
     updatePlato: (oldPlato, newPlato) => set((state) => ({ platos: state.platos.map((p) => p._id === oldPlato._id ? newPlato : p) })),
     addPlato: (plato) => set((state) => {
-        console.log(plato)
         return { platos: [...state.platos, plato]}
         }
     ),
