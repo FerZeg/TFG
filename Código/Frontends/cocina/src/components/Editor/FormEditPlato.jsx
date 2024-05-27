@@ -13,14 +13,14 @@ export default function FormEditPlato({plato, handleSubmit, handleDelete}) {
     const [previewImage, setPreviewImage] = useState(null)
 
     const handleImageChange = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-        const reader = new FileReader()
-        reader.onloadend = () => {
-        setPreviewImage(reader.result)
+        const file = e.target.files[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                setPreviewImage(reader.result)
+            }
+            reader.readAsDataURL(file)
         }
-        reader.readAsDataURL(file)
-    }
     }
     const handleChange = (e) => {
         setState(oldState => ({...oldState, [e.target.name]: e.target.value}))
@@ -34,7 +34,10 @@ export default function FormEditPlato({plato, handleSubmit, handleDelete}) {
         <>
         <h2>{plato ? "Editar plato" : "Añadir plato"}</h2>
         <form  onSubmit={handleFormSubmit}>
-        <img src={previewImage || state.imagen || "Placeholder.svg"} alt="" className="dialog-img"/>
+        <img 
+            src={previewImage || state.imagen || "Placeholder.svg"} 
+            alt="" className="dialog-img"
+        />
             <div className="input-wrapper">
                 <label htmlFor="nombre">Nombre:</label>
                 <input 

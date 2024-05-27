@@ -74,3 +74,30 @@ button.delete-item {
     display: block;
 }
 
+@media screen and (max-width: 768px) {
+    .cart-container {
+        padding: 0.5rem;
+    }
+    .cart-container .cart-title {
+        font-size: 1.5rem;
+    }
+    .cart-container .cart-items {
+        gap: 5px;
+    }
+    .cart-container .cart-item-info {
+        font-size: 0.8rem;
+    }
+    .cart-container button.submit-cart {
+        padding: 5px;
+        font-size: 1rem;
+    }
+    button.delete-item {
+        padding: 3px;
+        font-size: 0.8rem;
+    }
+    .separator {
+        margin: 5px 0;
+    }
+    
+}
+

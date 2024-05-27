@@ -38,3 +38,18 @@ nav > div.active {
 nav > div.active > svg {
     transform: scale(1.1);
 }
+
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0;
+        padding: 5px;
+    }
+
+    nav > div {
+        padding: 10px;
+    }
+    
+}

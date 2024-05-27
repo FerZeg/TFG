@@ -1,0 +1,31 @@
+{
+    "nombre": "String",
+    "direccion": "String",
+    "telefono": "String",
+    "platos": [
+      {
+        "nombre": "String",
+        "precio": "Number",
+        "tipo": "String",
+        "ingredientes": ["String"],
+        "active": "Boolean",
+        "imagen": "String"
+      }
+    ],
+    "mesas": [
+      {
+        "identificador": "String",
+        "estado": "String",
+        "capacidad": "Number"
+      }
+    ],
+    "users": [
+      {
+        "user": "Schema.Types.ObjectId",
+        "role": "String"
+      }
+    ],
+    "contraseña_mesas": "String",
+    "createdDate": "Date",
+    "lastModifiedDate": "Date"
+  }

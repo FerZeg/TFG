@@ -48,3 +48,16 @@
     justify-content: space-between;
     align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+    .item-box {
+        grid-template-columns: 1fr;
+    }
+    .item-box .item img {
+        max-height: 100px;
+    }
+    .item-box .item {
+        padding: 10px;
+    }
+    
+}
