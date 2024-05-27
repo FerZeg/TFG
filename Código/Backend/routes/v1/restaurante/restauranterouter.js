@@ -9,10 +9,10 @@ import platoRouter from "./plato/platorouter.js"
 
 
 const restauranteRouter = Router()
-restauranteRouter.get("/:restauranteId", permissionController("admin"), asyncMiddleware(getRestaurante))
-restauranteRouter.get("/", permissionController("admin"), asyncMiddleware(getRestaurante))
+restauranteRouter.get("/:restauranteId", permissionController("cocinero"), asyncMiddleware(getRestaurante))
+restauranteRouter.get("/", permissionController("cocinero"), asyncMiddleware(getRestaurante))
 restauranteRouter.post("/", permissionController("superadmin"), asyncMiddleware(createRestaurante))
-restauranteRouter.put("/:restauranteId", permissionController("admin"), asyncMiddleware(putRestaurante))
+restauranteRouter.put("/:restauranteId", permissionController("cocinero"), asyncMiddleware(putRestaurante))
 restauranteRouter.delete("/:restauranteId", permissionController("superadmin"), asyncMiddleware(deleteRestaurante))
 
 restauranteRouter.use("/:restauranteId/users", userRouter)

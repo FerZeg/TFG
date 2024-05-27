@@ -129,4 +129,30 @@ body {
   max-width: 700px;
 }
 
+@media screen and (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+  .third-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 200px;
+  }
+  .finish-container {
+    justify-content: center;
+  }
+  .finish-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: white;
+    color: #242424;
+  }
+  .pedidos-container {
+    max-width: 100%;
+  }
+}
+
 
